@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">NeWork</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="my_profile">my_profile</string>
+    <string name="list_of_post">list_of_post</string>
+    <string name="events_for_people">events_for_people</string>
+    <string name="list_of_users">list_of_users</string>
+</resources>
