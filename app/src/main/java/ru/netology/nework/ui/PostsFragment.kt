@@ -1,4 +1,4 @@
-package ru.netology.nework.ui.user_profile
+package ru.netology.nework.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ru.netology.nework.databinding.FragmentUserProfileBinding
+import ru.netology.nework.databinding.FragmentPostsBinding
+import ru.netology.nework.viewmodel.PostsViewModel
 
-class UserProfileFragment : Fragment() {
+class PostsFragment : Fragment() {
 
-    private var _binding: FragmentUserProfileBinding? = null
+    private var _binding: FragmentPostsBinding? = null
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +24,14 @@ class UserProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val userProfileViewModel =
-            ViewModelProvider(this).get(UserProfileViewModel::class.java)
+        val postsViewModel =
+            ViewModelProvider(this).get(PostsViewModel::class.java)
 
-        _binding = FragmentUserProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentPostsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.userProfile
-        userProfileViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textPosts
+        postsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

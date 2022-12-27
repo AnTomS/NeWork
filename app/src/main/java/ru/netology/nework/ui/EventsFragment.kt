@@ -1,4 +1,4 @@
-package ru.netology.nework.ui.events
+package ru.netology.nework.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.netology.nework.databinding.FragmentEventsBinding
+import ru.netology.nework.viewmodel.EventsViewModel
 
 class EventsFragment : Fragment() {
 

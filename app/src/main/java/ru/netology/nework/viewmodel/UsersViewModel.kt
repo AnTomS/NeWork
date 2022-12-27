@@ -1,13 +1,13 @@
-package ru.netology.nework.ui.events
+package ru.netology.nework.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class EventsViewModel : ViewModel() {
+class UsersViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Events Fragment"
+        value = "This is  List of Users Fragment"
     }
     val text: LiveData<String> = _text
 }
