@@ -5,7 +5,9 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import ru.netology.nework.db.AppDb
-import ru.netology.nework.dto.Post
+import ru.netology.nework.dto.*
+
+import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.model.FeedModel
 import ru.netology.nework.model.FeedModelState
 import ru.netology.nework.model.PhotoModel
@@ -13,16 +15,16 @@ import ru.netology.nework.repository.PostRepository
 import ru.netology.nework.repository.PostRepositoryImpl
 import ru.netology.nework.utils.SingleLiveEvent
 
-private val empty = Post(
+private val empty = PostCreateRequest(
     id = 0,
-    author = "",
-    authorAvatar = "",
     content = "",
-    published = "",
-    likedByMe = false,
-    likes = 0,
-    viewed = false
-)
+    coords = null,
+    link = null,
+    attachment = null,
+    mentionIds = listOf(),
+    viewed=  false
+
+    )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
     // упрощённый вариант
@@ -31,7 +33,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     )
 
     val data: LiveData<FeedModel> =
-        repository.data.map { FeedModel(it.filter(Post::viewed), it.isEmpty()) }
+            repository.data.map { FeedModel(it.filter(PostResponse::viewed), it.isEmpty()) }
             .asLiveData(Dispatchers.Default)
 
     private val edited = MutableLiveData(empty)
@@ -41,18 +43,20 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     val dataState: LiveData<FeedModelState>
         get() = _dataState
 
+    @Suppress("UNREACHABLE_CODE")
     val newerCount: LiveData<Int> = repository.data.flowOn(Dispatchers.Default)
         .flatMapLatest {
-            val firstId = it.firstOrNull()?.id ?: 0L
+            val firstId = it.firstOrNull()?.id ?: 0
             // При начальной загрузке покажем прогрессбар
-            if (firstId == 0L) _dataState.value = _dataState.value?.copy(loading = true)
+            if (firstId == 0) _dataState.value = _dataState.value?.copy(loading = true)
+
             repository.getNeverCount(firstId)
                 .onEach {
                     // Скроем прогрессбар и ошибку
                     _dataState.value = _dataState.value?.copy(loading = false, error = false)
                 }.catch {
                     // При начальной загрузке покажем ошибку, если не получилось
-                    if (firstId == 0L) _dataState.value = _dataState.value?.copy(error = true)
+                    if (firstId == 0) _dataState.value = _dataState.value?.copy(error = true)
                 }
         }
         .asLiveData()
@@ -97,18 +101,17 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             viewModelScope.launch {
                 try {
                     _postCreated.value = Unit
-                    repository.saveAsync(it)
                     _dataState.value = FeedModelState()
                 } catch (e: Exception) {
                     _dataState.value = FeedModelState(error = true)
                 }
             }
         }
-        edited.value = empty
+
     }
 
-    fun edit(post: Post) {
-        edited.value = post
+    fun edit(post: PostResponse) {
+        TODO()
     }
 
     fun changeContent(content: String) {
@@ -119,39 +122,44 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         edited.value = edited.value?.copy(content = text)
     }
 
-    fun likeById(id: Long) {
-        if (data.value?.posts.orEmpty().filter { it.id == id }.none { it.likedByMe }) {
-            viewModelScope.launch {
-                try {
-                    repository.likeByIdAsync(id)
-                } catch (e: Exception) {
-                    _dataState.value = FeedModelState(error = true)
-                }
-            }
-        } else {
-            viewModelScope.launch {
-                try {
-                    repository.dislikeByIdAsync(id)
-                } catch (e: Exception) {
-                    _dataState.value = FeedModelState(error = true)
-                }
-            }
-        }
+    fun likeById(id: Int) {
+//        if (data.value?.posts.orEmpty().filter { id == id }.none { it.likedByMe }) {
+//            viewModelScope.launch {
+//                try {
+//                    TODO()
+//                    //repository.likeByIdAsync(id)
+//                } catch (e: Exception) {
+//                    _dataState.value = FeedModelState(error = true)
+//                }
+//            }
+//        } else {
+//            viewModelScope.launch {
+//                try {
+//                    TODO()
+//                    //repository.dislikeByIdAsync(id)
+//                } catch (e: Exception) {
+//                    _dataState.value = FeedModelState(error = true)
+//                }
+//            }
+//        }
     }
 
 
-    fun removeById(id: Long) {
-        val posts = data.value?.posts.orEmpty()
-            .filter { it.id != id }
-        data.value?.copy(posts = posts, empty = posts.isEmpty())
-
-        viewModelScope.launch {
-            try {
-                repository.removeByIdAsync(id)
-            } catch (e: Exception) {
-                _dataState.value = FeedModelState(error = true)
-            }
-        }
+    @Suppress("UNREACHABLE_CODE")
+    fun removeById(id: Int) {
+//        val posts = data.value?.posts.orEmpty()
+//        //.filter { it.id != id }
+//        TODO()
+//        data.value?.copy(posts = posts, empty = posts.isEmpty())
+//
+//        viewModelScope.launch {
+//            try {
+//                TODO()
+//                //repository.removeByIdAsync(id)
+//            } catch (e: Exception) {
+//                _dataState.value = FeedModelState(error = true)
+//            }
+//        }
     }
 
     fun readNewPosts() = viewModelScope.launch {

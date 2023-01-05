@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import ru.netology.nework.api.PostsApi
 import ru.netology.nework.dao.PostDao
-import ru.netology.nework.dto.Post
+import ru.netology.nework.dto.PostResponse
 import ru.netology.nework.entity.PostEntity
 import ru.netology.nework.entity.toDto
 import ru.netology.nework.entity.toEntity
@@ -21,26 +21,22 @@ import java.io.IOException
 
 
 class PostRepositoryImpl(private val postDao: PostDao) : PostRepository {
-    override val data: Flow<List<Post>> = postDao.getAll().map(List<PostEntity>::toDto)
+    override val data: Flow<List<PostResponse>> = postDao.getAll().map(List<PostEntity>::toDto)
         .flowOn(Dispatchers.Default)
 
-    override fun getNeverCount(firstId: Long): Flow<Int> = flow {
+    override fun getNeverCount(firstId: Int): Flow<Int> = flow {
         try {
             while (true) {
-                val response = PostsApi.retrofitService.getNewer(firstId)
+                val response = PostsApi.retrofitService.getLatestPosts(firstId)
                 if (!response.isSuccessful) {
                     throw ApiError(response.code(), response.message())
                 }
 
                 val body =
                     response.body() ?: throw ApiError(response.code(), response.message())
-                postDao.insert(body.toEntity()
-                    .let { posts ->
-                        val empty = postDao.isEmpty()
-                        // Если это начальная загрузка, покажем все посты.
-                        // Иначе скроем до нажатия на кнопку
-                        posts.map { it.copy(viewed = empty) }
-                    }
+                postDao.insert(
+                    body.toEntity()
+
                 )
                 // Прочитаем из БД сколько действительно постов непрочитано.
                 // То, что вернул сервер может быть меньше
@@ -62,16 +58,15 @@ class PostRepositoryImpl(private val postDao: PostDao) : PostRepository {
     override suspend fun getAllAsync() {
 
         try {
-            val response = PostsApi.retrofitService.getAll()
+            val response = PostsApi.retrofitService.getAllPosts()
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             }
 
             val body = response.body() ?: throw ApiError(response.code(), response.message())
-            postDao.insert(body.toEntity()
-                .map {
-                    it.copy(viewed = true)
-                }
+            postDao.insert(
+                body.toEntity()
+
             )
         } catch (e: IOException) {
             throw NetworkError
@@ -91,18 +86,20 @@ class PostRepositoryImpl(private val postDao: PostDao) : PostRepository {
     }
 
 
-    override suspend fun saveAsync(post: Post) {
+    @Suppress("UNREACHABLE_CODE")
+    override suspend fun saveAsync(id: Int) {
         try {
-            val response = PostsApi.retrofitService.save(post)
-            if (!response.isSuccessful) {
-                throw ApiError(response.code(), response.message())
-            }
-
-            val body = response.body() ?: throw ApiError(response.code(), response.message())
-            postDao.insert(
-                PostEntity.fromDto(body)
-                //      .copy(viewed = true)
-            )
+            TODO()
+//            //val response = PostsApi.retrofitService.savePost()
+//            if (!response.isSuccessful) {
+//                throw ApiError(response.code(), response.message())
+//            }
+//
+//            val body = response.body() ?: throw ApiError(response.code(), response.message())
+//            postDao.insert(
+//                PostEntity.fromDto(body)
+//                //      .copy(viewed = true)
+        //           )
         } catch (e: IOException) {
             throw NetworkError
         } catch (e: Exception) {
@@ -110,11 +107,11 @@ class PostRepositoryImpl(private val postDao: PostDao) : PostRepository {
         }
     }
 
-    override suspend fun removeByIdAsync(id: Long) {
+    override suspend fun removeByIdAsync(id: Int) {
         postDao.removeById(id)
         try {
 
-            val response = PostsApi.retrofitService.removeById(id)
+            val response = PostsApi.retrofitService.removePostById(id)
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             }
@@ -125,17 +122,17 @@ class PostRepositoryImpl(private val postDao: PostDao) : PostRepository {
         }
     }
 
-    override suspend fun likeByIdAsync(id: Long) {
+    override suspend fun likeByIdAsync(id: Int) {
         postDao.likeById(id)
         try {
-            val response = PostsApi.retrofitService.likeById(id)
+            val response = PostsApi.retrofitService.likePostById(id)
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             }
             val body = response.body() ?: throw ApiError(response.code(), response.message())
             postDao.insert(
                 PostEntity.fromDto(body)
-                    .copy(viewed = true)
+
             )
         } catch (e: IOException) {
             throw NetworkError
@@ -144,17 +141,16 @@ class PostRepositoryImpl(private val postDao: PostDao) : PostRepository {
         }
     }
 
-    override suspend fun dislikeByIdAsync(id: Long) {
+    override suspend fun dislikeByIdAsync(id: Int) {
         postDao.likeById(id)
         try {
-            val response = PostsApi.retrofitService.dislikeById(id)
+            val response = PostsApi.retrofitService.dislikePostById(id)
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             }
             val body = response.body() ?: throw ApiError(response.code(), response.message())
             postDao.insert(
                 PostEntity.fromDto(body)
-                    .copy(viewed = true)
             )
         } catch (e: IOException) {
             throw NetworkError
@@ -163,10 +159,10 @@ class PostRepositoryImpl(private val postDao: PostDao) : PostRepository {
         }
     }
 
-    override suspend fun shareById(id: Long) {
+    override suspend fun shareById(id: Int) {
 
         try {
-            val response = PostsApi.retrofitService.removeById(id)
+            val response = PostsApi.retrofitService.getPostById(id)
             if (!response.isSuccessful) {
                 throw ApiError(
                     response.code(), response.message()

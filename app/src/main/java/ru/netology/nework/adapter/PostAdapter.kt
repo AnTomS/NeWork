@@ -11,14 +11,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.netology.nework.R
 import ru.netology.nework.databinding.CardPostBinding
-import ru.netology.nework.dto.Post
+
+import ru.netology.nework.dto.PostResponse
 
 
 interface OnInteractionListener {
-    fun onLike(post: Post) {}
-    fun onEdit(post: Post) {}
-    fun onRemove(post: Post) {}
-    fun onShare(post: Post) {}
+    fun onLike(post: PostResponse) {}
+    fun onEdit(post: PostResponse) {}
+    fun onRemove(post: PostResponse) {}
+    fun onShare(post: PostResponse) {}
 }
 
 private const val AVATARS_URL_PREFIX = "http://10.0.2.2:9999/avatars/"
@@ -26,7 +27,7 @@ private const val AVATARS_URL_PREFIX = "http://10.0.2.2:9999/avatars/"
 
 class PostsAdapter(
     private val onInteractionListener: OnInteractionListener,
-) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
+) : ListAdapter<PostResponse, PostViewHolder>(PostDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PostViewHolder(binding, onInteractionListener)
@@ -45,14 +46,14 @@ class PostViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
 
-    fun bind(post: Post) {
+    fun bind(post: PostResponse) {
         binding.apply {
             author.text = post.author
             published.text = post.published
             content.text = post.content
             // в адаптере
             like.isChecked = post.likedByMe
-            like.text = "${post.likes}"
+            like.text = "${post.likedByMe}"
             avatar.loadAvatar(post)
 
 
@@ -87,18 +88,18 @@ class PostViewHolder(
     }
 }
 
-class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
-    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+class PostDiffCallback : DiffUtil.ItemCallback<PostResponse>() {
+    override fun areItemsTheSame(oldItem: PostResponse, newItem: PostResponse): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+    override fun areContentsTheSame(oldItem: PostResponse, newItem: PostResponse): Boolean {
         return oldItem == newItem
     }
 }
 
 private fun ImageView.loadAvatar(
-    post: Post
+    post: PostResponse
 ) {
     val url = AVATARS_URL_PREFIX + post.authorAvatar
     Glide.with(this)

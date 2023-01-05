@@ -37,4 +37,6 @@
     <string name="menu_edit">menu_edit</string>
     <string name="chooser_share_post">Share post</string>
     <string name="google_play_unavailable">Google Api Unavailable</string>
+    <string name="add_event_fab">Создать новое событие</string>
+    <string name="add_post_fab">Создать новый пост</string>
 </resources>

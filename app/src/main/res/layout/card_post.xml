@@ -21,7 +21,8 @@
             app:layout_constraintBottom_toBottomOf="@id/header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-             />
+            tools:srcCompat="@sample/posts.json/data/authorAvatar"
+            />
 
         <TextView
             android:id="@+id/author"
@@ -36,6 +37,7 @@
             app:layout_constraintStart_toEndOf="@id/avatar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
+            tools:text="@sample/posts.json/data/author"
             />
 
         <TextView
@@ -49,6 +51,7 @@
             app:layout_constraintEnd_toStartOf="@id/menu"
             app:layout_constraintStart_toEndOf="@id/avatar"
             app:layout_constraintTop_toBottomOf="@id/author"
+            tools:text="@sample/posts.json/data/published"
              />
 
         <com.google.android.material.button.MaterialButton
@@ -81,6 +84,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header"
+            tools:text="@sample/posts.json/data/content"
             />
 
         <androidx.constraintlayout.widget.Barrier
@@ -100,6 +104,7 @@
             app:layout_constraintTop_toBottomOf="@id/footer"
             app:icon="@drawable/ic_favorite_24"
             style="@style/Widget.AppTheme.LikeCheckBox"
+            tools:text="@sample/posts.json/data/likes"
             />
 
         <com.google.android.material.button.MaterialButton

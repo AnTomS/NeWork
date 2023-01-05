@@ -1,8 +1,8 @@
 package ru.netology.nework.model
 
-import ru.netology.nework.dto.Post
+import ru.netology.nework.dto.PostResponse
 
 data class FeedModel(
-    val posts: List<Post> = emptyList(),
+    val posts: List<PostResponse> = emptyList(),
     val empty: Boolean = false,
 )

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,7 +14,7 @@ import ru.netology.nework.R
 import ru.netology.nework.adapter.OnInteractionListener
 import ru.netology.nework.adapter.PostsAdapter
 import ru.netology.nework.databinding.FragmentPostsBinding
-import ru.netology.nework.dto.Post
+import ru.netology.nework.dto.PostResponse
 import ru.netology.nework.viewmodel.PostViewModel
 
 import kotlin.system.exitProcess
@@ -32,19 +31,19 @@ class PostsFragment : Fragment() {
         val binding = FragmentPostsBinding.inflate(inflater, container, false)
 
         val adapter = PostsAdapter(object : OnInteractionListener {
-            override fun onEdit(post: Post) {
+            override fun onEdit(post: PostResponse) {
                 viewModel.edit(post)
             }
 
-            override fun onLike(post: Post) {
+            override fun onLike(post: PostResponse) {
                 viewModel.likeById(post.id)
             }
 
-            override fun onRemove(post: Post) {
+            override fun onRemove(post: PostResponse) {
                 viewModel.removeById(post.id)
             }
 
-            override fun onShare(post: Post) {
+            override fun onShare(post: PostResponse) {
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, post.content)
@@ -60,9 +59,8 @@ class PostsFragment : Fragment() {
         binding.list.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { state ->
             adapter.submitList(state.posts)
-
-            binding.emptyText.isVisible = state.empty
         }
+
 
 
         // Поскольку выполнение DiffUtil происходит асинхронно,
@@ -78,8 +76,7 @@ class PostsFragment : Fragment() {
 
 
         viewModel.dataState.observe(viewLifecycleOwner) { state ->
-            binding.progress.isVisible = state.loading
-            binding.errorGroup.isVisible = state.error
+
             binding.swipeRefresh.isRefreshing = state.refreshing
             if (state.error) {
                 Snackbar.make(binding.root, R.string.error_loading, Snackbar.LENGTH_LONG)
@@ -103,9 +100,7 @@ class PostsFragment : Fragment() {
             println("Newer count: $it")
         }
 
-        binding.retryButton.setOnClickListener {
-            viewModel.loadPosts()
-        }
+
 
         binding.newPostFab.setOnClickListener {
             binding.newPostFab.visibility = View.GONE
@@ -120,3 +115,5 @@ class PostsFragment : Fragment() {
         return binding.root
     }
 }
+
+

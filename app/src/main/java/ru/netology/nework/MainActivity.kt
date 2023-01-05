@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -24,20 +26,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //получаем доступ к BottomNavigationView
-        val navView: BottomNavigationView = binding.navView
 
-        //получаем доступ к фрагменту в файле xml, в который будем вставлять фрагменты, через findNavController
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.profile, R.id.list_post, R.id.list_of_users, R.id.events,
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+              //получаем доступ к BottomNavigationView
+        val navView: BottomNavigationView = findViewById(R.id.bottom_nav_view)
+
+        //получаем доступ к фрагменту в файле xml, в который будем вставлять фрагменты, через supportFragmentManager
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+        val navController: NavController = navHostFragment.navController
+
         navView.setupWithNavController(navController)
+
 
         checkGoogleApiAvailability()
     }
