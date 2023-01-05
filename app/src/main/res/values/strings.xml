@@ -39,4 +39,8 @@
     <string name="google_play_unavailable">Google Api Unavailable</string>
     <string name="add_event_fab">Создать новое событие</string>
     <string name="add_post_fab">Создать новый пост</string>
+    <string name="user_icon_content_description">User icon</string>
+    <string name="image_attachment_content_description">Image attachment</string>
+    <string name="save_button_title">Save</string>
+    <string name="save_button_description">Save</string>
 </resources>

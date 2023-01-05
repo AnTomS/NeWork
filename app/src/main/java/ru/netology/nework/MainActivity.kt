@@ -17,6 +17,7 @@ import ru.netology.nework.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +38,15 @@ class MainActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navController)
 
+        binding.fabAddPost.setOnClickListener {
+            navController.navigate(R.id.action_profile_to_newPostFragment)
+        }
+
 
         checkGoogleApiAvailability()
     }
+
+
 
     private fun checkGoogleApiAvailability() {
         with(GoogleApiAvailability.getInstance()) {
