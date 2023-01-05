@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         binding.fabAddPost.setOnClickListener {
-            navController.navigate(R.id.action_profile_to_newPostFragment)
+            navController.navigate(R.id.newPostFragment)
         }
 
 
