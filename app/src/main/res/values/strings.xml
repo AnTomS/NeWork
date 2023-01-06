@@ -43,4 +43,6 @@
     <string name="image_attachment_content_description">Image attachment</string>
     <string name="save_button_title">Save</string>
     <string name="save_button_description">Save</string>
+    <string name="hint_create_post_editText">Create a new post</string>
+    <string name="error_blank_post_content">Post content cannot be blank!</string>
 </resources>

@@ -1,8 +1,6 @@
 package ru.netology.nework.ui
 
 
-import android.app.Activity
-import android.content.DialogInterface
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
@@ -11,7 +9,8 @@ import android.view.*
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.core.net.toFile
+import androidx.core.view.MenuHost
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -25,11 +24,13 @@ import ru.netology.nework.utils.AndroidUtils
 import ru.netology.nework.utils.StringArg
 import ru.netology.nework.viewmodel.PostViewModel
 
-class NewPostFragment: Fragment() {
+class NewPostFragment : Fragment() {
     private lateinit var binding: FragmentNewPostBinding
     private val viewModel: PostViewModel by viewModels(
         ownerProducer = ::requireParentFragment
     )
+
+
 //    private var mediaPlayer: SimpleExoPlayer? = null
 //
 //    private val permissionsRequestCode = 123
@@ -40,6 +41,8 @@ class NewPostFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         var binding = FragmentNewPostBinding.inflate(inflater, container, false)
+
+        val menuHost: MenuHost = requireActivity()
 
         val permissions = listOf<String>(
 //            Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -263,19 +266,19 @@ class NewPostFragment: Fragment() {
         inflater.inflate(R.menu.fragment_create_edit_menu, menu)
     }
 
-     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.action_save -> {
-//                val content = binding.eTPostContent.text.toString()
-//                if (content.isEmpty()) {
-//                    Snackbar.make(
-//                        binding.root,
-//                        getString(R.string.error_blank_post_content),
-//                        Snackbar.LENGTH_SHORT
-//                    ).show()
-//                    return false
-//                }
-//
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_save -> {
+                val content = binding.eTPostContent.text.toString()
+                if (content.isEmpty()) {
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.error_blank_post_content),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    return true
+                }
+
 //                // if editedPost is not null, we are to rewrite an existing post.
 //                // Otherwise, save a new one
 //                viewModel.editedPost.value?.let {
@@ -290,8 +293,11 @@ class NewPostFragment: Fragment() {
 //            }
 //            else -> false
 //        }
-     //удалить return false
-         return false
+                //удалить return false
+                return false
+            }
+            else -> return true
+        }
     }
 
     override fun onStart() {
