@@ -1,20 +1,27 @@
 package ru.netology.nework.repository
 
 
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import ru.netology.nework.dto.*
 
-import ru.netology.nework.dto.PostResponse
+import ru.netology.nework.enumiration.AttachmentType
 
 
 interface PostRepository {
-
-    val data: Flow<List<PostResponse>>
-    fun getNeverCount(firstId: Int): Flow<Int>
-    suspend fun getAllAsync()
-    suspend fun readNewPosts()
-    suspend fun likeByIdAsync(id: Int)
-    suspend fun dislikeByIdAsync(id: Int)
-    suspend fun shareById(id: Int)
-    suspend fun saveAsync(id: Int)
-    suspend fun removeByIdAsync(id: Int)
+    val data: Flow<PagingData<PostResponse>>
+    val postUsersData: MutableLiveData<List<UserPreview>>
+    suspend fun getLikedAndMentionedUsersList(post: PostResponse)
+    suspend fun removePostById(id: Int)
+    suspend fun likePostById(id: Int): PostResponse
+    suspend fun dislikePostById(id: Int): PostResponse
+    suspend fun getPostById(id: Int): PostResponse
+    suspend fun getUsers(): List<UserResponse>
+    suspend fun getPostCreateRequest(id: Int): PostCreateRequest
+    suspend fun getUserById(id: Int): UserResponse
+    fun getUserPosts(data: Flow<PagingData<PostResponse>>, id: Int)
+    suspend fun addMediaToPost(type: AttachmentType, file: MultipartBody.Part): Attachment
+    suspend fun savePost(post: PostCreateRequest)
 }

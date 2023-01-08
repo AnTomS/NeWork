@@ -1,61 +1,142 @@
 package ru.netology.nework.adapter
 
-import android.system.Os.remove
+import android.bluetooth.BluetoothClass.Service.AUDIO
+import android.graphics.Point
+import android.media.browse.MediaBrowser
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View.GONE
+import android.view.View.VISIBLE
+
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.widget.ConstraintSet.GONE
+import androidx.navigation.NavDeepLinkRequest.Builder.Companion.fromUri
+
+import androidx.navigation.findNavController
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.google.firebase.firestore.core.View
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.chromium.base.ChildBindingState.VISIBLE
 import ru.netology.nework.R
 import ru.netology.nework.databinding.CardPostBinding
 
 import ru.netology.nework.dto.PostResponse
+import ru.netology.nework.enumiration.AttachmentType
+import ru.netology.nework.view.load
+import ru.netology.nework.view.loadCircleCrop
 
 
-interface OnInteractionListener {
+interface PostInteractionListener {
     fun onLike(post: PostResponse) {}
     fun onEdit(post: PostResponse) {}
     fun onRemove(post: PostResponse) {}
     fun onShare(post: PostResponse) {}
+    fun loadLikedAndMentionedUsersList(post: PostResponse) {}
+    fun onShowPhoto(post: PostResponse){}
 }
 
-private const val AVATARS_URL_PREFIX = "http://10.0.2.2:9999/avatars/"
-
-
-class PostsAdapter(
-    private val onInteractionListener: OnInteractionListener,
-) : ListAdapter<PostResponse, PostViewHolder>(PostDiffCallback()) {
+class PostAdapter(
+    private val interactionListener: PostInteractionListener,
+) : PagingDataAdapter<PostResponse, PostViewHolder>(PostDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onInteractionListener)
+        return PostViewHolder(binding, interactionListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val post = getItem(position)
+        val post = getItem(position) ?: return
         holder.bind(post)
     }
 }
 
-
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onInteractionListener: OnInteractionListener,
+    private val listener: PostInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    private val parentView = binding.root
+    val videoThumbnail = binding.videoThumbnail
+    val videoContainer = binding.videoContainer
+    val videoProgressBar = binding.videoProgressBar
+    var videoPreview: MediaBrowser.MediaItem? = null
+    val videoPlayIcon: ImageView = binding.videoButton
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun bind(post: PostResponse) {
+        parentView.tag = this
         binding.apply {
-            author.text = post.author
-            published.text = post.published
-            content.text = post.content
-            // в адаптере
-            like.isChecked = post.likedByMe
-            like.text = "${post.likedByMe}"
-            avatar.loadAvatar(post)
+            if (!post.mentionedMe) mentionedMe.visibility = View.GONE else mentionedMe.visibility =
+                View.VISIBLE
 
+
+            avatar.loadCircleCrop(post.authorAvatar)
+
+            if (post.attachment?.url != "") {
+                when (post.attachment?.type) {
+                    AttachmentType.IMAGE -> {
+                        videoPreview = null
+                        image.visibility = View.VISIBLE
+                        videoContainer.visibility = View.GONE
+                        image.load(post.attachment.url)
+                    }
+                    AttachmentType.VIDEO -> {
+                        image.visibility = View.GONE
+                        videoContainer.visibility = View.VISIBLE
+                        videoPreview = MediaItem.fromUri(post.attachment.url)
+                        videoThumbnail.load(post.attachment.url)
+                    }
+                    AttachmentType.AUDIO -> {
+                        image.visibility = View.GONE
+                        videoContainer.visibility = View.VISIBLE
+                        videoPreview = MediaBrowser.MediaItem.fromUri(post.attachment.url)
+                        videoThumbnail.setImageDrawable(
+                            AppCompatResources.getDrawable(
+                                itemView.context,
+                                R.drawable.ic_audiotrack_24
+                            )
+                        )
+                    }
+                    null -> {
+                        videoContainer.visibility = View.GONE
+                        image.visibility = View.GONE
+                        videoPreview = null
+                    }
+                }
+            }
+            author.text = post.author
+            published.text = Utils.convertDateAndTime(post.published)
+            val linkText = if (post.link != null) {
+                "\n" + post.link
+            } else {
+                ""
+            }
+            val postText = post.content + linkText
+            content.text = postText
+            like.isChecked = post.likedByMe
+            like.text = "${post.likeOwnerIds.size}"
+            coordinates.visibility = if (post.coords != null) View.VISIBLE else View.INVISIBLE
+            mentionedMe.visibility = if (post.mentionedMe) View.VISIBLE else View.INVISIBLE
+            menu.visibility = if (post.ownedByMe) View.VISIBLE else View.INVISIBLE
+            mention.text = "${post.mentionIds.size}"
+
+            if (post.users.isEmpty()) {
+                postUsersGroup.visibility = View.GONE
+            } else {
+                val firstUserAvatarUrl = post.users.values.first().avatar
+                avatar.loadCircleCrop(firstUserAvatarUrl)
+                postUsersGroup.visibility = View.VISIBLE
+                if (post.users.size >= 2) {
+                    val likedAndMentionedUsersText = "${post.users.values.first().name} and ${post.users.size - 1} users"
+                    likedAndMentionedUsers.text = likedAndMentionedUsersText
+                } else if (post.users.size == 1) {
+                    likedAndMentionedUsers.text = post.users.values.first().name
+                }
+            }
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
@@ -63,27 +144,45 @@ class PostViewHolder(
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.remove -> {
-                                onInteractionListener.onRemove(post)
+                                listener.onRemove(post)
                                 true
                             }
                             R.id.edit -> {
-                                onInteractionListener.onEdit(post)
+                                listener.onEdit(post)
                                 true
                             }
-                            else
-                            -> false
+
+                            else -> false
                         }
                     }
                 }.show()
             }
 
             like.setOnClickListener {
-                onInteractionListener.onLike(post)
+                listener.onLike(post)
             }
 
             share.setOnClickListener {
-                onInteractionListener.onShare(post)
+                listener.onShare(post)
             }
+
+            image.setOnClickListener {
+                listener.onShowPhoto(post)
+            }
+
+            coordinates.setOnClickListener { view ->
+                view.findNavController().navigate(R.id.action_postFeedFragment_to_mapsFragment,
+                    Bundle().apply {
+                        Point(
+                            post.coords?.lat!!.toDouble(), post.coords.long.toDouble()
+                        ).also { pointArg = it }
+                    })
+            }
+
+            postUsersGroup.setOnClickListener {
+                listener.loadLikedAndMentionedUsersList(post)
+            }
+
         }
     }
 }
@@ -96,17 +195,4 @@ class PostDiffCallback : DiffUtil.ItemCallback<PostResponse>() {
     override fun areContentsTheSame(oldItem: PostResponse, newItem: PostResponse): Boolean {
         return oldItem == newItem
     }
-}
-
-private fun ImageView.loadAvatar(
-    post: PostResponse
-) {
-    val url = AVATARS_URL_PREFIX + post.authorAvatar
-    Glide.with(this)
-        .load(url)
-        .placeholder(R.drawable.ic_baseline_do_disturb)
-        .error(R.drawable.ic_baseline_error)
-        .circleCrop()
-        .timeout(10_000)
-        .into(this)
 }

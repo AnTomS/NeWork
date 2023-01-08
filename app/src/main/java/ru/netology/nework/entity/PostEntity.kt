@@ -29,7 +29,6 @@ data class PostEntity(
     val mentionIds: List<Int>,
     val mentionedMe: Boolean,
     val likedByMe: Boolean,
-    val viewed: Boolean,
     @Embedded
     val attachment: AttachmentEmbedded?,
     val ownedByMe: Boolean,
@@ -38,7 +37,7 @@ data class PostEntity(
     fun toDto() = PostResponse(
         id, authorId, author, authorAvatar, authorJob, content,
         published, coords, link, likeOwnerIds, mentionIds, mentionedMe,
-        likedByMe,attachment?.toDto(), ownedByMe, users
+        likedByMe, attachment?.toDto(), ownedByMe, users
     )
 
     companion object {
@@ -46,7 +45,7 @@ data class PostEntity(
             PostEntity(
                 dto.id, dto.authorId, dto.author, dto.authorAvatar, dto.authorJob,
                 dto.content, dto.published, dto.coords,
-                dto.link, dto.likeOwnerIds, dto.mentionIds, dto.mentionedMe, dto.viewed,
+                dto.link, dto.likeOwnerIds, dto.mentionIds, dto.mentionedMe,
                 dto.likedByMe, AttachmentEmbedded.fromDto(dto.attachment), dto.ownedByMe, dto.users
             )
     }
@@ -65,5 +64,4 @@ data class AttachmentEmbedded(
     }
 }
 
-fun List<PostEntity>.toDto() = map { it.toDto() }
 fun List<PostResponse>.toEntity(): List<PostEntity> = map(PostEntity::fromDto)

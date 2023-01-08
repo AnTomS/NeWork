@@ -45,4 +45,11 @@
     <string name="save_button_description">Save</string>
     <string name="hint_create_post_editText">Create a new post</string>
     <string name="error_blank_post_content">Post content cannot be blank!</string>
+    <string name="video_thumbnail_description">video_description</string>
+    <string name="video_container">container for video</string>
+    <string name="liked_and_mentioned_users_sample_text">_mentioned_users_sample_text</string>
+    <string name="sample_number">sample_number</string>
+    <string name="mentions_description">mentions_description</string>
+    <string name="coordinates_description">coordinates_description</string>
+    <string name="image_container">container for image</string>
 </resources>

@@ -19,5 +19,5 @@ data class PostResponse(
     val attachment: Attachment?,
     val ownedByMe: Boolean = false,
     val users: Map<Int, UserPreview>,
-    val viewed: Boolean = false
+
 )

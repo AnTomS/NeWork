@@ -31,7 +31,7 @@ interface PostsApiService {
     suspend fun signIn(
         @Field("login") login: String,
         @Field("password") pass: String
-    ): Response<Auth>
+    ): Response<AuthState>
 
     @FormUrlEncoded
     @POST("users/registration")
@@ -39,7 +39,7 @@ interface PostsApiService {
         @Field("login") login: String,
         @Field("password") pass: String,
         @Field("name") name: String
-    ): Response<Auth>
+    ): Response<AuthState>
 
     @Multipart
     @POST("users/registration")
@@ -48,7 +48,7 @@ interface PostsApiService {
         @Part("password") pass: RequestBody,
         @Part("name") name: RequestBody,
         @Field("file") file: MultipartBody.Part?
-    ): Response<Auth>
+    ): Response<AuthState>
 
     @Multipart
     @POST("media")

@@ -1,183 +1,242 @@
 package ru.netology.nework.viewmodel
 
-import android.app.Application
+import android.net.Uri
 import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.map
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import ru.netology.nework.db.AppDb
+import okhttp3.MultipartBody
 import ru.netology.nework.dto.*
-
 import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.model.FeedModel
 import ru.netology.nework.model.FeedModelState
-import ru.netology.nework.model.PhotoModel
+import ru.netology.nework.model.MediaModel
 import ru.netology.nework.repository.PostRepository
 import ru.netology.nework.repository.PostRepositoryImpl
 import ru.netology.nework.utils.SingleLiveEvent
+import java.io.File
+import javax.inject.Inject
 
-private val empty = PostCreateRequest(
+private val editedPost = PostCreateRequest(
     id = 0,
     content = "",
     coords = null,
     link = null,
     attachment = null,
-    mentionIds = listOf(),
-    viewed=  false
+    mentionIds = listOf()
+)
 
-    )
+private val mentions = mutableListOf<UserResponse>()
 
-class PostViewModel(application: Application) : AndroidViewModel(application) {
-    // упрощённый вариант
-    private val repository: PostRepository = PostRepositoryImpl(
-        AppDb.getInstance(application).postDao()
-    )
+private val noMedia = MediaModel()
 
-    val data: LiveData<FeedModel> =
-            repository.data.map { FeedModel(it.filter(PostResponse::viewed), it.isEmpty()) }
-            .asLiveData(Dispatchers.Default)
+@ExperimentalCoroutinesApi
+@HiltViewModel
+class PostViewModel @Inject constructor(
+    private val repository: PostRepository,
+    appAuth: AppAuth
+) : ViewModel() {
 
-    private val edited = MutableLiveData(empty)
-
-    private val _dataState = MutableLiveData(FeedModelState())
-
+    private val _dataState = MutableLiveData<FeedModelState>()
     val dataState: LiveData<FeedModelState>
         get() = _dataState
 
-    @Suppress("UNREACHABLE_CODE")
-    val newerCount: LiveData<Int> = repository.data.flowOn(Dispatchers.Default)
-        .flatMapLatest {
-            val firstId = it.firstOrNull()?.id ?: 0
-            // При начальной загрузке покажем прогрессбар
-            if (firstId == 0) _dataState.value = _dataState.value?.copy(loading = true)
-
-            repository.getNeverCount(firstId)
-                .onEach {
-                    // Скроем прогрессбар и ошибку
-                    _dataState.value = _dataState.value?.copy(loading = false, error = false)
-                }.catch {
-                    // При начальной загрузке покажем ошибку, если не получилось
-                    if (firstId == 0) _dataState.value = _dataState.value?.copy(error = true)
-                }
-        }
-        .asLiveData()
-
+    private val _postResponse = MutableLiveData<PostResponse>()
+    val postResponse: LiveData<PostResponse>
+        get() = _postResponse
 
     private val _postCreated = SingleLiveEvent<Unit>()
     val postCreated: LiveData<Unit>
         get() = _postCreated
 
-    private val scope = MainScope()
+    private val _media = MutableLiveData(noMedia)
+    val media: LiveData<MediaModel>
+        get() = _media
 
-    init {
-        loadPosts()
-    }
+    val postUsersData: LiveData<List<UserPreview>> = repository.postUsersData
 
-    fun loadPosts() = viewModelScope.launch {
+    var isPostIntent = false
 
-        try {
-            _dataState.value = FeedModelState(loading = true)
-            repository.getAllAsync()
-            //repository.readNewPosts()
-            _dataState.value = FeedModelState()
-        } catch (e: Exception) {
-            _dataState.value = FeedModelState(error = true)
-        }
+    val newPost: MutableLiveData<PostCreateRequest> = MutableLiveData(editedPost)
+    val usersList: MutableLiveData<List<UserResponse>> = MutableLiveData()
+    val mentionsData: MutableLiveData<MutableList<UserResponse>> = MutableLiveData()
 
-    }
-
-    fun refreshPosts() = viewModelScope.launch {
-        try {
-            _dataState.value = FeedModelState(refreshing = true)
-            repository.getAllAsync()
-            _dataState.value = FeedModelState()
-        } catch (e: Exception) {
-            _dataState.value = FeedModelState(error = true)
-        }
-    }
-
-    fun save() {
-        edited.value?.let {
-
-            viewModelScope.launch {
-                try {
-                    _postCreated.value = Unit
-                    _dataState.value = FeedModelState()
-                } catch (e: Exception) {
-                    _dataState.value = FeedModelState(error = true)
+    val data: Flow<PagingData<PostResponse>> = appAuth
+        .authStateFlow
+        .flatMapLatest { (myId, _) ->
+            val cached = repository.data.cachedIn(viewModelScope)
+            cached.map { pagingData ->
+                pagingData.map {
+                    it.copy(ownedByMe = it.authorId.toLong() == myId)
                 }
+
             }
         }
 
-    }
-
-    fun edit(post: PostResponse) {
-        TODO()
-    }
-
-    fun changeContent(content: String) {
-        val text = content.trim()
-        if (edited.value?.content == text) {
-            return
-        }
-        edited.value = edited.value?.copy(content = text)
-    }
-
-    fun likeById(id: Int) {
-//        if (data.value?.posts.orEmpty().filter { id == id }.none { it.likedByMe }) {
-//            viewModelScope.launch {
-//                try {
-//                    TODO()
-//                    //repository.likeByIdAsync(id)
-//                } catch (e: Exception) {
-//                    _dataState.value = FeedModelState(error = true)
-//                }
-//            }
-//        } else {
-//            viewModelScope.launch {
-//                try {
-//                    TODO()
-//                    //repository.dislikeByIdAsync(id)
-//                } catch (e: Exception) {
-//                    _dataState.value = FeedModelState(error = true)
-//                }
-//            }
-//        }
-    }
-
-
-    @Suppress("UNREACHABLE_CODE")
-    fun removeById(id: Int) {
-//        val posts = data.value?.posts.orEmpty()
-//        //.filter { it.id != id }
-//        TODO()
-//        data.value?.copy(posts = posts, empty = posts.isEmpty())
-//
-//        viewModelScope.launch {
-//            try {
-//                TODO()
-//                //repository.removeByIdAsync(id)
-//            } catch (e: Exception) {
-//                _dataState.value = FeedModelState(error = true)
-//            }
-//        }
-    }
-
-    fun readNewPosts() = viewModelScope.launch {
-        try {
-            _dataState.value = FeedModelState(loading = true)
-            repository.readNewPosts()
-
-            _dataState.value = FeedModelState()
-        } catch (e: Exception) {
-            _dataState.value = FeedModelState(error = true)
+    fun getLikedAndMentionedUsersList(post: PostResponse) {
+        viewModelScope.launch {
+            try {
+                repository.getLikedAndMentionedUsersList(post)
+                _dataState.value = FeedModelState(loading = false)
+            } catch (e: Exception) {
+                _dataState.value = FeedModelState(loading = true)
+            }
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        scope.cancel()
+    fun removePostById(id: Int) {
+        viewModelScope.launch {
+            try {
+                repository.removePostById(id)
+                _dataState.value = FeedModelState()
+            } catch (e: Exception) {
+                _dataState.value = FeedModelState(error = true)
+            }
+        }
+    }
+
+    fun likePostById(id: Int) {
+        viewModelScope.launch {
+            try {
+                _postResponse.postValue(repository.likePostById(id))
+                _dataState.value = FeedModelState()
+            } catch (e: Exception) {
+                _dataState.value = FeedModelState(error = true)
+            }
+        }
+    }
+
+    fun dislikePostById(id: Int) {
+        viewModelScope.launch {
+            try {
+                _postResponse.postValue(repository.dislikePostById(id))
+                _dataState.value = FeedModelState()
+            } catch (e: Exception) {
+                _dataState.value = FeedModelState(error = true)
+            }
+        }
+    }
+
+    fun getPostCreateRequest(id: Int) {
+        mentionsData.postValue(mentions)
+        viewModelScope.launch {
+            try {
+                newPost.value = repository.getPostCreateRequest(id)
+                newPost.value?.mentionIds?.forEach {
+                    mentionsData.value!!.add(repository.getUserById(it))
+                }
+                _dataState.value = FeedModelState(error = false)
+            } catch (e: RuntimeException) {
+                _dataState.value = FeedModelState(error = true)
+            }
+        }
+    }
+
+    fun getUsers() {
+        mentionsData.postValue(mentions)
+        viewModelScope.launch {
+            try {
+                usersList.value = repository.getUsers()
+                usersList.value?.forEach { user ->
+                    newPost.value?.mentionIds?.forEach {
+                        if (user.id == it) {
+                            user.isChecked = true
+                        }
+                    }
+                }
+                _dataState.value = FeedModelState(error = false)
+            } catch (e: Exception) {
+                _dataState.value = FeedModelState(error = true)
+            }
+        }
+    }
+
+    fun addMentionIds() {
+        mentionsData.postValue(mentions)
+        val listChecked = mutableListOf<Int>()
+        val mentionsUserList = mutableListOf<UserResponse>()
+        usersList.value?.forEach { user ->
+            if (user.isChecked) {
+                listChecked.add(user.id)
+                mentionsUserList.add(user)
+            }
+        }
+        mentionsData.postValue(mentionsUserList)
+        newPost.value = newPost.value?.copy(mentionIds = listChecked)
+    }
+
+    fun check(id: Int) {
+        usersList.value?.forEach {
+            if (it.id == id) {
+                it.isChecked = true
+            }
+        }
+    }
+
+    fun unCheck(id: Int) {
+        usersList.value?.forEach {
+            if (it.id == id) {
+                it.isChecked = false
+            }
+        }
+    }
+
+    fun addCoords(point: Point) {
+        val coordinates = Coordinates(
+            ((point.latitude * 1000000.0).roundToInt() / 1000000.0).toString(),
+            ((point.longitude * 1000000.0).roundToInt() / 1000000.0).toString()
+        )
+        newPost.value = newPost.value?.copy(coords = coordinates)
+        isPostIntent = false
+    }
+
+    fun addLink(link: String) {
+        if (link != "") {
+            newPost.value = newPost.value?.copy(link = link)
+        } else {
+            newPost.value = newPost.value?.copy(link = null)
+        }
+    }
+
+    fun changeMedia(uri: Uri?, file: File?, type: AttachmentType?) {
+        _media.value = MediaModel(uri, file, type)
+    }
+
+    fun savePost(content: String) {
+        newPost.value = newPost.value?.copy(content = content)
+        val post = newPost.value!!
+        viewModelScope.launch {
+            try {
+                repository.savePost(post)
+                _dataState.value = FeedModelState(error = false)
+                deleteEditPost()
+                _postCreated.value = Unit
+            } catch (e: RuntimeException) {
+                _dataState.value = FeedModelState(error = true)
+            }
+        }
+    }
+
+    fun addMediaToPost(
+        type: AttachmentType,
+        file: MultipartBody.Part
+    ) {
+        viewModelScope.launch {
+            try {
+                val attachment = repository.addMediaToPost(type, file)
+                newPost.value = newPost.value?.copy(attachment = attachment)
+                _dataState.value = FeedModelState(error = false)
+            } catch (e: RuntimeException) {
+                _dataState.value = FeedModelState(error = true)
+            }
+        }
+    }
+
+    fun deleteEditPost() {
+        newPost.value = editedPost
+        mentions.clear()
+        mentionsData.postValue(mentions)
     }
 }
-
-
-
