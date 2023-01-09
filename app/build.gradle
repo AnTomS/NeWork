@@ -87,6 +87,10 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitgson_version"
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10"
     implementation "androidx.room:room-ktx:2.4.3"
+    implementation 'com.yandex.android:maps.mobile:4.0.0-lite'
+    implementation "com.google.android.exoplayer:exoplayer:2.18.2"
+    implementation "androidx.browser:browser:1.4.0"
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
 
     implementation 'androidx.activity:activity-compose:1.6.1'
 

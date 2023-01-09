@@ -1,30 +1,23 @@
 package ru.netology.nework.adapter
 
-import android.bluetooth.BluetoothClass.Service.AUDIO
-import android.graphics.Point
 import android.media.browse.MediaBrowser
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View.GONE
-import android.view.View.VISIBLE
-
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.constraintlayout.widget.ConstraintSet.GONE
 import androidx.navigation.NavDeepLinkRequest.Builder.Companion.fromUri
-
 import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.core.View
+import com.google.android.exoplayer2.MediaItem
+import com.yandex.mapkit.geometry.Point
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.chromium.base.ChildBindingState.VISIBLE
 import ru.netology.nework.R
 import ru.netology.nework.databinding.CardPostBinding
-
 import ru.netology.nework.dto.PostResponse
 import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.view.load
@@ -87,7 +80,7 @@ class PostViewHolder(
                     AttachmentType.VIDEO -> {
                         image.visibility = View.GONE
                         videoContainer.visibility = View.VISIBLE
-                        videoPreview = MediaItem.fromUri(post.attachment.url)
+                        videoPreview = MediaBrowser.MediaItem.fromUri(post.attachment.url)
                         videoThumbnail.load(post.attachment.url)
                     }
                     AttachmentType.AUDIO -> {
