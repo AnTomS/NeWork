@@ -7,21 +7,13 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.*
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.MenuHost
-
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import io.grpc.internal.SharedResourceHolder.release
-import ru.netology.nework.MainActivity
 import ru.netology.nework.R
 import ru.netology.nework.databinding.FragmentNewPostBinding
-import ru.netology.nework.enumiration.AttachmentType
-import ru.netology.nework.utils.AndroidUtils
-import ru.netology.nework.utils.StringArg
 import ru.netology.nework.viewmodel.PostViewModel
 
 class NewPostFragment : Fragment() {

@@ -1,6 +1,5 @@
 package ru.netology.nework.adapter
 
-import android.media.browse.MediaBrowser
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.navigation.NavDeepLinkRequest.Builder.Companion.fromUri
 import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -20,6 +18,7 @@ import ru.netology.nework.R
 import ru.netology.nework.databinding.CardPostBinding
 import ru.netology.nework.dto.PostResponse
 import ru.netology.nework.enumiration.AttachmentType
+import ru.netology.nework.utils.AndroidUtils
 import ru.netology.nework.view.load
 import ru.netology.nework.view.loadCircleCrop
 
@@ -56,7 +55,7 @@ class PostViewHolder(
     val videoThumbnail = binding.videoThumbnail
     val videoContainer = binding.videoContainer
     val videoProgressBar = binding.videoProgressBar
-    var videoPreview: MediaBrowser.MediaItem? = null
+    var videoPreview: MediaItem? = null
     val videoPlayIcon: ImageView = binding.videoButton
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -80,13 +79,13 @@ class PostViewHolder(
                     AttachmentType.VIDEO -> {
                         image.visibility = View.GONE
                         videoContainer.visibility = View.VISIBLE
-                        videoPreview = MediaBrowser.MediaItem.fromUri(post.attachment.url)
+                        videoPreview = MediaItem.fromUri(post.attachment.url)
                         videoThumbnail.load(post.attachment.url)
                     }
                     AttachmentType.AUDIO -> {
                         image.visibility = View.GONE
                         videoContainer.visibility = View.VISIBLE
-                        videoPreview = MediaBrowser.MediaItem.fromUri(post.attachment.url)
+                        videoPreview = MediaItem.fromUri(post.attachment.url)
                         videoThumbnail.setImageDrawable(
                             AppCompatResources.getDrawable(
                                 itemView.context,
@@ -102,7 +101,7 @@ class PostViewHolder(
                 }
             }
             author.text = post.author
-            published.text = Utils.convertDateAndTime(post.published)
+            published.text = AndroidUtils.convertDateAndTime(post.published)
             val linkText = if (post.link != null) {
                 "\n" + post.link
             } else {
@@ -163,14 +162,14 @@ class PostViewHolder(
                 listener.onShowPhoto(post)
             }
 
-            coordinates.setOnClickListener { view ->
-                view.findNavController().navigate(R.id.action_postFeedFragment_to_mapsFragment,
-                    Bundle().apply {
-                        Point(
-                            post.coords?.lat!!.toDouble(), post.coords.long.toDouble()
-                        ).also { pointArg = it }
-                    })
-            }
+//            coordinates.setOnClickListener { view ->
+//                view.findNavController().navigate(R.id.action_postFeedFragment_to_mapsFragment,
+//                    Bundle().apply {
+//                        Point(
+//                            post.coords?.lat!!.toDouble(), post.coords.long.toDouble()
+//                        ).also { pointArg = it }
+//                    })
+//            }
 
             postUsersGroup.setOnClickListener {
                 listener.loadLikedAndMentionedUsersList(post)

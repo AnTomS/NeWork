@@ -9,17 +9,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.messaging.FirebaseMessaging
 import ru.netology.nework.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class AppActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
@@ -47,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-              //получаем доступ к BottomNavigationView
+        //получаем доступ к BottomNavigationView
         val navView: BottomNavigationView = findViewById(R.id.bottom_nav_view)
 
         //получаем доступ к фрагменту в файле xml, в который будем вставлять фрагменты, через supportFragmentManager
@@ -69,19 +66,17 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun checkGoogleApiAvailability() {
         with(GoogleApiAvailability.getInstance()) {
-            val code = isGooglePlayServicesAvailable(this@MainActivity)
+            val code = isGooglePlayServicesAvailable(this@AppActivity)
             if (code == ConnectionResult.SUCCESS) {
                 return@with
             }
             if (isUserResolvableError(code)) {
-                getErrorDialog(this@MainActivity, code, 9000)?.show()
+                getErrorDialog(this@AppActivity, code, 9000)?.show()
                 return
             }
-            Toast.makeText(this@MainActivity, R.string.google_play_unavailable, Toast.LENGTH_LONG)
+            Toast.makeText(this@AppActivity, R.string.google_play_unavailable, Toast.LENGTH_LONG)
                 .show()
         }
 

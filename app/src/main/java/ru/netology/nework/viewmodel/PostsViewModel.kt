@@ -5,19 +5,21 @@ import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
+import com.yandex.mapkit.geometry.Point
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import okhttp3.MultipartBody
+import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.dto.*
 import ru.netology.nework.enumiration.AttachmentType
-import ru.netology.nework.model.FeedModel
 import ru.netology.nework.model.FeedModelState
 import ru.netology.nework.model.MediaModel
 import ru.netology.nework.repository.PostRepository
-import ru.netology.nework.repository.PostRepositoryImpl
 import ru.netology.nework.utils.SingleLiveEvent
 import java.io.File
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 private val editedPost = PostCreateRequest(
     id = 0,

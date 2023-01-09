@@ -52,11 +52,14 @@ dependencies {
     def espresso_core_version = '3.5.0'
     def lifecycle_version = "2.5.1"
     def room_version = "2.4.3"
+    def paging_version = "3.1.1"
     def firebase_version = '31.0.2'
+    def hilt_version = "2.44"
     def play_services_base_version = "18.1.0"
     def glide_version = "4.14.2"
     def retrofit_version = "2.9.0"
     def retrofitgson_version = "2.9.0"
+    def coroutines_version = '1.6.4'
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.20"
@@ -87,10 +90,14 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitgson_version"
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10"
     implementation "androidx.room:room-ktx:2.4.3"
+    implementation "androidx.room:room-paging:$room_version"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     implementation 'com.yandex.android:maps.mobile:4.0.0-lite'
     implementation "com.google.android.exoplayer:exoplayer:2.18.2"
     implementation "androidx.browser:browser:1.4.0"
     implementation 'com.github.dhaval2404:imagepicker:2.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutines_version"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
 
     implementation 'androidx.activity:activity-compose:1.6.1'
 

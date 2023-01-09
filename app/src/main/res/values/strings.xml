@@ -1,6 +1,6 @@
 <resources>
     <string name="description_post_save">Save</string>
-    <string name="app_name">NeWork</string>
+    <string name="app_name" translatable="false">NeWork</string>
     <string name="title_home" translatable="false">Home</string>
     <string name="title_dashboard" translatable="false">Dashboard</string>
     <string name="title_notifications" translatable="false">Notifications</string>
@@ -8,21 +8,21 @@
     <string name="list_of_post">Посты</string>
     <string name="events_for_people">События</string>
     <string name="list_of_users">Пользователи</string>
-    <string name="loading">loading</string>
-    <string name="error_loading">error_loading</string>
-    <string name="retry_loading">retry_loading</string>
-    <string name="close_app">close_app</string>
-    <string name="wait">wait</string>
-    <string name="empty_posts">empty_post</string>
-    <string name="new_post">new_post</string>
-    <string name="have_new_post">have_new_post</string>
-    <string name="add_post">add_post</string>
-    <string name="description_photo">description_photo</string>
-    <string name="menu_remove">menu_remove</string>
-    <string name="description_select_photo">description_select_photo</string>
-    <string name="description_take_photo">description_take_photo</string>
-    <string name="description_pick_audio">description_pick_audio</string>
-    <string name="description_pick_video">description_pick_video</string>
+    <string name="loading" translatable="false">loading</string>
+    <string name="error_loading" translatable="false">error_loading</string>
+    <string name="retry_loading" translatable="false">retry_loading</string>
+    <string name="close_app" translatable="false">close_app</string>
+    <string name="wait" translatable="false">wait</string>
+    <string name="empty_posts" translatable="false">empty_post</string>
+    <string name="new_post" translatable="false">new_post</string>
+    <string name="have_new_post">Появились новые посты</string>
+    <string name="add_post">Добавить новый пост</string>
+    <string name="description_photo" translatable="false">description_photo</string>
+    <string name="menu_remove" translatable="false">menu_remove</string>
+    <string name="description_select_photo" translatable="false">description_select_photo</string>
+    <string name="description_take_photo" translatable="false">description_take_photo</string>
+    <string name="description_pick_audio" translatable="false">description_pick_audio</string>
+    <string name="description_pick_video" translatable="false">description_pick_video</string>
     <string name="menu_save">menu_save</string>
     <string name="description_post_share">description_post_share</string>
     <string name="description_post_hide">description_post_hide</string>
@@ -35,21 +35,25 @@
     <string name="channel_remote_description">Уведомления с сервера</string>
     <string name="notification_user_liked">User %1$s liked %2$s\'s post</string>
     <string name="menu_edit">menu_edit</string>
-    <string name="chooser_share_post">Share post</string>
-    <string name="google_play_unavailable">Google Api Unavailable</string>
+    <string name="chooser_share_post">Поделиться постом</string>
+    <string name="google_play_unavailable" translatable="false">Google Api Unavailable</string>
     <string name="add_event_fab">Создать новое событие</string>
     <string name="add_post_fab">Создать новый пост</string>
-    <string name="user_icon_content_description">User icon</string>
-    <string name="image_attachment_content_description">Image attachment</string>
-    <string name="save_button_title">Save</string>
-    <string name="save_button_description">Save</string>
-    <string name="hint_create_post_editText">Create a new post</string>
-    <string name="error_blank_post_content">Post content cannot be blank!</string>
-    <string name="video_thumbnail_description">video_description</string>
-    <string name="video_container">container for video</string>
-    <string name="liked_and_mentioned_users_sample_text">_mentioned_users_sample_text</string>
-    <string name="sample_number">sample_number</string>
-    <string name="mentions_description">mentions_description</string>
-    <string name="coordinates_description">coordinates_description</string>
-    <string name="image_container">container for image</string>
+    <string name="user_icon_content_description" translatable="false">User icon</string>
+    <string name="image_attachment_content_description" translatable="false">Image attachment</string>
+    <string name="save_button_title">Сохранить</string>
+    <string name="save_button_description">Сохранить</string>
+    <string name="hint_create_post_editText">Создать новый пост</string>
+    <string name="error_blank_post_content">Содержимое поста не может быть пустым</string>
+    <string name="video_thumbnail_description" translatable="false">video_description</string>
+    <string name="video_container" translatable="false">container for video</string>
+    <string name="liked_and_mentioned_users_sample_text" translatable="false">_mentioned_users_sample_text</string>
+    <string name="sample_number" translatable="false">sample_number</string>
+    <string name="mentions_description" translatable="false">mentions_description</string>
+    <string name="coordinates_description" translatable="false">coordinates_description</string>
+    <string name="image_container" translatable="false">container for image</string>
+    <string name="posts" translatable="false">Posts</string>
+    <string name="log_in_to_continue">Выполнить вход для продолжения</string>
+    <string name="retry">Повторить</string>
+    <string name="server_error_message">server_error_message</string>
 </resources>
