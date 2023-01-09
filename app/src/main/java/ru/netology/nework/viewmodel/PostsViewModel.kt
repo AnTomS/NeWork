@@ -1,14 +1,20 @@
 package ru.netology.nework.viewmodel
 
 import android.net.Uri
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.yandex.mapkit.geometry.Point
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.dto.*
@@ -20,6 +26,7 @@ import ru.netology.nework.utils.SingleLiveEvent
 import java.io.File
 import javax.inject.Inject
 import kotlin.math.roundToInt
+
 
 private val editedPost = PostCreateRequest(
     id = 0,

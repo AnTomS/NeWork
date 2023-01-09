@@ -7,5 +7,4 @@ data class PostCreateRequest(
     val link: String?,
     val attachment: Attachment?,
     val mentionIds: List<Int>,
-    val viewed: Boolean = false
 )

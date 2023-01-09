@@ -1,6 +1,5 @@
 package ru.netology.nework.dto
 
-import ru.netology.nework.enumiration.AttachmentType
 
 data class PostResponse(
     val id: Int,

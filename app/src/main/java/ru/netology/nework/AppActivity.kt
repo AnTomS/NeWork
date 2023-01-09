@@ -1,10 +1,12 @@
 package ru.netology.nework
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
@@ -14,13 +16,32 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.messaging.FirebaseMessaging
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.databinding.ActivityMainBinding
+import ru.netology.nework.viewmodel.AuthViewModel
+import javax.inject.Inject
 
+
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class AppActivity : AppCompatActivity() {
+    private val viewModel: AuthViewModel by viewModels()
 
-    private lateinit var navController: NavController
-    private lateinit var binding: ActivityMainBinding
+    @Inject
+    lateinit var appAuth: AppAuth
 
+    @Inject
+    lateinit var googleApiAvailability: GoogleApiAvailability
+
+    companion object {
+        private const val MAPKIT_API_KEY = "4020182c-79bf-4ab9-b30b-08aaddd23117"
+    }
+
+    lateinit var binding: ActivityMainBinding
+
+    @SuppressLint("ResourceType")
     fun setActionBarTitle(title: String) {
         binding.mainToolbar.title = title
     }

@@ -54,7 +54,7 @@ dependencies {
     def room_version = "2.4.3"
     def paging_version = "3.1.1"
     def firebase_version = '31.0.2'
-    def hilt_version = "2.44"
+    def hilt_version = "2.44.2"
     def play_services_base_version = "18.1.0"
     def glide_version = "4.14.2"
     def retrofit_version = "2.9.0"
@@ -98,6 +98,7 @@ dependencies {
     implementation 'com.github.dhaval2404:imagepicker:2.1'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutines_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation "com.google.dagger:hilt-android:2.44.2"
 
     implementation 'androidx.activity:activity-compose:1.6.1'
 
