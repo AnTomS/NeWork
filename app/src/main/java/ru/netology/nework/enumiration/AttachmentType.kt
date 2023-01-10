@@ -1,5 +1,5 @@
 package ru.netology.nework.enumiration
 
 enum class AttachmentType {
-    IMAGE
+    IMAGE, VIDEO, AUDIO
 }

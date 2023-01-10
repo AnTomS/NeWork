@@ -6,11 +6,15 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.netology.nework.databinding.FragmentNewPostBinding
-import ru.netology.nework.utils.AndroidUtils
 import ru.netology.nework.utils.StringArg
+import ru.netology.nework.utils.Utils
 import ru.netology.nework.viewmodel.PostViewModel
 
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class NewPostFragment: Fragment() {
     companion object {
         var Bundle.textArg: String? by StringArg
@@ -34,11 +38,7 @@ class NewPostFragment: Fragment() {
         arguments?.textArg
             ?.let(binding.edit::setText)
 
-        binding.ok.setOnClickListener {
-            viewModel.changeContent(binding.edit.text.toString())
-            viewModel.save()
-            AndroidUtils.hideKeyboard(requireView())
-        }
+
         viewModel.postCreated.observe(viewLifecycleOwner) {
             //viewModel.loadPosts()
             findNavController().navigateUp()
