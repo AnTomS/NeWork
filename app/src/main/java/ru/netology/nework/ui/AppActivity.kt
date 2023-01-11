@@ -22,6 +22,7 @@ import ru.netology.nework.R
 import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.databinding.ActivityAppBinding
 import ru.netology.nework.databinding.ActivityAppBinding.inflate
+
 import ru.netology.nework.viewmodel.AuthViewModel
 import javax.inject.Inject
 
@@ -80,6 +81,7 @@ class AppActivity : AppCompatActivity() {
         checkGoogleApiAvailability()
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_authorization, menu)
 
@@ -93,14 +95,14 @@ class AppActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.signin -> {
-                findNavController(R.id.navHostFragment).navigate(R.id.list_of_users)
+                findNavController(R.id.navHostFragment).navigate(R.id.signInFragment)
                 true
             }
             R.id.signup -> {
                 findNavController(R.id.navHostFragment).navigate(R.id.list_of_users)
                 true
             }
-            R.id.signout -> {
+            R.id.signOut -> {
                 appAuth.removeAuth()
                 findNavController(R.id.navHostFragment).navigateUp()
                 true

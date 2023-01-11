@@ -13,7 +13,7 @@
     </group>
     <group android:id="@+id/authenticated">
         <item
-            android:id="@+id/signout"
+            android:id="@+id/signOut"
             android:title="@string/sign_out"
             app:showAsAction="never" />
     </group>

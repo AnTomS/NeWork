@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/profile"
         android:name="ru.netology.nework.ui.UserProfileFragment"
-        android:label="@string/my_profile" />
+        android:label="@string/my_profile">
+        <action
+            android:id="@+id/action_profile_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/list_post"
@@ -18,6 +22,9 @@
         <action
             android:id="@+id/action_list_post_to_newPostFragment"
             app:destination="@id/newPostFragment" />
+        <action
+            android:id="@+id/action_list_post_to_signInFragment"
+            app:destination="@id/signInFragment" />
 
     </fragment>
 
@@ -31,16 +38,43 @@
         android:id="@+id/events"
         android:name="ru.netology.nework.ui.EventsFragment"
         android:label="@string/events_for_people"
-        tools:layout="@layout/fragment_events" />
+        tools:layout="@layout/fragment_events">
+        <action
+            android:id="@+id/action_events_to_newEvents"
+            app:destination="@id/newEventFragment" />
+        <action
+            android:id="@+id/action_events_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/newEventFragment"
+        android:name="ru.netology.nework.ui.NewEventFragment"
+        android:label="@string/events_for_people"
+        tools:layout="@layout/fragment_events" >
+</fragment>
 
 
     <fragment
         android:id="@+id/list_of_users"
         android:name="ru.netology.nework.ui.UsersFragment"
-        android:label="@string/list_of_users" />
+        android:label="@string/list_of_users" >
+        <action
+            android:id="@+id/action_list_of_users_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 
-
-
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="ru.netology.nework.ui.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="ru.netology.nework.ui.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+    </fragment>
 
 </navigation>
