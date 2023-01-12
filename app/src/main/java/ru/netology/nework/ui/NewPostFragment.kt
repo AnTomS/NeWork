@@ -10,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.netology.nework.databinding.FragmentNewPostBinding
 import ru.netology.nework.utils.StringArg
-import ru.netology.nework.utils.Utils
 import ru.netology.nework.viewmodel.PostViewModel
 
 @ExperimentalCoroutinesApi

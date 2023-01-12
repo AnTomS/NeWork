@@ -99,7 +99,7 @@ class AppActivity : AppCompatActivity() {
                 true
             }
             R.id.signup -> {
-                findNavController(R.id.navHostFragment).navigate(R.id.list_of_users)
+                findNavController(R.id.navHostFragment).navigate(R.id.registerFragment)
                 true
             }
             R.id.signOut -> {

@@ -1,33 +1,77 @@
 package ru.netology.nework.ui
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import ru.netology.nework.R
+import ru.netology.nework.auth.AppAuth
+import ru.netology.nework.auth.AppAuth.Companion.name
+import ru.netology.nework.databinding.FragmentRegisterBinding
+import ru.netology.nework.dto.MediaUpload
+import ru.netology.nework.repository.AuthRepository
+import ru.netology.nework.utils.Utils
 import ru.netology.nework.viewmodel.RegisterViewModel
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
+    @Inject
+    lateinit var auth: AppAuth
 
-    companion object {
-        fun newInstance() = RegisterFragment()
-    }
+    @Inject
+    lateinit var repository: AuthRepository
 
-    private lateinit var viewModel: RegisterViewModel
+    private val viewModel: RegisterViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_register, container, false)
-    }
+        val binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+        binding.singButton.setOnClickListener {
+            val login = binding.login.text.toString()
+            val pass = binding.password.text.toString()
+            val name = binding.username.text.toString()
 
+            when {
+                binding.login.text.isNullOrBlank() || binding.password.text.isNullOrBlank() -> {
+                    Toast.makeText(
+                        activity,
+                        getString(R.string.error_filling_forms),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+                binding.confirmPassword.text.toString() != pass -> {
+                    Toast.makeText(
+                        activity,
+                        getString(R.string.password_doesnt_match),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+                viewModel.avatar.value?.file == null -> {
+                    viewModel.register(login, pass, name)
+                    Utils.hideKeyboard(requireView())
+                    findNavController().navigateUp()
+                }
+                else -> {
+                    val file = viewModel.avatar.value?.file?.let { MediaUpload(it) }
+                    file?.let { viewModel.registerWithPhoto(login, pass, name, it) }
+                    Utils.hideKeyboard(requireView())
+                    findNavController().navigateUp()
+                }
+            }
+        }
+        return binding.root
+    }
 }
+
