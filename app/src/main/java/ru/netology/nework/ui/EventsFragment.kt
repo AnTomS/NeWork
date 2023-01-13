@@ -27,7 +27,7 @@ import ru.netology.nework.adapter.EventRecyclerView
 import ru.netology.nework.databinding.FragmentEventsBinding
 import ru.netology.nework.dto.EventResponse
 import ru.netology.nework.enumiration.AttachmentType
-import ru.netology.nework.ui.NewPostFragment.Companion.textArg
+import ru.netology.nework.ui.UserProfileFragment.Companion.textArg
 import ru.netology.nework.utils.IntArg
 import ru.netology.nework.viewmodel.AuthViewModel
 import ru.netology.nework.viewmodel.EventViewModel
