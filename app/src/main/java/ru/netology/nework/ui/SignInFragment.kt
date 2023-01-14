@@ -1,6 +1,5 @@
 package ru.netology.nework.ui
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.netology.nework.R
 import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.databinding.FragmentSignInBinding
-import ru.netology.nework.repository.AuthRepository
+import ru.netology.nework.repository.auth.AuthRepository
 import ru.netology.nework.utils.Utils
 import ru.netology.nework.viewmodel.SignInViewModel
 import javax.inject.Inject

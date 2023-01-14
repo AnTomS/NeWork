@@ -11,10 +11,9 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.netology.nework.R
 import ru.netology.nework.auth.AppAuth
-import ru.netology.nework.auth.AppAuth.Companion.name
 import ru.netology.nework.databinding.FragmentRegisterBinding
 import ru.netology.nework.dto.MediaUpload
-import ru.netology.nework.repository.AuthRepository
+import ru.netology.nework.repository.auth.AuthRepository
 import ru.netology.nework.utils.Utils
 import ru.netology.nework.viewmodel.RegisterViewModel
 import javax.inject.Inject

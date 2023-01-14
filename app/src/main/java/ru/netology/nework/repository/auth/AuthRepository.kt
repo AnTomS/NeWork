@@ -1,10 +1,6 @@
-package ru.netology.nework.repository
+package ru.netology.nework.repository.auth
 
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.Part
+
 import ru.netology.nework.auth.AuthState
 import ru.netology.nework.dto.MediaUpload
 

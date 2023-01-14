@@ -2,9 +2,12 @@ package ru.netology.nework.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import ru.netology.nework.databinding.CardUserToChooseBinding
 import ru.netology.nework.dto.UserResponse
+import ru.netology.nework.view.loadCircleCrop
 
 interface ChooseUsersInteractionListener {
     fun check(id: Int) {}

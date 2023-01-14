@@ -22,6 +22,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import ru.netology.nework.R
+import ru.netology.nework.adapter.CreatePageUsersListAdapter
+import ru.netology.nework.adapter.CreatePageUsersListInteractionListener
 import ru.netology.nework.databinding.FragmentNewPostBinding
 import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.ui.PostsFragment.Companion.intArg

@@ -1,4 +1,4 @@
-package ru.netology.nework.repository
+package ru.netology.nework.repository.event
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData

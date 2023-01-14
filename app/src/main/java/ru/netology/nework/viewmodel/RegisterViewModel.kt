@@ -11,7 +11,7 @@ import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.dto.MediaUpload
 import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.model.MediaModel
-import ru.netology.nework.repository.AuthRepository
+import ru.netology.nework.repository.auth.AuthRepository
 import java.io.File
 import javax.inject.Inject
 

@@ -51,7 +51,7 @@
     <string name="enter_password">Введите пароль</string>
     <string name="enter_user_name">Введите Ваше имя</string>
     <string name="confirm_password">Подтвердите пароль</string>
-    <string name="error_filling_forms">Пожалуйсте, заполните все поля</string>
+    <string name="error_filling_forms">Пожалуйста, заполните все поля</string>
     <string name="password_doesnt_match">Пароль не подходит</string>
     <string name="log_in_to_continue" translatable="false">Log in to continue</string>
     <string name="skip_edit_question">Вы уверены, что хотите выйти? все изменения будут потеряны!</string>
@@ -92,7 +92,7 @@
     <string name="action_sign_in_short">Выполнить вход</string>
     <string name="welcome">Добро пожаловать</string>
     <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_password">Пароль должен содержать не меньше 5 символов</string>
     <string name="login_failed">Вход не удался</string>
     <string name="server_error_message">Проблема с доступом к серверу</string>
 </resources>

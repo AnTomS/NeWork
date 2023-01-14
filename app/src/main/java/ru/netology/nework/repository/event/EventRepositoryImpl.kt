@@ -1,4 +1,4 @@
-package ru.netology.nework.repository
+package ru.netology.nework.repository.event
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.*
@@ -6,90 +6,116 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import okhttp3.MultipartBody
 import ru.netology.nework.api.ApiService
-import ru.netology.nework.dao.PostDao
+import ru.netology.nework.dao.EventDao
 import ru.netology.nework.dto.*
-import ru.netology.nework.entity.PostEntity
+import ru.netology.nework.entity.EventEntity
 import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.error.ApiError
 import ru.netology.nework.error.NetworkError
 import java.io.IOException
 import javax.inject.Inject
 
-
 @OptIn(ExperimentalPagingApi::class)
-class PostRepositoryImpl @Inject constructor(
+class EventRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
-    mediator: PostRemoteMediator,
-    private val dao: PostDao,
-) : PostRepository {
-
-    override var data: Flow<PagingData<PostResponse>> =
+    mediator: EventRemoteMediator,
+    private val dao: EventDao,
+) : EventRepository {
+    override val data: Flow<PagingData<EventResponse>> =
         Pager(
             config = PagingConfig(pageSize = 10, enablePlaceholders = false),
-            pagingSourceFactory = { dao.getAllPosts() },
+            pagingSourceFactory = { dao.getAllEvents() },
             remoteMediator = mediator
         ).flow.map {
-            it.map(PostEntity::toDto)
+            it.map(EventEntity::toDto)
         }
+    override val eventUsersData: MutableLiveData<List<UserPreview>> =
+        MutableLiveData(emptyList())
 
-    override val postUsersData: MutableLiveData<List<UserPreview>> = MutableLiveData(emptyList())
-
-    override suspend fun getLikedAndMentionedUsersList(post: PostResponse) {
+    override suspend fun getEventUsersList(event: EventResponse) {
         try {
-            val response = apiService.getPostById(post.id)
+            val response = apiService.getEventById(event.id)
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             }
             val usersList = response.body()?.users?.values?.toMutableList()!!
-            postUsersData.postValue(usersList)
+            eventUsersData.postValue(usersList)
         } catch (e: IOException) {
             throw NetworkError
         }
     }
 
-    override suspend fun removePostById(id: Int) {
+    override suspend fun removeEventById(id: Int) {
         try {
-            val response = apiService.removePostById(id)
+            val response = apiService.removeEventById(id)
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             }
-            dao.removeById(id)
+            dao.removeEventById(id)
         } catch (e: IOException) {
             throw NetworkError
         }
     }
 
-    override suspend fun likePostById(id: Int): PostResponse {
+    override suspend fun likeEventById(id: Int): EventResponse {
         try {
-            val response = apiService.likePostById(id)
+            val response = apiService.likeEventById(id)
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             }
             val body = response.body() ?: throw ApiError(response.code(), response.message())
-            dao.insert(PostEntity.fromDto(body))
+            dao.insert(EventEntity.fromDto(body))
             return body
         } catch (e: IOException) {
             throw NetworkError
         }
     }
 
-    override suspend fun dislikePostById(id: Int): PostResponse {
+    override suspend fun dislikeEventById(id: Int): EventResponse {
         try {
-            val response = apiService.dislikePostById(id)
+            val response = apiService.dislikeEventById(id)
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             }
             val body = response.body() ?: throw ApiError(response.code(), response.message())
-            dao.insert(PostEntity.fromDto(body))
+            dao.insert(EventEntity.fromDto(body))
             return body
         } catch (e: IOException) {
             throw NetworkError
         }
     }
 
-    override suspend fun getPostById(id: Int): PostResponse {
+    override suspend fun participateInEvent(id: Int): EventResponse {
         try {
-            val response = apiService.getPostById(id)
+            val response = apiService.participateInEvent(id)
+            if (!response.isSuccessful) {
+                throw ApiError(response.code(), response.message())
+            }
+            val body = response.body() ?: throw ApiError(response.code(), response.message())
+            dao.insert(EventEntity.fromDto(body))
+            return body
+        } catch (e: IOException) {
+            throw NetworkError
+        }
+    }
+
+    override suspend fun quitParticipateInEvent(id: Int): EventResponse {
+        try {
+            val response = apiService.quitParticipateInEvent(id)
+            if (!response.isSuccessful) {
+                throw ApiError(response.code(), response.message())
+            }
+            val body = response.body() ?: throw ApiError(response.code(), response.message())
+            dao.insert(EventEntity.fromDto(body))
+            return body
+        } catch (e: IOException) {
+            throw NetworkError
+        }
+    }
+
+    override suspend fun getEventById(id: Int): EventResponse {
+        try {
+            val response = apiService.getEventById(id)
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             }
@@ -99,7 +125,21 @@ class PostRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addMediaToPost(
+    override suspend fun getUsers(): List<UserResponse> {
+        val usersList: List<UserResponse>
+        try {
+            val response = apiService.getAllUsers()
+            if (!response.isSuccessful) {
+                throw ApiError(response.code(), response.message())
+            }
+            usersList = response.body() ?: throw ApiError(response.code(), response.message())
+            return usersList
+        } catch (e: IOException) {
+            throw NetworkError
+        }
+    }
+
+    override suspend fun addMediaToEvent(
         type: AttachmentType,
         file: MultipartBody.Part,
     ): Attachment {
@@ -116,47 +156,36 @@ class PostRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getUsers(): List<UserResponse> {
+    override suspend fun saveEvent(event: EventCreateRequest) {
         try {
-            val response = apiService.getAllUsers()
-            if (!response.isSuccessful) {
-                throw ApiError(response.code(), response.message())
-            }
-            return response.body() ?: throw ApiError(response.code(), response.message())
-        } catch (e: IOException) {
-            throw NetworkError
-        }
-    }
-
-    override suspend fun savePost(post: PostCreateRequest) {
-        try {
-            val response = apiService.savePost(post)
+            val response = apiService.saveEvent(event)
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             } else {
                 val body = response.body() ?: throw ApiError(response.code(), response.message())
-                dao.insert(PostEntity.fromDto(body))
+                dao.insert(EventEntity.fromDto(body))
             }
         } catch (e: IOException) {
             throw NetworkError
         }
     }
 
-    override suspend fun getPostCreateRequest(id: Int): PostCreateRequest {
+    override suspend fun getEventCreateRequest(id: Int): EventCreateRequest {
         try {
-            val response = apiService.getPostById(id)
+            val response = apiService.getEventById(id)
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             } else {
-                val body =
-                    response.body() ?: throw ApiError(response.code(), response.message())
-                return PostCreateRequest(
+                val body = response.body() ?: throw ApiError(response.code(), response.message())
+                return EventCreateRequest(
                     id = body.id,
                     content = body.content,
+                    datetime = body.datetime,
                     coords = body.coords,
-                    link = body.link,
+                    type = body.type,
                     attachment = body.attachment,
-                    mentionIds = body.mentionIds
+                    link = body.link,
+                    speakerIds = body.speakerIds
                 )
             }
         } catch (e: IOException) {
@@ -176,9 +205,4 @@ class PostRepositoryImpl @Inject constructor(
             throw NetworkError
         }
     }
-
-    override fun getUserPosts(data: Flow<PagingData<PostResponse>>, id: Int) {
-        this.data = data.map { it.filter { it.authorId == id } }
-    }
-
 }

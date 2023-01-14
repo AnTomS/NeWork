@@ -1,6 +1,5 @@
 package ru.netology.nework.viewmodel
 
-import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.*
 import androidx.paging.PagingData
@@ -18,8 +17,7 @@ import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.model.FeedModelState
 import ru.netology.nework.model.MediaModel
 
-import ru.netology.nework.repository.PostRepository
-import ru.netology.nework.repository.PostRepositoryImpl
+import ru.netology.nework.repository.post.PostRepository
 import ru.netology.nework.utils.SingleLiveEvent
 import java.io.File
 import javax.inject.Inject

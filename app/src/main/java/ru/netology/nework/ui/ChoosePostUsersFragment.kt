@@ -8,47 +8,47 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.netology.nework.R
-import ru.netology.nework.adapter.UsersListAdapter
-import ru.netology.nework.adapter.UsersListInteractionListener
-import ru.netology.nework.databinding.FragmentUsersBinding
-import ru.netology.nework.ui.UserProfileFragment.Companion.textArg
+import ru.netology.nework.adapter.ChooseUsersAdapter
+import ru.netology.nework.adapter.ChooseUsersInteractionListener
+import ru.netology.nework.databinding.FragmentChoosePostUsersBinding
 import ru.netology.nework.viewmodel.PostViewModel
-import ru.netology.nework.viewmodel.UsersViewModel
+
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class UsersFragment :  Fragment() {
+class ChoosePostUsersFragment: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentUsersBinding.inflate(inflater, container, false)
+        val binding = FragmentChoosePostUsersBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.post_users)
+        (activity as AppActivity).supportActionBar?.title = getString(R.string.choose_post_users)
 
-        val viewModel: PostViewModel by activityViewModels()
+        val postViewModel: PostViewModel by activityViewModels()
 
-        val adapter = UsersListAdapter(object : UsersListInteractionListener {
-            override fun openUserProfile(id: Int) {
-                val idAuthor = id.toString()
-                findNavController().navigate(
-                    R.id.profile,
-                    Bundle().apply { textArg = idAuthor })
+        postViewModel.getUsers()
+
+        val adapter = ChooseUsersAdapter(object : ChooseUsersInteractionListener {
+            override fun check(id: Int) {
+                postViewModel.check(id)
+            }
+            override fun unCheck(id: Int) {
+                postViewModel.unCheck(id)
             }
         })
         binding.list.adapter = adapter
 
-        viewModel.dataState.observe(viewLifecycleOwner) { state ->
-            if (state.loading) {
+        postViewModel.dataState.observe(viewLifecycleOwner) { state ->
+            if (state.loading){
                 Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT).show()
             }
         }
 
-        viewModel.postUsersData.observe(viewLifecycleOwner) {
+        postViewModel.usersList.observe(viewLifecycleOwner) {
             val newUser = adapter.itemCount < it.size
             adapter.submitList(it) {
                 if (newUser) {
@@ -57,6 +57,10 @@ class UsersFragment :  Fragment() {
             }
         }
 
+        binding.add.setOnClickListener {
+            postViewModel.addMentionIds()
+            findNavController().navigateUp()
+        }
         return binding.root
     }
 }

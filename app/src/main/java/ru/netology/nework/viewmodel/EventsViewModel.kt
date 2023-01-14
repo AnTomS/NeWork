@@ -22,7 +22,7 @@ import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.enumiration.EventType
 import ru.netology.nework.model.FeedModelState
 import ru.netology.nework.model.MediaModel
-import ru.netology.nework.repository.EventRepository
+import ru.netology.nework.repository.event.EventRepository
 import ru.netology.nework.utils.SingleLiveEvent
 import java.io.File
 import javax.inject.Inject
