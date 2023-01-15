@@ -7,16 +7,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.*
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.github.dhaval2404.imagepicker.constant.ImageProvider
 import com.google.android.material.snackbar.Snackbar
-import com.yandex.mapkit.geometry.Point
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okhttp3.MultipartBody
@@ -53,7 +52,6 @@ class NewPostFragment: Fragment() {
         val viewModel: PostViewModel by activityViewModels()
         var file: MultipartBody.Part
 
-
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             Snackbar.make(binding.root, R.string.skip_edit_question, Snackbar.LENGTH_SHORT)
                 .setAction(R.string.exit) {
@@ -61,6 +59,7 @@ class NewPostFragment: Fragment() {
                     findNavController().navigate(R.id.list_post)
                 }.show()
         }
+
 
         if (arguments?.intArg != null) {
             val id = arguments?.intArg
@@ -209,23 +208,23 @@ class NewPostFragment: Fragment() {
         }
 
         binding.addMention.setOnClickListener {
-            findNavController().navigate(R.id.action_newPostFragment_to_choosePostUsersFragment)
+            findNavController().navigate(R.id.action_new_post_to_chooseEventUsersFragment)
         }
 
-        binding.addCoordinates.setOnClickListener {
-            if (viewModel.newPost.value?.coords != null) {
-                val point = Point(
-                    viewModel.newPost.value?.coords!!.lat.toDouble(),
-                    viewModel.newPost.value?.coords!!.long.toDouble()
-                )
-                viewModel.isPostIntent = true
-                findNavController().navigate(R.id.action_newPostFragment_to_mapsFragment,
-                    Bundle().apply { pointArg = point })
-            } else {
-                viewModel.isPostIntent = true
-                findNavController().navigate(R.id.action_newPostFragment_to_mapsFragment)
-            }
-        }
+//        binding.addCoordinates.setOnClickListener {
+//            if (viewModel.newPost.value?.coords != null) {
+//                val point = Point(
+//                    viewModel.newPost.value?.coords!!.lat.toDouble(),
+//                    viewModel.newPost.value?.coords!!.long.toDouble()
+//                )
+//                viewModel.isPostIntent = true
+//                     findNavController().navigate(R.id.action_newPostFragment_to_mapsFragment,
+//                    Bundle().apply { pointArg = point })
+//            } else {
+//                viewModel.isPostIntent = true
+//                findNavController().navigate(R.id.action_newPostFragment_to_mapsFragment)
+//            }
+//        }
 
         if (viewModel.newPost.value?.coords != null) {
             val latitude = viewModel.newPost.value?.coords!!.lat

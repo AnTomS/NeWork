@@ -32,8 +32,11 @@
         android:id="@+id/newPostFragment"
         android:name="ru.netology.nework.ui.NewPostFragment"
         android:label="fragment_new_post"
-        tools:layout="@layout/fragment_new_post" />
-
+        tools:layout="@layout/fragment_new_post" >
+    <action
+        android:id="@+id/action_new_post_to_chooseEventUsersFragment"
+        app:destination="@id/chooseEventUsersFragment" />
+    </fragment>
     <fragment
         android:id="@+id/events"
         android:name="ru.netology.nework.ui.EventsFragment"
@@ -76,5 +79,9 @@
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
     </fragment>
+    <fragment
+        android:id="@+id/chooseEventUsersFragment"
+        android:name="ru.netology.nework.ui.ChooseEventUsersFragment"
+        android:label="ChooseEventUsersFragment" />
 
 </navigation>

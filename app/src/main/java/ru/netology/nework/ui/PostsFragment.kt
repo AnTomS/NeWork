@@ -22,7 +22,8 @@ import ru.netology.nework.adapter.*
 import ru.netology.nework.databinding.FragmentPostsBinding
 import ru.netology.nework.dto.PostResponse
 import ru.netology.nework.enumiration.AttachmentType
-import ru.netology.nework.ui.NewPostFragment.Companion.textArg
+import ru.netology.nework.ui.UserProfileFragment.Companion.textArg
+
 import ru.netology.nework.utils.IntArg
 import ru.netology.nework.viewmodel.AuthViewModel
 import ru.netology.nework.viewmodel.PostViewModel
