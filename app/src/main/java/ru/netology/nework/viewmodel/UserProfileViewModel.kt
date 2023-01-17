@@ -9,6 +9,7 @@ import androidx.paging.cachedIn
 import androidx.paging.filter
 import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
@@ -32,12 +33,13 @@ val editedJob = Job(
     link = null
 )
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class UserProfileViewModel @Inject constructor(
     private val userRepository: UserRepository,
     //private val jobRepository: JobRepository,
     private val postRepository: PostRepository,
-    appAuth: AppAuth
+    appAuth: AppAuth,
 ) : ViewModel() {
 
     val myId: Long = appAuth.authStateFlow.value.id
@@ -52,6 +54,7 @@ class UserProfileViewModel @Inject constructor(
 
     val data: MutableLiveData<List<UserResponse>> = userRepository.data
     val userData: MutableLiveData<UserResponse> = userRepository.userData
+
     //val jobData: MutableLiveData<List<Job>> = jobRepository.data
     var postData: Flow<PagingData<PostResponse>> = appAuth
         .authStateFlow
@@ -145,7 +148,7 @@ class UserProfileViewModel @Inject constructor(
 
     fun getUserPosts(id: Int) {
         postData = postRepository.data
-        postData = postData.map { it.filter { it.authorId == id }}
+        postData = postData.map { it.filter { it.authorId == id } }
         viewModelScope.launch {
             try {
                 postRepository.getUserPosts(postData, id)

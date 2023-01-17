@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collectLatest
 import ru.netology.nework.R
+import ru.netology.nework.adapter.PagingLoadStateAdapter
 import ru.netology.nework.adapter.PostAdapter
 import ru.netology.nework.adapter.PostInteractionListener
 import ru.netology.nework.databinding.FragmentUserProfileBinding
@@ -27,7 +30,7 @@ import ru.netology.nework.viewmodel.UserProfileViewModel
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class UserProfileFragment : Fragment() {
-    val userProfileViewModel: UserProfileViewModel by activityViewModels()
+    private val userProfileViewModel: UserProfileViewModel by activityViewModels()
     val authViewModel: AuthViewModel by activityViewModels()
     val postViewModel: PostViewModel by activityViewModels()
 
@@ -50,17 +53,17 @@ class UserProfileFragment : Fragment() {
                 binding.addPost.visibility = View.GONE
                 arguments?.textArg?.let {
                     val userId = it.toInt()
-//                    userProfileViewModel.getUserById(userId)
+                    userProfileViewModel.getUserById(userId)
 //                    userProfileViewModel.getUserJobs(userId)
-//                    userProfileViewModel.getUserPosts(userId)
+                    userProfileViewModel.getUserPosts(userId)
                 }
             } else if (authViewModel.authenticated && arguments == null) {
                 binding.addJob.visibility = View.VISIBLE
                 binding.addPost.visibility = View.VISIBLE
-//                val myId = userProfileViewModel.myId.toInt()
-//                userProfileViewModel.getUserById(myId)
+                val myId = userProfileViewModel.myId.toInt()
+                userProfileViewModel.getUserById(myId)
 //                userProfileViewModel.getMyJobs()
-//                userProfileViewModel.getUserPosts(myId)
+                userProfileViewModel.getUserPosts(myId)
 
             }
         }
@@ -94,11 +97,11 @@ class UserProfileFragment : Fragment() {
 //            }
 //        }
 //
-//        userProfileViewModel.userData.observe(viewLifecycleOwner) {
-//            (activity as AppActivity?)?.supportActionBar?.title = it.name
-//            binding.name.text = it.name
-//            binding.avatar.loadCircleCrop(it.avatar)
-//        }
+        userProfileViewModel.userData.observe(viewLifecycleOwner) {
+            (activity as AppActivity?)?.supportActionBar?.title = it.name
+            binding.name.text = it.name
+            binding.avatar.loadCircleCrop(it.avatar)
+        }
 
         val postAdapter = PostAdapter(object : PostInteractionListener {
             override fun onLike(post: PostResponse) {
@@ -164,23 +167,23 @@ class UserProfileFragment : Fragment() {
             }
         })
 
-//        binding.postList.adapter = postAdapter.withLoadStateHeaderAndFooter(
-//            header = PagingLoadStateAdapter(object : PagingLoadStateAdapter.OnInteractionListener {
-//                override fun onRetry() {
-//                    postAdapter.retry()
-//                }
-//            }),
-//            footer = PagingLoadStateAdapter(object : PagingLoadStateAdapter.OnInteractionListener {
-//                override fun onRetry() {
-//                    postAdapter.retry()
-//                }
-//            }),
-//        )
-//
-//        lifecycleScope.launchWhenCreated {
-//            println(userProfileViewModel.postData.toString())
-//            userProfileViewModel.postData.collectLatest(postAdapter::submitData)
-//        }
+        binding.postList.adapter = postAdapter.withLoadStateHeaderAndFooter(
+            header = PagingLoadStateAdapter(object : PagingLoadStateAdapter.OnInteractionListener {
+                override fun onRetry() {
+                    postAdapter.retry()
+                }
+            }),
+            footer = PagingLoadStateAdapter(object : PagingLoadStateAdapter.OnInteractionListener {
+                override fun onRetry() {
+                    postAdapter.retry()
+                }
+            }),
+        )
+
+        lifecycleScope.launchWhenCreated {
+            println(userProfileViewModel.postData.toString())
+            userProfileViewModel.postData.collectLatest(postAdapter::submitData)
+        }
 
         binding.addJob.setOnClickListener {
             findNavController().navigate(R.id.list_post)

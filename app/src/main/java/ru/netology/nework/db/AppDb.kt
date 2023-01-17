@@ -5,17 +5,15 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import ru.netology.nework.dao.*
-import ru.netology.nework.entity.EventEntity
-import ru.netology.nework.entity.EventRemoteKeyEntity
-import ru.netology.nework.entity.PostEntity
-import ru.netology.nework.entity.PostRemoteKeyEntity
+import ru.netology.nework.entity.*
 
 @Database(
     entities = [PostEntity::class,
         EventEntity::class,
         EventRemoteKeyEntity::class,
         PostRemoteKeyEntity::class,
-        ], version = 4
+        UserEntity::class
+    ], version = 5
 )
 @TypeConverters(Converters::class)
 abstract class AppDb : RoomDatabase() {
@@ -23,6 +21,7 @@ abstract class AppDb : RoomDatabase() {
     abstract fun postRemoteKeyDao(): PostRemoteKeyDao
     abstract fun eventDao(): EventDao
     abstract fun eventRemoteKeyDao(): EventRemoteKeyDao
+    abstract fun userDao(): UserDao
 
 }
 

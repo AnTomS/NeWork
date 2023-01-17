@@ -65,8 +65,6 @@ class UsersFragment : Fragment() {
         return binding.root
     }
 
-
-
 }
 
 
