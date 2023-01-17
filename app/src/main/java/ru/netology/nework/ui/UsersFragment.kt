@@ -12,51 +12,25 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.netology.nework.R
+import ru.netology.nework.adapter.ContactAdapter
 import ru.netology.nework.adapter.UsersListAdapter
 import ru.netology.nework.adapter.UsersListInteractionListener
 import ru.netology.nework.databinding.FragmentUsersBinding
 import ru.netology.nework.ui.UserProfileFragment.Companion.textArg
 import ru.netology.nework.viewmodel.PostViewModel
+import ru.netology.nework.viewmodel.UserProfileViewModel
 import ru.netology.nework.viewmodel.UsersViewModel
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class UsersFragment :  Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val binding = FragmentUsersBinding.inflate(inflater, container, false)
+    val userViewModel: UserProfileViewModel by activityViewModels()
+    lateinit var adapter: ContactAdapter
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.post_users)
-
-        val viewModel: PostViewModel by activityViewModels()
-
-        val adapter = UsersListAdapter(object : UsersListInteractionListener {
-            override fun openUserProfile(id: Int) {
-                val idAuthor = id.toString()
-                findNavController().navigate(
-                    R.id.profile,
-                    Bundle().apply { textArg = idAuthor })
-            }
-        })
-        binding.list.adapter = adapter
-
-        viewModel.dataState.observe(viewLifecycleOwner) { state ->
-            if (state.loading) {
-                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT).show()
-            }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        userViewModel.data.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
         }
-
-        viewModel.postUsersData.observe(viewLifecycleOwner) {
-            val newUser = adapter.itemCount < it.size
-            adapter.submitList(it) {
-                if (newUser) {
-                    binding.list.smoothScrollToPosition(0)
-                }
-            }
-        }
-
-        return binding.root
     }
+
 }
