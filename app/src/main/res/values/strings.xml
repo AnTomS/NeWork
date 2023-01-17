@@ -71,7 +71,7 @@
     <string name="do_not_have_an_account">Ещё нет аккаунта?</string>
     <string name="choose_event_users">Choose event users</string>
     <string name="choose_post_users">Choose post users</string>
-    <string name="contacts">Contacts</string>
+    <string name="contacts">Список пользователей</string>
     <string name="events">События</string>
     <string name="posts">Посты</string>
     <string name="map">Map</string>
