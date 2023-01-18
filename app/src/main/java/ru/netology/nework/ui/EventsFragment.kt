@@ -24,6 +24,7 @@ import ru.netology.nework.R
 import ru.netology.nework.adapter.EventAdapter
 import ru.netology.nework.adapter.EventInteractionListener
 import ru.netology.nework.adapter.EventRecyclerView
+import ru.netology.nework.adapter.PagingLoadStateAdapter
 import ru.netology.nework.databinding.FragmentEventsBinding
 import ru.netology.nework.dto.EventResponse
 import ru.netology.nework.enumiration.AttachmentType
@@ -68,7 +69,7 @@ class EventsFragment : Fragment() {
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT)
                         .show()
-                    //findNavController().navigate(R.id.action_eventFeedFragment_to_signInFragment)
+                    findNavController().navigate(R.id.action_events_to_signInFragment)
                 }
             }
 
@@ -85,7 +86,7 @@ class EventsFragment : Fragment() {
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT)
                         .show()
-                    findNavController().navigate(R.id.action_list_post_to_newPostFragment)
+                    findNavController().navigate(R.id.action_events_to_signInFragment)
                 }
             }
 
@@ -105,12 +106,12 @@ class EventsFragment : Fragment() {
                         return
                     } else {
                         viewModel.getEventUsersList(event)
-                        findNavController().navigate(R.id.action_list_post_to_newPostFragment)
+                        findNavController().navigate(R.id.action_events_to_event_users)
                     }
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT)
                         .show()
-                    findNavController().navigate(R.id.action_list_post_to_newPostFragment)
+                    findNavController().navigate(R.id.action_events_to_signInFragment)
                 }
             }
 
@@ -122,7 +123,7 @@ class EventsFragment : Fragment() {
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT)
                         .show()
-                    findNavController().navigate(R.id.action_list_post_to_newPostFragment)
+                    findNavController().navigate(R.id.action_events_to_signInFragment)
                 }
             }
 
@@ -140,18 +141,18 @@ class EventsFragment : Fragment() {
 
         })
 
-//        binding.list.adapter = adapter.withLoadStateHeaderAndFooter(
-//            header = PagingLoadStateAdapter(object : PagingLoadStateAdapter.OnInteractionListener {
-//                override fun onRetry() {
-//                    adapter.retry()
-//                }
-//            }),
-//            footer = PagingLoadStateAdapter(object : PagingLoadStateAdapter.OnInteractionListener {
-//                override fun onRetry() {
-//                    adapter.retry()
-//                }
-//            }),
-//        )
+        binding.list.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = PagingLoadStateAdapter(object : PagingLoadStateAdapter.OnInteractionListener {
+                override fun onRetry() {
+                    adapter.retry()
+                }
+            }),
+            footer = PagingLoadStateAdapter(object : PagingLoadStateAdapter.OnInteractionListener {
+                override fun onRetry() {
+                    adapter.retry()
+                }
+            }),
+        )
 
         binding.list.addItemDecoration(
             DividerItemDecoration(
@@ -160,17 +161,17 @@ class EventsFragment : Fragment() {
             )
         )
 
-//        viewModel.dataState.observe(viewLifecycleOwner) { state ->
-//            binding.progress.isVisible = state.loading
-//            if (state.error) {
-//                Snackbar.make(binding.root, R.string.error_loading, Snackbar.LENGTH_INDEFINITE)
-//                    .show()
-//            }
-//            if (state.loading) {
-//                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT)
-//                    .show()
-//            }
-//        }
+        viewModel.dataState.observe(viewLifecycleOwner) { state ->
+            binding.progress.isVisible = state.loading
+            if (state.error) {
+                Snackbar.make(binding.root, R.string.error_loading, Snackbar.LENGTH_INDEFINITE)
+                    .show()
+            }
+            if (state.loading) {
+                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT)
+                    .show()
+            }
+        }
 
         lifecycleScope.launchWhenCreated {
             viewModel.data.collectLatest(adapter::submitData)

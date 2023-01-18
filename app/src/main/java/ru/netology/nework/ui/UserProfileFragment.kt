@@ -37,7 +37,7 @@ class UserProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!authViewModel.authenticated && arguments == null)
-            findNavController().navigate(R.id.list_post)
+            findNavController().navigate(R.id.signInFragment)
     }
 
     override fun onCreateView(
@@ -109,7 +109,7 @@ class UserProfileFragment : Fragment() {
                     if (!post.likedByMe) postViewModel.likePostById(post.id) else postViewModel.dislikePostById(post.id)
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.list_post)
+                    findNavController().navigate(R.id.signInFragment)
                 }
             }
 
@@ -136,7 +136,7 @@ class UserProfileFragment : Fragment() {
                     startActivity(shareIntent)
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.list_post)
+                    findNavController().navigate(R.id.signInFragment)
                 }
             }
 
@@ -146,11 +146,11 @@ class UserProfileFragment : Fragment() {
                         return
                     } else {
                         postViewModel.getLikedAndMentionedUsersList(post)
-                        findNavController().navigate(R.id.list_post)
+                        findNavController().navigate(R.id.list_of_users)
                     }
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.list_post)
+                    findNavController().navigate(R.id.signInFragment)
                 }
             }
 
@@ -185,9 +185,9 @@ class UserProfileFragment : Fragment() {
             userProfileViewModel.postData.collectLatest(postAdapter::submitData)
         }
 
-        binding.addJob.setOnClickListener {
-            findNavController().navigate(R.id.list_post)
-        }
+//        binding.addJob.setOnClickListener {
+//            findNavController().navigate(R.id.list_post)
+//        }
 
         binding.addPost.setOnClickListener {
             findNavController().navigate(R.id.newPostFragment)

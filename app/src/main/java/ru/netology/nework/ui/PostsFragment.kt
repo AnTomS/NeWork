@@ -44,7 +44,7 @@ class PostsFragment : Fragment() {
     ): View {
         val binding = FragmentPostsBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.posts)
+        (activity as AppActivity).supportActionBar?.title = getString(R.string.list_of_post)
 
         authViewModel.data.observeForever {
             if (!authViewModel.authenticated) {
@@ -62,7 +62,7 @@ class PostsFragment : Fragment() {
                     if (!post.likedByMe) viewModel.likePostById(post.id) else viewModel.dislikePostById(post.id)
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_list_post_to_newPostFragment)
+                    findNavController().navigate(R.id.action_list_post_to_signInFragment)
                 }
             }
 
@@ -88,7 +88,7 @@ class PostsFragment : Fragment() {
                     startActivity(shareIntent)
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_list_post_to_newPostFragment)
+                    findNavController().navigate(R.id.action_list_post_to_signInFragment)
                 }
             }
 
@@ -98,11 +98,11 @@ class PostsFragment : Fragment() {
                         return
                     } else {
                         viewModel.getLikedAndMentionedUsersList(post)
-                        findNavController().navigate(R.id.action_list_post_to_newPostFragment)
+                        findNavController().navigate(R.id.action_list_post_to_list_users)
                     }
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_list_post_to_newPostFragment)
+                    findNavController().navigate(R.id.action_list_post_to_signInFragment)
                 }
             }
 

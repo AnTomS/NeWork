@@ -53,7 +53,7 @@
     <string name="confirm_password">Подтвердите пароль</string>
     <string name="error_filling_forms">Пожалуйста, заполните все поля</string>
     <string name="password_doesnt_match">Пароль не подходит</string>
-    <string name="log_in_to_continue" translatable="false">Log in to continue</string>
+    <string name="log_in_to_continue" >Выполните вход, чтобы продолжить</string>
     <string name="skip_edit_question">Вы уверены, что хотите выйти? все изменения будут потеряны!</string>
     <string name="fill_text" translatable="false">Please fill content text and datetime</string>
     <string name="need_location_permission">Location permission required</string>

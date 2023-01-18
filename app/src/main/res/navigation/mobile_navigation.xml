@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_list_post_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_list_post_to_list_users"
+            app:destination="@id/list_of_users" />
 
     </fragment>
 
@@ -48,6 +51,9 @@
         <action
             android:id="@+id/action_events_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_events_to_event_users"
+            app:destination="@id/chooseEventUsersFragment" />
     </fragment>
 
     <fragment
@@ -83,5 +89,10 @@
         android:id="@+id/chooseEventUsersFragment"
         android:name="ru.netology.nework.ui.ChooseEventUsersFragment"
         android:label="ChooseEventUsersFragment" />
+    <fragment
+        android:id="@+id/choosePostUsersFragment"
+        android:name="ru.netology.nework.ui.ChoosePostUsersFragment"
+        android:label="fragment_choose_post_users"
+        tools:layout="@layout/fragment_choose_post_users" />
 
 </navigation>
