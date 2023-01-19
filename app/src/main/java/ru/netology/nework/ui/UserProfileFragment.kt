@@ -30,14 +30,14 @@ import ru.netology.nework.viewmodel.UserProfileViewModel
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class UserProfileFragment : Fragment() {
-    private val userProfileViewModel: UserProfileViewModel by activityViewModels()
+    val userProfileViewModel: UserProfileViewModel by activityViewModels()
     val authViewModel: AuthViewModel by activityViewModels()
     val postViewModel: PostViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (!authViewModel.authenticated && arguments == null)
-            findNavController().navigate(R.id.signInFragment)
+//        if (!authViewModel.authenticated && arguments == null)
+//            findNavController().navigate(R.id.list_of_users)
     }
 
     override fun onCreateView(

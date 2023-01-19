@@ -58,7 +58,6 @@ class PostViewHolder(
     var videoPreview: MediaItem? = null
     val videoPlayIcon: ImageView = binding.videoButton
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun bind(post: PostResponse) {
         parentView.tag = this
         binding.apply {

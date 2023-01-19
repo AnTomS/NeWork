@@ -17,8 +17,7 @@
     <fragment
         android:id="@+id/list_post"
         android:name="ru.netology.nework.ui.PostsFragment"
-        android:label="@string/list_of_post"
-        tools:layout="@layout/fragment_posts">
+        android:label="@string/list_of_post">
         <action
             android:id="@+id/action_list_post_to_newPostFragment"
             app:destination="@id/newPostFragment" />
@@ -28,6 +27,9 @@
         <action
             android:id="@+id/action_list_post_to_list_users"
             app:destination="@id/list_of_users" />
+        <action
+            android:id="@+id/action_list_post_to_show_image"
+            app:destination="@id/showImageFragment" />
 
     </fragment>
 
@@ -88,11 +90,17 @@
     <fragment
         android:id="@+id/chooseEventUsersFragment"
         android:name="ru.netology.nework.ui.ChooseEventUsersFragment"
-        android:label="ChooseEventUsersFragment" />
+        android:label="ChooseEventUsersFragment" >
+</fragment>
     <fragment
         android:id="@+id/choosePostUsersFragment"
         android:name="ru.netology.nework.ui.ChoosePostUsersFragment"
         android:label="fragment_choose_post_users"
-        tools:layout="@layout/fragment_choose_post_users" />
+        tools:layout="@layout/fragment_choose_post_users" >
+    </fragment>
+    <fragment
+        android:id="@+id/showImageFragment"
+        android:name="ru.netology.nework.ui.ShowImageFragment"
+        android:label="ShowImageFragment" />
 
 </navigation>

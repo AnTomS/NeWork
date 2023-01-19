@@ -28,7 +28,6 @@ import ru.netology.nework.utils.IntArg
 import ru.netology.nework.viewmodel.AuthViewModel
 import ru.netology.nework.viewmodel.PostViewModel
 
-import kotlin.system.exitProcess
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -44,7 +43,7 @@ class PostsFragment : Fragment() {
     ): View {
         val binding = FragmentPostsBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.list_of_post)
+        (activity as AppActivity).supportActionBar?.title = getString(R.string.posts)
 
         authViewModel.data.observeForever {
             if (!authViewModel.authenticated) {
@@ -110,7 +109,7 @@ class PostsFragment : Fragment() {
                 if (post.attachment?.url != "") {
                     when (post.attachment?.type) {
                         AttachmentType.IMAGE -> {
-                            findNavController().navigate(R.id.action_list_post_to_newPostFragment,
+                            findNavController().navigate(R.id.action_list_post_to_show_image,
                                 Bundle().apply { textArg = post.attachment.url })
                         }
                         else -> return
@@ -146,13 +145,20 @@ class PostsFragment : Fragment() {
                     .show()
             }
             if (state.loading) {
-                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT)
+                    .setAction(R.string.retry_loading) { viewModel.refreshPosts() }
+                    .show()
             }
+        }
+
+        binding.swipeRefresh.setOnClickListener{
+            adapter.refresh()
         }
 
         lifecycleScope.launchWhenCreated {
             viewModel.data.collectLatest(adapter::submitData)
         }
+
 
         adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {

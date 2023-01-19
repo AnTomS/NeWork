@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
+import retrofit2.Response
 import ru.netology.nework.dto.*
 import ru.netology.nework.enumiration.AttachmentType
 
@@ -22,4 +23,6 @@ interface PostRepository {
     fun getUserPosts(data: Flow<PagingData<PostResponse>>, id: Int)
     suspend fun addMediaToPost(type: AttachmentType, file: MultipartBody.Part): Attachment
     suspend fun savePost(post: PostCreateRequest)
+
+    suspend fun getAllPosts(): List<PostResponse>
 }

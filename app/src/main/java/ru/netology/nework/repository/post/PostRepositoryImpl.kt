@@ -9,9 +9,11 @@ import ru.netology.nework.api.ApiService
 import ru.netology.nework.dao.PostDao
 import ru.netology.nework.dto.*
 import ru.netology.nework.entity.PostEntity
+import ru.netology.nework.entity.toEntity
 import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.error.ApiError
 import ru.netology.nework.error.NetworkError
+import ru.netology.nework.error.UnkError
 import java.io.IOException
 import javax.inject.Inject
 
@@ -34,6 +36,24 @@ class PostRepositoryImpl @Inject constructor(
 
     override val postUsersData: MutableLiveData<List<UserPreview>> = MutableLiveData(emptyList())
 
+
+
+    override suspend fun getAllPosts(): List<PostResponse> {
+        try {
+            val response = apiService.getAllPosts()
+            if (!response.isSuccessful) {
+                throw ApiError(response.code(), response.message())
+            }
+            val body = response.body() ?: throw ApiError(response.code(), response.message())
+            dao.insert(body.toEntity())
+            return body
+        }
+            catch (e: IOException) {
+                throw NetworkError
+            } catch (e: Exception) {
+                throw UnkError
+            }
+        }
     override suspend fun getLikedAndMentionedUsersList(post: PostResponse) {
         try {
             val response = apiService.getPostById(post.id)
@@ -141,6 +161,8 @@ class PostRepositoryImpl @Inject constructor(
             throw NetworkError
         }
     }
+
+
 
     override suspend fun getPostCreateRequest(id: Int): PostCreateRequest {
         try {

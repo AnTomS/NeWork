@@ -79,6 +79,16 @@ class PostViewModel @Inject constructor(
             }
         }
 
+    fun refreshPosts() = viewModelScope.launch {
+        try {
+            _dataState.value = FeedModelState(refreshing = true)
+            repository.getAllPosts()
+            _dataState.value = FeedModelState()
+        } catch (e: Exception) {
+            _dataState.value = FeedModelState(error = true)
+        }
+    }
+
     fun getLikedAndMentionedUsersList(post: PostResponse) {
         viewModelScope.launch {
             try {

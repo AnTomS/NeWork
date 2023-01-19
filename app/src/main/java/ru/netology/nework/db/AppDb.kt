@@ -13,7 +13,7 @@ import ru.netology.nework.entity.*
         EventRemoteKeyEntity::class,
         PostRemoteKeyEntity::class,
         UserEntity::class
-    ], version = 5
+    ], version = 4
 )
 @TypeConverters(Converters::class)
 abstract class AppDb : RoomDatabase() {
