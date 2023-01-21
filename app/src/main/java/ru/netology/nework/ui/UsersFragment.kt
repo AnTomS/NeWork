@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.ExperimentalPagingApi
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,10 +25,8 @@ class UsersFragment : Fragment() {
     private val userViewModel: UserProfileViewModel by activityViewModels()
     lateinit var adapter: ContactAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-            }
+    @ExperimentalCoroutinesApi
+    @ExperimentalPagingApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,6 +59,8 @@ class UsersFragment : Fragment() {
             println(it.toString())
             adapter.submitList(it)
         }
+
+
 
 
 

@@ -25,4 +25,5 @@ interface PostRepository {
     suspend fun savePost(post: PostCreateRequest)
 
     suspend fun getAllPosts(): List<PostResponse>
+
 }

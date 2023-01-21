@@ -31,6 +31,10 @@
             android:id="@+id/action_list_post_to_show_image"
             app:destination="@id/showImageFragment" />
 
+        <action
+            android:id="@+id/action_list_to_postUsersListFragment"
+            app:destination="@id/postUsersListFragment" />
+
     </fragment>
 
     <fragment
@@ -102,5 +106,15 @@
         android:id="@+id/showImageFragment"
         android:name="ru.netology.nework.ui.ShowImageFragment"
         android:label="ShowImageFragment" />
+    <fragment
+        android:id="@+id/newJobFragment"
+        android:name="ru.netology.nework.ui.NewJobFragment"
+        android:label="fragment_new_job"
+        tools:layout="@layout/fragment_new_job" />
+    <fragment
+        android:id="@+id/postUsersListFragment"
+        android:name="ru.netology.nework.ui.PostUsersListFragment"
+        android:label="fragment_post_users_list"
+        tools:layout="@layout/fragment_post_users_list" />
 
 </navigation>

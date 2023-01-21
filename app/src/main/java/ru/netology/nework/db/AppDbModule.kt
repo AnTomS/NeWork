@@ -38,11 +38,11 @@ class AppDbModule {
     @Provides
     fun provideEventRemoteKeyDao(appDb: AppDb): EventRemoteKeyDao =
         appDb.eventRemoteKeyDao()
-//
-//    @Provides
-//    fun provideJobDao(appDb: AppDb): JobDao =
-//        appDb.jobDao()
-//
+
+    @Provides
+    fun provideJobDao(appDb: AppDb): JobDao =
+        appDb.jobDao()
+
     @Provides
     fun provideUserDao(appDb: AppDb): UserDao =
         appDb.userDao()

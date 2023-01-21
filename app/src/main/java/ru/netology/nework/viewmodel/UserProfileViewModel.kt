@@ -19,6 +19,7 @@ import ru.netology.nework.dto.Job
 import ru.netology.nework.dto.PostResponse
 import ru.netology.nework.dto.UserResponse
 import ru.netology.nework.model.FeedModelState
+import ru.netology.nework.repository.job.JobRepository
 import ru.netology.nework.repository.post.PostRepository
 import ru.netology.nework.repository.user.UserRepository
 import ru.netology.nework.utils.SingleLiveEvent
@@ -37,7 +38,7 @@ val editedJob = Job(
 @HiltViewModel
 class UserProfileViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    //private val jobRepository: JobRepository,
+    private val jobRepository: JobRepository,
     private val postRepository: PostRepository,
     appAuth: AppAuth,
 ) : ViewModel() {
@@ -55,7 +56,7 @@ class UserProfileViewModel @Inject constructor(
     val data: MutableLiveData<List<UserResponse>> = userRepository.data
     val userData: MutableLiveData<UserResponse> = userRepository.userData
 
-    //val jobData: MutableLiveData<List<Job>> = jobRepository.data
+    val jobData: MutableLiveData<List<Job>> = jobRepository.data
     var postData: Flow<PagingData<PostResponse>> = appAuth
         .authStateFlow
         .flatMapLatest { (myId, _) ->
@@ -67,9 +68,11 @@ class UserProfileViewModel @Inject constructor(
             }
         }
 
+
     private val _dataState = MutableLiveData<FeedModelState>()
     val dataState: LiveData<FeedModelState>
         get() = _dataState
+
 
     fun getAllUsers() {
         viewModelScope.launch {
@@ -91,48 +94,48 @@ class UserProfileViewModel @Inject constructor(
         }
     }
 
-//    fun getUserJobs(id: Int) {
-//        viewModelScope.launch {
-//            try {
-//                jobRepository.getUserJobs(id)
-//            } catch (e: Exception) {
-//                _dataState.value = FeedModelState(error = true)
-//            }
-//        }
-//    }
+    fun getUserJobs(id: Int) {
+        viewModelScope.launch {
+            try {
+                jobRepository.getUserJobs(id)
+            } catch (e: Exception) {
+                _dataState.value = FeedModelState(error = true)
+            }
+        }
+    }
 
-//    fun saveJob(job: Job) {
-//        viewModelScope.launch {
-//            try {
-//                jobRepository.saveJob(job)
-//                _dataState.value = FeedModelState(error = false)
-//                deleteEditJob()
-//                _jobCreated.value = Unit
-//            } catch (e: Exception) {
-//                _dataState.value = FeedModelState(error = true)
-//            }
-//        }
-//    }
+    fun saveJob(job: Job) {
+        viewModelScope.launch {
+            try {
+                jobRepository.saveJob(job)
+                _dataState.value = FeedModelState(error = false)
+                deleteEditJob()
+                _jobCreated.value = Unit
+            } catch (e: Exception) {
+                _dataState.value = FeedModelState(error = true)
+            }
+        }
+    }
 
-//    fun removeJobById(id: Int) {
-//        viewModelScope.launch {
-//            try {
-//                jobRepository.removeJobById(id)
-//            } catch (e: Exception) {
-//                _dataState.value = FeedModelState(error = true)
-//            }
-//        }
-//    }
+    fun removeJobById(id: Int) {
+        viewModelScope.launch {
+            try {
+                jobRepository.removeJobById(id)
+            } catch (e: Exception) {
+                _dataState.value = FeedModelState(error = true)
+            }
+        }
+    }
 
-//    fun getMyJobs() {
-//        viewModelScope.launch {
-//            try {
-//                jobRepository.getMyJobs()
-//            } catch (e: Exception) {
-//                _dataState.value = FeedModelState(error = true)
-//            }
-//        }
-//    }
+    fun getMyJobs() {
+        viewModelScope.launch {
+            try {
+                jobRepository.getMyJobs()
+            } catch (e: Exception) {
+                _dataState.value = FeedModelState(error = true)
+            }
+        }
+    }
 
     fun deleteEditJob() {
         newJob.postValue(editedJob)
@@ -148,7 +151,7 @@ class UserProfileViewModel @Inject constructor(
 
     fun getUserPosts(id: Int) {
         postData = postRepository.data
-        postData = postData.map { it.filter { it.authorId == id } }
+        postData = postData.map { it.filter { it.authorId == id }}
         viewModelScope.launch {
             try {
                 postRepository.getUserPosts(postData, id)

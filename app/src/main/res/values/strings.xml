@@ -18,23 +18,23 @@
     <string name="coordinates_description" translatable="false">Coordinates</string>
     <string name="liked_and_mentioned_users_sample_text" translatable="false">Liked and mentioned users amount</string>
     <string name="sample_author_name" translatable="false">User User</string>
-    <string name="sample_published_date">January 1, 20:00</string>
+    <string name="sample_published_date" translatable="false">January 1, 20:00</string>
     <string name="sample_content">заглушка</string>
     <string name="sample_number" translatable="false">15</string>
     <string name="mention" translatable="false">Mention</string>
     <string name="retry_loading" translatable="false">Retry loading</string>
     <string name="empty_posts">В данный момент нет постов. Но если Вы создатите новый, то он отобразится здесь</string>
-    <string name="error_loading" translatable="false">Loading error. There is no internet connection</string>
+    <string name="error_loading">Ошибка загрузки.</string>
     <string name="add_post">Добавить новый пост</string>
     <string name="add_job">Добавить место работы</string>
-    <string name="add_event">СОздать новое событие</string>
-    <string name="add_avatar" translatable="false">Add avatar</string>
+    <string name="add_event">Создать новое событие</string>
+    <string name="add_avatar" translatable="false">Добавить аватар</string>
     <string name="add" translatable="false">Add</string>
     <string name="edit">Изменить</string>
     <string name="remove">Удалить</string>
     <string name="content" translatable="false">Content</string>
     <string name="exit">Выйти</string>
-    <string name="mention_users" translatable="false">Mention users</string>
+    <string name="mention_users">Упомянутые пользователи</string>
     <string name="add_coordinates" translatable="false">Add coordinates</string>
     <string name="add_link">Добавить ссылку</string>
     <string name="link_description" translatable="false">Ссылка</string>
@@ -46,7 +46,7 @@
     <string name="close_user_preview_card_description">закрыть просмотр</string>
     <string name="get_location">Получить локацию</string>
     <string name="login">Логин</string>
-    <string name="enter_login">Повторите ввод логина</string>
+    <string name="enter_login">Введите логин</string>
     <string name="password">Пароль</string>
     <string name="enter_password">Введите пароль</string>
     <string name="enter_user_name">Введите Ваше имя</string>
@@ -55,8 +55,8 @@
     <string name="password_doesnt_match">Пароль не подходит</string>
     <string name="log_in_to_continue" >Выполните вход, чтобы продолжить</string>
     <string name="skip_edit_question">Вы уверены, что хотите выйти? все изменения будут потеряны!</string>
-    <string name="fill_text" translatable="false">Please fill content text and datetime</string>
-    <string name="need_location_permission">Location permission required</string>
+    <string name="fill_text">Пожалуйста, заполните все поля.</string>
+    <string name="need_location_permission" translatable="false">Location permission required</string>
     <string name="event_type_online" translatable="false">Online</string>
     <string name="event_type_offline" translatable="false">Offline</string>
     <string name="event_type_description">Тип события</string>
@@ -64,34 +64,34 @@
     <string name="position">Должность</string>
     <string name="start_date">Начало работы</string>
     <string name="end_date">окончание работы</string>
-    <string name="fill_company_name_position_and_start_date_message" translatable="false">Please fill in company name, position and start date</string>
-    <string name="add_speakers">Add speakers</string>
-    <string name="add_date_time">Add date and time</string>
-    <string name="go_to_register_page">Go to register page</string>
+    <string name="fill_company_name_position_and_start_date_message">Пожалуйста укажите название компании, должность и начало работы</string>
+    <string name="add_speakers">Добавить слушателей</string>
+    <string name="add_date_time">Добавить время и дату</string>
+    <string name="go_to_register_page" translatable="false">Go to register page</string>
     <string name="do_not_have_an_account">Ещё нет аккаунта?</string>
-    <string name="choose_event_users">Choose event users</string>
-    <string name="choose_post_users">Choose post users</string>
+    <string name="choose_event_users" translatable="false">Choose event users</string>
+    <string name="choose_post_users" translatable="false">Choose post users</string>
     <string name="contacts">Список пользователей</string>
     <string name="events">События</string>
     <string name="posts">Посты</string>
     <string name="map">Map</string>
     <string name="create_event">Создать новое событие</string>
     <string name="create_post">Создать новый пост</string>
-    <string name="post_users">Post users</string>
-    <string name="event_users">Event users</string>
-    <string name="photo">Photo</string>
+    <string name="post_users" translatable="false">Post users</string>
+    <string name="event_users" translatable="false">Event users</string>
+    <string name="photo" translatable="false">Photo</string>
     <string name="list_of_post">Список постов</string>
     <string name="my_profile">Мой профиль</string>
     <string name="events_for_people">События</string>
     <string name="list_of_users">Список пользователей</string>
-    <string name="description_post_save">description_post_save</string>
+    <string name="description_post_save" translatable="false">description_post_save</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Емейл</string>
     <string name="prompt_password">Пароль</string>
     <string name="action_sign_in">ВЫполнить вход или регистрацию</string>
     <string name="action_sign_in_short">Выполнить вход</string>
     <string name="welcome">Добро пожаловать</string>
-    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_username">Имя пользователя недоступно</string>
     <string name="invalid_password">Пароль должен содержать не меньше 5 символов</string>
     <string name="login_failed">Вход не удался</string>
     <string name="server_error_message">Проблема с доступом к серверу</string>

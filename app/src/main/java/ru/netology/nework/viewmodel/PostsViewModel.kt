@@ -13,10 +13,8 @@ import okhttp3.MultipartBody
 import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.dto.*
 import ru.netology.nework.enumiration.AttachmentType
-
 import ru.netology.nework.model.FeedModelState
 import ru.netology.nework.model.MediaModel
-
 import ru.netology.nework.repository.post.PostRepository
 import ru.netology.nework.utils.SingleLiveEvent
 import java.io.File
@@ -78,6 +76,8 @@ class PostViewModel @Inject constructor(
 
             }
         }
+
+
 
     fun refreshPosts() = viewModelScope.launch {
         try {
