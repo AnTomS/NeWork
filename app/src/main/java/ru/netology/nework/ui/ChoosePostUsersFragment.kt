@@ -14,6 +14,7 @@ import ru.netology.nework.R
 import ru.netology.nework.adapter.ChooseUsersAdapter
 import ru.netology.nework.adapter.ChooseUsersInteractionListener
 import ru.netology.nework.databinding.FragmentChoosePostUsersBinding
+import ru.netology.nework.ui.AppActivity
 import ru.netology.nework.viewmodel.PostViewModel
 
 @ExperimentalCoroutinesApi

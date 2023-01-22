@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import ru.netology.nework.dao.Converters
-import ru.netology.nework.dto.Coordinates
 import ru.netology.nework.dto.EventResponse
 import ru.netology.nework.dto.UserPreview
 import ru.netology.nework.enumiration.EventType
@@ -32,7 +31,7 @@ data class EventEntity(
     val attachment: AttachmentEmbedded?,
     val link: String?,
     val ownedByMe: Boolean,
-    val users: Map<Int, UserPreview>
+    val users: Map<Int, UserPreview>,
 ) {
 
     fun toDto() = EventResponse(

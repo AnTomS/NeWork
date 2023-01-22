@@ -25,6 +25,7 @@ import ru.netology.nework.adapter.CreatePageUsersListAdapter
 import ru.netology.nework.adapter.CreatePageUsersListInteractionListener
 import ru.netology.nework.databinding.FragmentNewPostBinding
 import ru.netology.nework.enumiration.AttachmentType
+import ru.netology.nework.ui.AppActivity
 import ru.netology.nework.ui.PostsFragment.Companion.intArg
 import ru.netology.nework.ui.UserProfileFragment.Companion.textArg
 import ru.netology.nework.utils.Utils

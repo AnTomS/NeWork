@@ -3,7 +3,6 @@ package ru.netology.nework.dao
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import ru.netology.nework.dto.Coordinates
 import ru.netology.nework.dto.UserPreview
 import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.enumiration.EventType
@@ -14,25 +13,6 @@ class Converters {
 
     @TypeConverter
     fun fromAttachmentType(value: AttachmentType) = value.name
-
-    @TypeConverter
-    fun coordinatesToJson(coordinates: Coordinates?): String? {
-        return if (coordinates == null) {
-            null
-        } else {
-            Gson().toJson(coordinates)
-        }
-    }
-
-    @TypeConverter
-    fun jsonToCoordinates(json: String?): Coordinates? {
-        return if (json.isNullOrEmpty()) {
-            null
-        } else {
-            val type = object : TypeToken<Coordinates>() {}.type
-            Gson().fromJson(json, type)
-        }
-    }
 
     @TypeConverter
     fun fromListInt(list: List<Int?>): String {
