@@ -40,7 +40,7 @@ class JobViewHolder(
             startDate.text = Utils.convertDate(job.start)
             endDate.text = job.finish?.let { Utils.convertDate(it) }
             link.text = job.link
-            link.setOnClickListener{
+            link.setOnClickListener {
                 listener.onLinkClick(link.text.toString())
             }
             delete.visibility = if (job.ownedByMe) View.VISIBLE else View.GONE

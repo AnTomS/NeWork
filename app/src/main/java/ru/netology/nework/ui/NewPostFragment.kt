@@ -27,18 +27,17 @@ import ru.netology.nework.databinding.FragmentNewPostBinding
 import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.ui.PostsFragment.Companion.intArg
 import ru.netology.nework.ui.UserProfileFragment.Companion.textArg
-import ru.netology.nework.utils.StringArg
 import ru.netology.nework.utils.Utils
 import ru.netology.nework.viewmodel.PostViewModel
 import java.io.File
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class NewPostFragment: Fragment() {
+class NewPostFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
 
         (activity as AppActivity).supportActionBar?.title = getString(R.string.create_post)
@@ -210,31 +209,6 @@ class NewPostFragment: Fragment() {
         binding.addMention.setOnClickListener {
             findNavController().navigate(R.id.action_new_post_to_chooseEventUsersFragment)
         }
-
-//        binding.addCoordinates.setOnClickListener {
-//            if (viewModel.newPost.value?.coords != null) {
-//                val point = Point(
-//                    viewModel.newPost.value?.coords!!.lat.toDouble(),
-//                    viewModel.newPost.value?.coords!!.long.toDouble()
-//                )
-//                viewModel.isPostIntent = true
-//                     findNavController().navigate(R.id.action_newPostFragment_to_mapsFragment,
-//                    Bundle().apply { pointArg = point })
-//            } else {
-//                viewModel.isPostIntent = true
-//                findNavController().navigate(R.id.action_newPostFragment_to_mapsFragment)
-//            }
-//        }
-
-        if (viewModel.newPost.value?.coords != null) {
-            val latitude = viewModel.newPost.value?.coords!!.lat
-            val longitude = viewModel.newPost.value?.coords!!.long
-            val coords = "$latitude, $longitude"
-            binding.addCoordinates.setText(coords)
-        } else {
-            binding.addCoordinates.text = null
-        }
-
         binding.addLink.setOnClickListener {
             val link: String = binding.link.text.toString()
             viewModel.addLink(link)

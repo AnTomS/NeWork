@@ -18,11 +18,11 @@ import ru.netology.nework.viewmodel.PostViewModel
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class ChoosePostUsersFragment: Fragment() {
+class ChoosePostUsersFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         val binding = FragmentChoosePostUsersBinding.inflate(inflater, container, false)
 
@@ -36,6 +36,7 @@ class ChoosePostUsersFragment: Fragment() {
             override fun check(id: Int) {
                 postViewModel.check(id)
             }
+
             override fun unCheck(id: Int) {
                 postViewModel.unCheck(id)
             }
@@ -43,8 +44,9 @@ class ChoosePostUsersFragment: Fragment() {
         binding.list.adapter = adapter
 
         postViewModel.dataState.observe(viewLifecycleOwner) { state ->
-            if (state.loading){
-                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT).show()
+            if (state.loading) {
+                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT)
+                    .show()
             }
         }
 

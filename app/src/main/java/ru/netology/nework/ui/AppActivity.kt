@@ -121,9 +121,11 @@ class AppActivity : AppCompatActivity() {
                 getErrorDialog(this@AppActivity, code, 9000)?.show()
                 return
             }
-            Toast.makeText(this@AppActivity,
+            Toast.makeText(
+                this@AppActivity,
                 R.string.google_api_unavailable_message,
-                Toast.LENGTH_LONG)
+                Toast.LENGTH_LONG
+            )
                 .show()
         }
     }

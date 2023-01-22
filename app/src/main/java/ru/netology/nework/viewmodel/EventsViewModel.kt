@@ -32,7 +32,6 @@ val editedEvent = EventCreateRequest(
     id = 0,
     content = "",
     datetime = null,
-    coords = null,
     type = EventType.OFFLINE,
     attachment = null,
     link = null,
@@ -46,7 +45,7 @@ private val noMedia = MediaModel()
 @HiltViewModel
 class EventViewModel @Inject constructor(
     private val repository: EventRepository,
-    appAuth: AppAuth
+    appAuth: AppAuth,
 ) : ViewModel() {
 
     private val _dataState = MutableLiveData<FeedModelState>()
@@ -211,15 +210,6 @@ class EventViewModel @Inject constructor(
         }
     }
 
-    fun addCoords(point: Point) {
-        val coordinates = Coordinates(
-            ((point.latitude * 1000000.0).roundToInt() / 1000000.0).toString(),
-            ((point.longitude * 1000000.0).roundToInt() / 1000000.0).toString()
-        )
-        newEvent.value = newEvent.value?.copy(coords = coordinates)
-        isEventIntent = false
-    }
-
     fun addLink(link: String) {
         if (link != "") {
             newEvent.value = newEvent.value?.copy(link = link)
@@ -234,7 +224,7 @@ class EventViewModel @Inject constructor(
 
     fun addMediaToEvent(
         type: AttachmentType,
-        file: MultipartBody.Part
+        file: MultipartBody.Part,
     ) {
         viewModelScope.launch {
             try {

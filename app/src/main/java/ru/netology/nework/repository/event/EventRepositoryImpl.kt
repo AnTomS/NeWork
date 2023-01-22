@@ -181,7 +181,6 @@ class EventRepositoryImpl @Inject constructor(
                     id = body.id,
                     content = body.content,
                     datetime = body.datetime,
-                    coords = body.coords,
                     type = body.type,
                     attachment = body.attachment,
                     link = body.link,

@@ -2,7 +2,6 @@ package ru.netology.nework.repository.user
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
-import androidx.paging.ExperimentalPagingApi
 import ru.netology.nework.api.ApiService
 import ru.netology.nework.dao.UserDao
 import ru.netology.nework.dto.UserResponse

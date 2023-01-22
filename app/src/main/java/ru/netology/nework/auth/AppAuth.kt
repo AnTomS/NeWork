@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AppAuth @Inject constructor(
-    private val prefs: SharedPreferences
+    private val prefs: SharedPreferences,
 ) {
     companion object {
         const val idKey = "id"
@@ -64,5 +64,5 @@ class AppAuth @Inject constructor(
 
 data class AuthState(
     val id: Long = 0, val token: String? = null,
-    val avatar: String? = null, val name: String? = null
+    val avatar: String? = null, val name: String? = null,
 )

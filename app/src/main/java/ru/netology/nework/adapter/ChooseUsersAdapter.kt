@@ -31,7 +31,7 @@ class ChooseUsersAdapter(private val onInteractionListener: ChooseUsersInteracti
 
 class ChooseUsersViewHolder(
     private val binding: CardUserToChooseBinding,
-    private val listener: ChooseUsersInteractionListener
+    private val listener: ChooseUsersInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(user: UserResponse) {

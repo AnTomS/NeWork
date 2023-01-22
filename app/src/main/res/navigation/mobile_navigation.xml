@@ -67,6 +67,9 @@
         android:name="ru.netology.nework.ui.NewEventFragment"
         android:label="@string/events_for_people"
         tools:layout="@layout/fragment_events" >
+        <action
+            android:id="@+id/action_new_events_to_event_users"
+            app:destination="@id/chooseEventUsersFragment" />
 </fragment>
 
 

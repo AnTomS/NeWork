@@ -12,13 +12,13 @@
         android:layout_marginStart="@dimen/small_padding"
         android:layout_marginTop="@dimen/small_padding"
         android:layout_marginEnd="@dimen/small_padding"
+        android:layout_marginBottom="@dimen/small_padding"
         android:background="@drawable/textview_background"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/add_attachment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="@dimen/small_padding">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ScrollView
             android:id="@+id/add_content"
@@ -72,32 +72,13 @@
         app:layout_constraintBottom_toTopOf="@id/button_panel"
         app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/add_coordinates"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/avatar_size"
-            android:layout_marginStart="@dimen/small_padding"
-            android:layout_marginEnd="@dimen/small_padding"
-            android:layout_marginBottom="@dimen/small_padding"
-            android:autofillHints="@string/add_coordinates"
-            android:background="@drawable/textview_background"
-            android:focusable="false"
-            android:hint="@string/add_coordinates"
-            android:inputType="none"
-            android:padding="@dimen/coords_padding"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            app:drawableStartCompat="@drawable/ic_add_location_24"
-            app:drawableTint="@color/amber_700"
-            tools:ignore="TextFields" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/small_padding"
-            android:paddingEnd="@dimen/small_padding"
+            android:layout_marginBottom="@dimen/small_padding"
             android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/small_padding">
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding">
 
             <EditText
                 android:id="@+id/link"
@@ -110,9 +91,9 @@
                 android:inputType="textPostalAddress"
                 android:paddingStart="@dimen/common_spacing"
                 android:paddingEnd="@dimen/small_padding"
+                app:layout_constraintEnd_toStartOf="@id/add_link"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/add_link" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/add_link"
@@ -120,14 +101,14 @@
                 android:layout_height="@dimen/avatar_size"
                 android:layout_gravity="bottom"
                 android:background="@drawable/button_background"
-                android:textColor="@color/white"
                 android:text="@string/add_link"
+                android:textColor="@color/white"
                 app:icon="@drawable/ic_add_link_24"
                 app:iconTint="@color/white"
-                tools:ignore="RelativeOverlap,RtlSymmetry"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/link"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -147,7 +128,7 @@
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                 app:spanCount="3"
-                tools:listitem="@layout/card_user_preview"/>
+                tools:listitem="@layout/card_user_preview" />
 
         </ScrollView>
 

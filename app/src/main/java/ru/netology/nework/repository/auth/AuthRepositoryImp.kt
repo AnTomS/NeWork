@@ -9,7 +9,6 @@ import ru.netology.nework.auth.AuthState
 import ru.netology.nework.dto.MediaUpload
 import ru.netology.nework.error.ApiError
 import ru.netology.nework.error.NetworkError
-import ru.netology.nework.repository.auth.AuthRepository
 import java.io.IOException
 import javax.inject.Inject
 

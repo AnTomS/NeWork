@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import ru.netology.nework.dao.Converters
 import ru.netology.nework.dto.Attachment
-import ru.netology.nework.dto.Coordinates
 import ru.netology.nework.dto.PostResponse
 import ru.netology.nework.dto.UserPreview
 import ru.netology.nework.enumiration.AttachmentType
@@ -23,7 +22,6 @@ data class PostEntity(
     val authorJob: String?,
     val content: String,
     val published: String,
-    val coords: Coordinates?,
     val link: String?,
     val likeOwnerIds: List<Int>,
     val mentionIds: List<Int>,
@@ -32,11 +30,11 @@ data class PostEntity(
     @Embedded
     val attachment: AttachmentEmbedded?,
     val ownedByMe: Boolean,
-    val users: Map<Int, UserPreview>
+    val users: Map<Int, UserPreview>,
 ) {
     fun toDto() = PostResponse(
         id, authorId, author, authorAvatar, authorJob, content,
-        published, coords, link, likeOwnerIds, mentionIds, mentionedMe,
+        published, link, likeOwnerIds, mentionIds, mentionedMe,
         likedByMe, attachment?.toDto(), ownedByMe, users
     )
 
@@ -44,7 +42,7 @@ data class PostEntity(
         fun fromDto(dto: PostResponse) =
             PostEntity(
                 dto.id, dto.authorId, dto.author, dto.authorAvatar, dto.authorJob,
-                dto.content, dto.published, dto.coords,
+                dto.content, dto.published,
                 dto.link, dto.likeOwnerIds, dto.mentionIds, dto.mentionedMe,
                 dto.likedByMe, AttachmentEmbedded.fromDto(dto.attachment), dto.ownedByMe, dto.users
             )

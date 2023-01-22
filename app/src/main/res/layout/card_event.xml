@@ -108,22 +108,22 @@
             android:layout_width="@dimen/image_width"
             android:layout_height="@dimen/image_height"
             android:contentDescription="@string/image_container"
+            android:paddingBottom="@dimen/small_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/date_time"
             app:srcCompat="@drawable/ic_sample_video_24"
-            tools:ignore="ContentDescription"
-            android:paddingBottom="@dimen/small_padding"/>
+            tools:ignore="ContentDescription" />
 
         <FrameLayout
             android:id="@+id/video_container"
             android:layout_width="@dimen/image_width"
             android:layout_height="@dimen/image_height"
+            android:paddingBottom="@dimen/small_padding"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/content"
-            android:paddingBottom="@dimen/small_padding">
+            app:layout_constraintTop_toBottomOf="@id/content">
 
             <ImageView
                 android:id="@+id/video_thumbnail"
@@ -202,30 +202,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_spacing"
-            android:contentDescription="@string/speakers_description"
             android:checkable="true"
+            android:contentDescription="@string/speakers_description"
             app:icon="@drawable/ic_speaker_24"
             app:layout_constraintStart_toEndOf="@+id/participate"
             app:layout_constraintTop_toBottomOf="@id/content_barrier"
             tools:text="@string/sample_number" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/coordinates"
-            style="@style/Widget.AppTheme.IconButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/common_spacing"
-            android:contentDescription="@string/coordinates_description"
-            app:icon="@drawable/ic_location_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/content_barrier" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/footer_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="like,share,participate,speakers, coordinates" />
+            app:constraint_referenced_ids="like,share,participate,speakers" />
 
         <ImageView
             android:id="@+id/first_user_avatar"

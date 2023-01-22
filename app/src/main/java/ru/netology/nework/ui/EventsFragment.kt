@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -44,7 +42,7 @@ class EventsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         val binding = FragmentEventsBinding.inflate(inflater, container, false)
 
@@ -194,7 +192,7 @@ class EventsFragment : Fragment() {
         }
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_list_post_to_newPostFragment)
+            findNavController().navigate(R.id.action_events_to_newEvents)
         }
 
         return binding.root
@@ -205,17 +203,17 @@ class EventsFragment : Fragment() {
     }
 
     override fun onResume() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.createPlayer()
+        if (::mediaRecyclerView.isInitialized) mediaRecyclerView.createPlayer()
         super.onResume()
     }
 
     override fun onPause() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
+        if (::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
         super.onPause()
     }
 
     override fun onStop() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
+        if (::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
         super.onStop()
     }
 }

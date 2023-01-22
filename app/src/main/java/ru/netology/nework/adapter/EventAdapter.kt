@@ -47,7 +47,7 @@ class EventAdapter(
 
 class EventViewHolder(
     private val binding: CardEventBinding,
-    private val listener: EventInteractionListener
+    private val listener: EventInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val parentView = binding.root
@@ -115,7 +115,6 @@ class EventViewHolder(
             like.text = "${event.likeOwnerIds.size}"
             participate.isChecked = event.participatedByMe
             participate.text = "${event.participantsIds.size}"
-            coordinates.visibility = if (event.coords != null) View.VISIBLE else View.INVISIBLE
             menu.visibility = if (event.ownedByMe) View.VISIBLE else View.INVISIBLE
             speakers.text = "${event.speakerIds.size}"
 
@@ -126,7 +125,8 @@ class EventViewHolder(
                 avatar.loadCircleCrop(firstUserAvatarUrl)
                 eventUsersGroup.visibility = View.VISIBLE
                 if (event.users.size >= 2) {
-                    val likedAndMentionedUsersText = "${event.users.values.first().name} and ${event.users.size - 1} users"
+                    val likedAndMentionedUsersText =
+                        "${event.users.values.first().name} and ${event.users.size - 1} users"
                     eventUsers.text = likedAndMentionedUsersText
                 } else if (event.users.size == 1) {
                     eventUsers.text = event.users.values.first().name
@@ -166,15 +166,6 @@ class EventViewHolder(
             image.setOnClickListener {
                 listener.onShowPhoto(event)
             }
-
-//            coordinates.setOnClickListener { view ->
-//                view.findNavController().navigate(R.id.action_postFeedFragment_to_mapsFragment,
-//                    Bundle().apply {
-//                        Point(
-//                            event.coords?.lat!!.toDouble(), event.coords.long.toDouble()
-//                        ).also { var pointArg = it }
-//                    })
-//            }
 
             eventUsersGroup.setOnClickListener {
                 listener.loadEventUsersList(event)

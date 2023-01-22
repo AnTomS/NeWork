@@ -17,7 +17,8 @@ class UsersListAdapter(private val onInteractionListener: UsersListInteractionLi
     ListAdapter<UserPreview, UsersListViewHolder>(UserPreviewDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersListViewHolder {
-        val binding = CardUserInListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            CardUserInListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return UsersListViewHolder(binding, onInteractionListener)
     }
 
@@ -29,7 +30,7 @@ class UsersListAdapter(private val onInteractionListener: UsersListInteractionLi
 
 class UsersListViewHolder(
     private val binding: CardUserInListBinding,
-    private val listener: UsersListInteractionListener
+    private val listener: UsersListInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(user: UserPreview) {

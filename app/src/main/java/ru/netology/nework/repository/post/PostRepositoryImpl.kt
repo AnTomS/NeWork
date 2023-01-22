@@ -37,7 +37,6 @@ class PostRepositoryImpl @Inject constructor(
     override val postUsersData: MutableLiveData<List<UserPreview>> = MutableLiveData(emptyList())
 
 
-
     override suspend fun getAllPosts(): List<PostResponse> {
         try {
             val response = apiService.getAllPosts()
@@ -47,13 +46,13 @@ class PostRepositoryImpl @Inject constructor(
             val body = response.body() ?: throw ApiError(response.code(), response.message())
             dao.insert(body.toEntity())
             return body
+        } catch (e: IOException) {
+            throw NetworkError
+        } catch (e: Exception) {
+            throw UnkError
         }
-            catch (e: IOException) {
-                throw NetworkError
-            } catch (e: Exception) {
-                throw UnkError
-            }
-        }
+    }
+
     override suspend fun getLikedAndMentionedUsersList(post: PostResponse) {
         try {
             val response = apiService.getPostById(post.id)
@@ -163,7 +162,6 @@ class PostRepositoryImpl @Inject constructor(
     }
 
 
-
     override suspend fun getPostCreateRequest(id: Int): PostCreateRequest {
         try {
             val response = apiService.getPostById(id)
@@ -175,7 +173,6 @@ class PostRepositoryImpl @Inject constructor(
                 return PostCreateRequest(
                     id = body.id,
                     content = body.content,
-                    coords = body.coords,
                     link = body.link,
                     attachment = body.attachment,
                     mentionIds = body.mentionIds

@@ -37,8 +37,8 @@ class UserProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        if (!authViewModel.authenticated && arguments == null)
-//            findNavController().navigate(R.id.list_of_users)
+        if (!authViewModel.authenticated && arguments == null)
+            findNavController().navigate(R.id.list_of_users)
     }
 
     override fun onCreateView(

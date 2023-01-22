@@ -8,7 +8,6 @@ data class PostResponse(
     val authorJob: String?,
     val content: String,
     val published: String,
-    val coords: Coordinates?,
     val link: String?,
     val likeOwnerIds: List<Int>,
     val mentionIds: List<Int>,

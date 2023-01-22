@@ -11,8 +11,8 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/card_user_in_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

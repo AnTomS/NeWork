@@ -11,25 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/avatar_size"
         android:layout_gravity="start"
-        android:paddingStart="@dimen/big_icon_button_size"
-        android:paddingEnd="@dimen/big_icon_button_size"
         android:layout_marginStart="@dimen/small_padding"
+        android:layout_marginTop="@dimen/company_margin"
         android:layout_marginEnd="@dimen/small_padding"
         android:layout_marginBottom="@dimen/icon_button_size"
-        android:layout_marginTop="@dimen/company_margin"
         android:autofillHints="@string/position"
         android:background="@drawable/textview_background"
         android:hint="@string/company_name"
         android:inputType="textMultiLine"
-        android:linksClickable="true" />
+        android:linksClickable="true"
+        android:paddingStart="@dimen/big_icon_button_size"
+        android:paddingEnd="@dimen/big_icon_button_size" />
 
     <EditText
         android:id="@+id/position"
         android:layout_width="match_parent"
         android:layout_height="@dimen/avatar_size"
         android:layout_gravity="start"
-        android:paddingStart="@dimen/big_icon_button_size"
-        android:paddingEnd="@dimen/big_icon_button_size"
         android:layout_marginStart="@dimen/small_padding"
         android:layout_marginEnd="@dimen/small_padding"
         android:layout_marginBottom="@dimen/icon_button_size"
@@ -37,7 +35,9 @@
         android:background="@drawable/textview_background"
         android:hint="@string/position"
         android:inputType="textMultiLine"
-        android:linksClickable="true" />
+        android:linksClickable="true"
+        android:paddingStart="@dimen/big_icon_button_size"
+        android:paddingEnd="@dimen/big_icon_button_size" />
 
     <EditText
         android:id="@+id/add_start_date"
@@ -55,7 +55,7 @@
         android:inputType="none"
         android:padding="@dimen/small_padding"
         android:textSize="18sp"
-        tools:ignore="TextFields"/>
+        tools:ignore="TextFields" />
 
     <EditText
         android:id="@+id/add_end_date"
@@ -88,11 +88,11 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/avatar_size"
             android:layout_marginEnd="0dp"
-            android:paddingStart="@dimen/big_icon_button_size"
             android:autofillHints="no"
             android:background="@drawable/textview_background_left_rounded"
             android:hint="@string/add_link"
             android:inputType="textPostalAddress"
+            android:paddingStart="@dimen/big_icon_button_size"
             android:paddingEnd="@dimen/small_padding"
             app:layout_constraintEnd_toStartOf="@id/add_link"
             app:layout_constraintStart_toStartOf="parent"

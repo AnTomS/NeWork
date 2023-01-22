@@ -11,7 +11,6 @@ data class EventResponse(
     val content: String,
     val datetime: String,
     val published: String,
-    val coords: Coordinates?,
     val type: EventType,
     val likeOwnerIds: List<Int>,
     val likedByMe: Boolean,

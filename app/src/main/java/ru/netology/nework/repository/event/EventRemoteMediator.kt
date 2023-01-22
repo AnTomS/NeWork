@@ -25,7 +25,7 @@ class EventRemoteMediator @Inject constructor(
 ) : RemoteMediator<Int, EventEntity>() {
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, EventEntity>
+        state: PagingState<Int, EventEntity>,
     ): MediatorResult {
         try {
             val response = when (loadType) {

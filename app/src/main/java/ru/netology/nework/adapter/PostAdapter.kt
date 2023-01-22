@@ -27,7 +27,7 @@ interface PostInteractionListener {
     fun onRemove(post: PostResponse) {}
     fun onShare(post: PostResponse) {}
     fun loadLikedAndMentionedUsersList(post: PostResponse) {}
-    fun onShowPhoto(post: PostResponse){}
+    fun onShowPhoto(post: PostResponse) {}
 }
 
 class PostAdapter(
@@ -107,7 +107,6 @@ class PostViewHolder(
             content.text = postText
             like.isChecked = post.likedByMe
             like.text = "${post.likeOwnerIds.size}"
-            coordinates.visibility = if (post.coords != null) View.VISIBLE else View.INVISIBLE
             mentionedMe.visibility = if (post.mentionedMe) View.VISIBLE else View.INVISIBLE
             menu.visibility = if (post.ownedByMe) View.VISIBLE else View.INVISIBLE
             mention.text = "${post.mentionIds.size}"
@@ -119,7 +118,8 @@ class PostViewHolder(
                 avatar.loadCircleCrop(firstUserAvatarUrl)
                 postUsersGroup.visibility = View.VISIBLE
                 if (post.users.size >= 2) {
-                    val likedAndMentionedUsersText = "${post.users.values.first().name} and ${post.users.size - 1} users"
+                    val likedAndMentionedUsersText =
+                        "${post.users.values.first().name} and ${post.users.size - 1} users"
                     likedAndMentionedUsers.text = likedAndMentionedUsersText
                 } else if (post.users.size == 1) {
                     likedAndMentionedUsers.text = post.users.values.first().name
@@ -157,15 +157,6 @@ class PostViewHolder(
             image.setOnClickListener {
                 listener.onShowPhoto(post)
             }
-
-//            coordinates.setOnClickListener { view ->
-//                view.findNavController().navigate(R.id.action_postFeedFragment_to_mapsFragment,
-//                    Bundle().apply {
-//                        Point(
-//                            post.coords?.lat!!.toDouble(), post.coords.long.toDouble()
-//                        ).also { pointArg = it }
-//                    })
-//            }
 
             postUsersGroup.setOnClickListener {
                 listener.loadLikedAndMentionedUsersList(post)

@@ -33,14 +33,14 @@ class ApiModule {
 
     @Provides
     fun provideAuthPrefs(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): SharedPreferences = context.getSharedPreferences("auth", Context.MODE_PRIVATE)
 
     @Singleton
     @Provides
     fun provideOkHttp(
         logging: HttpLoggingInterceptor,
-        authPrefs: SharedPreferences
+        authPrefs: SharedPreferences,
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(logging)
         .addInterceptor { chain ->

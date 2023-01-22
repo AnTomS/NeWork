@@ -8,7 +8,8 @@ import ru.netology.nework.dao.*
 import ru.netology.nework.entity.*
 
 @Database(
-    entities = [PostEntity::class,
+    entities = [
+        PostEntity::class,
         EventEntity::class,
         EventRemoteKeyEntity::class,
         PostRemoteKeyEntity::class,

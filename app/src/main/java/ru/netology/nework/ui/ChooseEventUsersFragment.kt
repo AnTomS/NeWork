@@ -18,13 +18,13 @@ import ru.netology.nework.adapter.ChooseUsersInteractionListener
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class ChooseEventUsersFragment: Fragment() {
+class ChooseEventUsersFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        val binding =  FragmentChoosePostUsersBinding.inflate(inflater, container, false)
+        val binding = FragmentChoosePostUsersBinding.inflate(inflater, container, false)
 
         (activity as AppActivity).supportActionBar?.title = getString(R.string.choose_event_users)
 
@@ -36,6 +36,7 @@ class ChooseEventUsersFragment: Fragment() {
             override fun check(id: Int) {
                 eventViewModel.check(id)
             }
+
             override fun unCheck(id: Int) {
                 eventViewModel.unCheck(id)
             }
@@ -43,8 +44,9 @@ class ChooseEventUsersFragment: Fragment() {
         binding.list.adapter = adapter
 
         eventViewModel.dataState.observe(viewLifecycleOwner) { state ->
-            if (state.loading){
-                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT).show()
+            if (state.loading) {
+                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT)
+                    .show()
             }
         }
 

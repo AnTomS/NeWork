@@ -19,11 +19,11 @@ import ru.netology.nework.viewmodel.PostViewModel
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class PostUsersListFragment: Fragment() {
+class PostUsersListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         val binding = FragmentPostUsersListBinding.inflate(inflater, container, false)
 
@@ -43,7 +43,8 @@ class PostUsersListFragment: Fragment() {
 
         viewModel.dataState.observe(viewLifecycleOwner) { state ->
             if (state.loading) {
-                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT)
+                    .show()
             }
         }
 

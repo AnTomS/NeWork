@@ -23,7 +23,6 @@ import ru.netology.nework.databinding.FragmentPostsBinding
 import ru.netology.nework.dto.PostResponse
 import ru.netology.nework.enumiration.AttachmentType
 import ru.netology.nework.ui.UserProfileFragment.Companion.textArg
-
 import ru.netology.nework.utils.IntArg
 import ru.netology.nework.viewmodel.AuthViewModel
 import ru.netology.nework.viewmodel.PostViewModel
@@ -39,7 +38,7 @@ class PostsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         val binding = FragmentPostsBinding.inflate(inflater, container, false)
 
@@ -58,9 +57,12 @@ class PostsFragment : Fragment() {
         val adapter = PostAdapter(object : PostInteractionListener {
             override fun onLike(post: PostResponse) {
                 if (authViewModel.authenticated) {
-                    if (!post.likedByMe) viewModel.likePostById(post.id) else viewModel.dislikePostById(post.id)
+                    if (!post.likedByMe) viewModel.likePostById(post.id) else viewModel.dislikePostById(
+                        post.id
+                    )
                 } else {
-                    Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT)
+                        .show()
                     findNavController().navigate(R.id.action_list_post_to_signInFragment)
                 }
             }
@@ -86,7 +88,8 @@ class PostsFragment : Fragment() {
                         Intent.createChooser(intent, getString(R.string.share_description))
                     startActivity(shareIntent)
                 } else {
-                    Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT)
+                        .show()
                     findNavController().navigate(R.id.action_list_post_to_signInFragment)
                 }
             }
@@ -100,7 +103,8 @@ class PostsFragment : Fragment() {
                         findNavController().navigate(R.id.action_list_post_to_list_users)
                     }
                 } else {
-                    Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT)
+                        .show()
                     findNavController().navigate(R.id.action_list_post_to_signInFragment)
                 }
             }
@@ -151,7 +155,7 @@ class PostsFragment : Fragment() {
             }
         }
 
-        binding.swipeRefresh.setOnClickListener{
+        binding.swipeRefresh.setOnClickListener {
             adapter.refresh()
         }
 
@@ -189,18 +193,18 @@ class PostsFragment : Fragment() {
     }
 
     override fun onResume() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.createPlayer()
+        if (::mediaRecyclerView.isInitialized) mediaRecyclerView.createPlayer()
         super.onResume()
     }
 
     override fun onPause() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
+        if (::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
         super.onPause()
     }
 
 
     override fun onStop() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
+        if (::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
         super.onStop()
     }
 }

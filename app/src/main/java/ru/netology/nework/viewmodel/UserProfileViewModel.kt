@@ -151,7 +151,7 @@ class UserProfileViewModel @Inject constructor(
 
     fun getUserPosts(id: Int) {
         postData = postRepository.data
-        postData = postData.map { it.filter { it.authorId == id }}
+        postData = postData.map { it.filter { it.authorId == id } }
         viewModelScope.launch {
             try {
                 postRepository.getUserPosts(postData, id)

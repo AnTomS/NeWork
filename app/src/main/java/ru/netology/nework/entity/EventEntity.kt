@@ -22,7 +22,6 @@ data class EventEntity(
     val content: String,
     val datetime: String,
     val published: String,
-    val coords: Coordinates?,
     val type: EventType,
     val likeOwnerIds: List<Int>,
     val likedByMe: Boolean,
@@ -38,7 +37,7 @@ data class EventEntity(
 
     fun toDto() = EventResponse(
         id, authorId, author, authorAvatar, authorJob, content,
-        datetime, published, coords, type, likeOwnerIds, likedByMe, speakerIds,
+        datetime, published, type, likeOwnerIds, likedByMe, speakerIds,
         participantsIds, participatedByMe, attachment?.toDto(), link, ownedByMe, users
     )
 
@@ -46,7 +45,7 @@ data class EventEntity(
         fun fromDto(dto: EventResponse) =
             EventEntity(
                 dto.id, dto.authorId, dto.author, dto.authorAvatar, dto.authorJob,
-                dto.content, dto.datetime, dto.published, dto.coords,
+                dto.content, dto.datetime, dto.published,
                 dto.type, dto.likeOwnerIds, dto.likedByMe,
                 dto.speakerIds, dto.participantsIds,
                 dto.participatedByMe, AttachmentEmbedded.fromDto(dto.attachment),

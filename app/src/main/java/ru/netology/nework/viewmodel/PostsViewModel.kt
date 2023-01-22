@@ -24,7 +24,6 @@ import kotlin.math.roundToInt
 private val editedPost = PostCreateRequest(
     id = 0,
     content = "",
-    coords = null,
     link = null,
     attachment = null,
     mentionIds = listOf()
@@ -38,7 +37,7 @@ private val noMedia = MediaModel()
 @HiltViewModel
 class PostViewModel @Inject constructor(
     private val repository: PostRepository,
-    appAuth: AppAuth
+    appAuth: AppAuth,
 ) : ViewModel() {
 
     private val _dataState = MutableLiveData<FeedModelState>()
@@ -78,6 +77,9 @@ class PostViewModel @Inject constructor(
         }
 
 
+    init {
+        refreshPosts()
+    }
 
     fun refreshPosts() = viewModelScope.launch {
         try {
@@ -197,15 +199,6 @@ class PostViewModel @Inject constructor(
         }
     }
 
-    fun addCoords(point: Point) {
-        val coordinates = Coordinates(
-            ((point.latitude * 1000000.0).roundToInt() / 1000000.0).toString(),
-            ((point.longitude * 1000000.0).roundToInt() / 1000000.0).toString()
-        )
-        newPost.value = newPost.value?.copy(coords = coordinates)
-        isPostIntent = false
-    }
-
     fun addLink(link: String) {
         if (link != "") {
             newPost.value = newPost.value?.copy(link = link)
@@ -235,7 +228,7 @@ class PostViewModel @Inject constructor(
 
     fun addMediaToPost(
         type: AttachmentType,
-        file: MultipartBody.Part
+        file: MultipartBody.Part,
     ) {
         viewModelScope.launch {
             try {

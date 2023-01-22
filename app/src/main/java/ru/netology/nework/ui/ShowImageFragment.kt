@@ -10,11 +10,11 @@ import ru.netology.nework.databinding.FragmentShowImageBinding
 import ru.netology.nework.utils.StringArg
 import ru.netology.nework.view.load
 
-class ShowImageFragment: Fragment()  {
+class ShowImageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         val binding = FragmentShowImageBinding.inflate(
             inflater,

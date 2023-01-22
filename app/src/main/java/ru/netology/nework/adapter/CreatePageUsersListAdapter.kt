@@ -10,14 +10,18 @@ import ru.netology.nework.view.loadCircleCrop
 
 interface CreatePageUsersListInteractionListener {
     fun openUserProfile(id: Int)
-    fun deleteFromList(id:Int)
+    fun deleteFromList(id: Int)
 }
 
 class CreatePageUsersListAdapter(private val onInteractionListener: CreatePageUsersListInteractionListener) :
     ListAdapter<UserResponse, CreatePageUsersListViewHolder>(UserResponseDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreatePageUsersListViewHolder {
-        val binding = CardUserPreviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CreatePageUsersListViewHolder {
+        val binding =
+            CardUserPreviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CreatePageUsersListViewHolder(binding, onInteractionListener)
     }
 
@@ -29,7 +33,7 @@ class CreatePageUsersListAdapter(private val onInteractionListener: CreatePageUs
 
 class CreatePageUsersListViewHolder(
     private val binding: CardUserPreviewBinding,
-    private val listener: CreatePageUsersListInteractionListener
+    private val listener: CreatePageUsersListInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(user: UserResponse) {

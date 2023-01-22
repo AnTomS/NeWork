@@ -28,7 +28,7 @@ class ContactAdapter(private val onInteractionListener: ContactInteractionListen
 
 class ContactViewHolder(
     private val binding: CardContactBinding,
-    private val listener: ContactInteractionListener
+    private val listener: ContactInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(user: UserResponse) {
