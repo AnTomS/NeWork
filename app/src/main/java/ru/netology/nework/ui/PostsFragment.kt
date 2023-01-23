@@ -160,7 +160,7 @@ class PostsFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenCreated {
-            viewModel.data.collectLatest(adapter::submitData)
+            viewModel.data.collectLatest { adapter.submitData(it) }
         }
 
 

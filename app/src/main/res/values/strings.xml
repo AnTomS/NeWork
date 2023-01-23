@@ -22,7 +22,7 @@
     <string name="sample_content">заглушка</string>
     <string name="sample_number" translatable="false">15</string>
     <string name="mention" translatable="false">Mention</string>
-    <string name="retry_loading" translatable="false">Retry loading</string>
+    <string name="retry_loading" >Повторить загрузку</string>
     <string name="empty_posts">В данный момент нет постов. Но если Вы создатите новый, то он отобразится здесь</string>
     <string name="error_loading">Ошибка загрузки.</string>
     <string name="add_post">Добавить новый пост</string>

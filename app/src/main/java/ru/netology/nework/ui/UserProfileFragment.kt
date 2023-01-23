@@ -56,7 +56,6 @@ class UserProfileFragment : Fragment() {
                     val userId = it.toInt()
                     userProfileViewModel.getUserById(userId)
                     userProfileViewModel.getUserJobs(userId)
-                    userProfileViewModel.getUserPosts(userId)
                 }
             } else if (authViewModel.authenticated && arguments == null) {
                 binding.addJob.visibility = View.VISIBLE
@@ -64,7 +63,6 @@ class UserProfileFragment : Fragment() {
                 val myId = userProfileViewModel.myId.toInt()
                 userProfileViewModel.getUserById(myId)
                 userProfileViewModel.getMyJobs()
-                userProfileViewModel.getUserPosts(myId)
 
             }
         }
@@ -151,7 +149,7 @@ class UserProfileFragment : Fragment() {
                         return
                     } else {
                         postViewModel.getLikedAndMentionedUsersList(post)
-                        findNavController().navigate(R.id.postUsersListFragment)
+                        findNavController().navigate(R.id.action_list_to_postUsersListFragment)
                     }
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT)
@@ -186,10 +184,10 @@ class UserProfileFragment : Fragment() {
             }),
         )
 
-        lifecycleScope.launchWhenCreated {
-            println(userProfileViewModel.postData.toString())
-            userProfileViewModel.postData.collectLatest(postAdapter::submitData)
-        }
+//        lifecycleScope.launchWhenCreated {
+//            println(userProfileViewModel.postData.toString())
+//            userProfileViewModel.postData.collectLatest(postAdapter::submitData)
+//        }
 
         binding.addJob.setOnClickListener {
             findNavController().navigate(R.id.newJobFragment)

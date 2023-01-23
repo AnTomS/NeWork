@@ -57,16 +57,16 @@ class UserProfileViewModel @Inject constructor(
     val userData: MutableLiveData<UserResponse> = userRepository.userData
 
     val jobData: MutableLiveData<List<Job>> = jobRepository.data
-    var postData: Flow<PagingData<PostResponse>> = appAuth
-        .authStateFlow
-        .flatMapLatest { (myId, _) ->
-            val cached = postRepository.data.cachedIn(viewModelScope)
-            cached.map { pagingData ->
-                pagingData.map {
-                    it.copy(ownedByMe = it.authorId.toLong() == myId)
-                }
-            }
-        }
+//    var postData: Flow<PagingData<PostResponse>> = appAuth
+//        .authStateFlow
+//        .flatMapLatest { (myId, _) ->
+//            val cached = postRepository.data.cachedIn(viewModelScope)
+//            cached.map { pagingData ->
+//                pagingData.map {
+//                    it.copy(ownedByMe = it.authorId.toLong() == myId)
+//                }
+//            }
+//        }
 
 
     private val _dataState = MutableLiveData<FeedModelState>()
@@ -149,15 +149,15 @@ class UserProfileViewModel @Inject constructor(
         newJob.value = newJob.value?.copy(finish = date)
     }
 
-    fun getUserPosts(id: Int) {
-        postData = postRepository.data
-        postData = postData.map { it.filter { it.authorId == id } }
-        viewModelScope.launch {
-            try {
-                postRepository.getUserPosts(postData, id)
-            } catch (e: Exception) {
-                _dataState.value = FeedModelState(error = true)
-            }
-        }
-    }
+//    fun getUserPosts(id: Int) {
+//        postData = postRepository.data
+//        postData = postData.map { it.filter { it.authorId == id } }
+//        viewModelScope.launch {
+//            try {
+//                postRepository.getUserPosts(postData, id)
+//            } catch (e: Exception) {
+//                _dataState.value = FeedModelState(error = true)
+//            }
+//        }
+//    }
 }
