@@ -8,7 +8,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/contact_background"
         android:padding="@dimen/micro_padding">
 
         <ImageView
@@ -30,6 +29,7 @@
             android:layout_marginEnd="@dimen/common_spacing"
             android:ellipsize="end"
             android:singleLine="true"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/avatar"
             app:layout_constraintTop_toTopOf="parent"

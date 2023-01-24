@@ -37,16 +37,12 @@ class AppActivity : AppCompatActivity() {
     @Inject
     lateinit var googleApiAvailability: GoogleApiAvailability
 
-    companion object {
-        private const val MAPKIT_API_KEY = "4020182c-79bf-4ab9-b30b-08aaddd23117"
-    }
 
     private lateinit var binding: ActivityAppBinding
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MapKitFactory.setApiKey(MAPKIT_API_KEY)
         binding = inflate(layoutInflater)
         setContentView(binding.root)
 

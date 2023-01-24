@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.NeWork"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/contact_background"
     android:padding="@dimen/small_padding">
 
     <ImageView
