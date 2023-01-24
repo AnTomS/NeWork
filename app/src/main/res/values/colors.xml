@@ -24,6 +24,15 @@
     <color name="red_200">#eb8baf</color>
     <color name="red_700">#b31058</color>
 
+
+    <color name="clay">#77341D</color>
+    <color name="cyan">#206F7C</color>
+    <color name="coral">#B17365</color>
+
+
+    <color name="nut">#5C5946</color>
+    <color name="latte">#8F6331</color>
+
     <color name="primary_700">#e57373</color>
     <color name="primary_light">#ffa4a2</color>
     <color name="secondary_500">#44ffff </color>

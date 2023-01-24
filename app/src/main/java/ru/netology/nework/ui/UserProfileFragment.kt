@@ -184,11 +184,6 @@ class UserProfileFragment : Fragment() {
             }),
         )
 
-//        lifecycleScope.launchWhenCreated {
-//            println(userProfileViewModel.postData.toString())
-//            userProfileViewModel.postData.collectLatest(postAdapter::submitData)
-//        }
-
         binding.addJob.setOnClickListener {
             findNavController().navigate(R.id.newJobFragment)
         }
