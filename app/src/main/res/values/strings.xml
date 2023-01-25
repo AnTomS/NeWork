@@ -1,40 +1,98 @@
 <resources>
-    <string name="description_post_save">Save</string>
     <string name="app_name">NeWork</string>
-    <string name="title_home" translatable="false">Home</string>
-    <string name="title_dashboard" translatable="false">Dashboard</string>
-    <string name="title_notifications" translatable="false">Notifications</string>
-    <string name="my_profile">Мой профиль</string>
+    <string name="menu">Меню</string>
+    <string name="sign_in">Выполнить вход</string>
+    <string name="sign_up">Создать новый аккаунт</string>
+    <string name="sign_out">Выйти из аккаунта</string>
+    <string name="google_api_unavailable_message" translatable="false">Google Api Unavailable</string>
+    <string name="author_avatar_description" translatable="false">Author avatar</string>
+    <string name="menu_description" translatable="false">Menu</string>
+    <string name="image_container" translatable="false">Image container</string>
+    <string name="video_thumbnail_description" translatable="false">Video thumbnail</string>
+    <string name="video_container" translatable="false">Video container</string>
+    <string name="like_description">Нравится</string>
+    <string name="share_description">Поделиться</string>
+    <string name="participate_description" translatable="false">Participate</string>
+    <string name="mentions_description" translatable="false">Mentions</string>
+    <string name="speakers_description" translatable="false">Speakers</string>
+    <string name="coordinates_description" translatable="false">Coordinates</string>
+    <string name="liked_and_mentioned_users_sample_text" translatable="false">Liked and mentioned users amount</string>
+    <string name="sample_author_name" translatable="false">User User</string>
+    <string name="sample_published_date" translatable="false">January 1, 20:00</string>
+    <string name="sample_content">заглушка</string>
+    <string name="sample_number" translatable="false">15</string>
+    <string name="mention" translatable="false">Mention</string>
+    <string name="retry_loading" >Повторить загрузку</string>
+    <string name="empty_posts">В данный момент нет постов. Но если Вы создатите новый, то он отобразится здесь</string>
+    <string name="error_loading">Ошибка загрузки.</string>
+    <string name="add_post">Добавить новый пост</string>
+    <string name="add_job">Добавить место работы</string>
+    <string name="add_event">Создать новое событие</string>
+    <string name="add_avatar" translatable="false">Добавить аватар</string>
+    <string name="add" translatable="false">Add</string>
+    <string name="edit">Изменить</string>
+    <string name="remove">Удалить</string>
+    <string name="content" translatable="false">Content</string>
+    <string name="exit">Выйти</string>
+    <string name="mention_users">Упомянутые пользователи</string>
+    <string name="add_coordinates" translatable="false">Add coordinates</string>
+    <string name="add_link">Добавить ссылку</string>
+    <string name="link_description" translatable="false">Ссылка</string>
+    <string name="pick_photo_description">Добавить фото</string>
+    <string name="take_photo_description">Сделать фото через камеру и добавить</string>
+    <string name="pick_video_description">Добавить видео</string>
+    <string name="pick_audio_description">Добавить аудио</string>
+    <string name="save_photo_description">Сохранить аудио</string>
+    <string name="close_user_preview_card_description">закрыть просмотр</string>
+    <string name="get_location">Получить локацию</string>
+    <string name="login">Логин</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="password">Пароль</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="enter_user_name">Введите Ваше имя</string>
+    <string name="confirm_password">Подтвердите пароль</string>
+    <string name="error_filling_forms">Пожалуйста, заполните все поля</string>
+    <string name="password_doesnt_match">Пароль не подходит</string>
+    <string name="log_in_to_continue" >Выполните вход, чтобы продолжить</string>
+    <string name="skip_edit_question">Вы уверены, что хотите выйти? все изменения будут потеряны!</string>
+    <string name="fill_text">Пожалуйста, заполните все поля.</string>
+    <string name="need_location_permission" translatable="false">Location permission required</string>
+    <string name="event_type_online" translatable="false">Online</string>
+    <string name="event_type_offline" translatable="false">Offline</string>
+    <string name="event_type_description">Тип события</string>
+    <string name="company_name">Название компании</string>
+    <string name="position">Должность</string>
+    <string name="start_date">Начало работы</string>
+    <string name="end_date">окончание работы</string>
+    <string name="fill_company_name_position_and_start_date_message">Пожалуйста укажите название компании, должность и начало работы</string>
+    <string name="add_speakers">Добавить слушателей</string>
+    <string name="add_date_time">Добавить время и дату</string>
+    <string name="go_to_register_page" translatable="false">Go to register page</string>
+    <string name="do_not_have_an_account">Ещё нет аккаунта?</string>
+    <string name="choose_event_users" translatable="false">Choose event users</string>
+    <string name="choose_post_users" translatable="false">Choose post users</string>
+    <string name="contacts">Список пользователей</string>
+    <string name="events">События</string>
+    <string name="posts">Посты</string>
+    <string name="map">Map</string>
+    <string name="create_event">Создать новое событие</string>
+    <string name="create_post">Создать новый пост</string>
+    <string name="post_users" translatable="false">Post users</string>
+    <string name="event_users" translatable="false">Event users</string>
+    <string name="photo" translatable="false">Photo</string>
     <string name="list_of_post">Посты</string>
+    <string name="my_profile">Мой профиль</string>
     <string name="events_for_people">События</string>
-    <string name="list_of_users">Пользователи</string>
-    <string name="loading">loading</string>
-    <string name="error_loading">error_loading</string>
-    <string name="retry_loading">retry_loading</string>
-    <string name="close_app">close_app</string>
-    <string name="wait">wait</string>
-    <string name="empty_posts">empty_post</string>
-    <string name="new_post">new_post</string>
-    <string name="have_new_post">have_new_post</string>
-    <string name="add_post">add_post</string>
-    <string name="description_photo">description_photo</string>
-    <string name="menu_remove">menu_remove</string>
-    <string name="description_select_photo">description_select_photo</string>
-    <string name="description_take_photo">description_take_photo</string>
-    <string name="description_pick_audio">description_pick_audio</string>
-    <string name="description_pick_video">description_pick_video</string>
-    <string name="menu_save">menu_save</string>
-    <string name="description_post_share">description_post_share</string>
-    <string name="description_post_hide">description_post_hide</string>
-    <string name="play_video">play_video</string>
-    <string name="description_post_like">description_post_like</string>
-    <string name="description_post_menu">description_post_menu</string>
-    <string name="description_post_author_avatar">description_post_author_avatar</string>
-    <string name="error_empty_content">error_empty_content</string>
-    <string name="channel_remote_name">Server notifications</string>
-    <string name="channel_remote_description">Уведомления с сервера</string>
-    <string name="notification_user_liked">User %1$s liked %2$s\'s post</string>
-    <string name="menu_edit">menu_edit</string>
-    <string name="chooser_share_post">Share post</string>
-    <string name="google_play_unavailable">Google Api Unavailable</string>
+    <string name="list_of_users">Список пользователей</string>
+    <string name="description_post_save" translatable="false">description_post_save</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Емейл</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in">ВЫполнить вход или регистрацию</string>
+    <string name="action_sign_in_short">Выполнить вход</string>
+    <string name="welcome">Добро пожаловать</string>
+    <string name="invalid_username">Имя пользователя недоступно</string>
+    <string name="invalid_password">Пароль должен содержать не меньше 5 символов</string>
+    <string name="login_failed">Вход не удался</string>
+    <string name="server_error_message">Проблема с доступом к серверу</string>
 </resources>

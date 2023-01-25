@@ -8,30 +8,116 @@
     <fragment
         android:id="@+id/profile"
         android:name="ru.netology.nework.ui.UserProfileFragment"
-        android:label="@string/my_profile" />
+        android:label="@string/my_profile">
+        <action
+            android:id="@+id/action_profile_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/list_post"
         android:name="ru.netology.nework.ui.PostsFragment"
-        android:label="@string/list_of_post" >
+        android:label="@string/list_of_post">
         <action
             android:id="@+id/action_list_post_to_newPostFragment"
             app:destination="@id/newPostFragment" />
+        <action
+            android:id="@+id/action_list_post_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_list_post_to_list_users"
+            app:destination="@id/list_of_users" />
+        <action
+            android:id="@+id/action_list_post_to_show_image"
+            app:destination="@id/showImageFragment" />
+
+        <action
+            android:id="@+id/action_list_to_postUsersListFragment"
+            app:destination="@id/postUsersListFragment" />
+
     </fragment>
 
-    <fragment
-        android:id="@+id/events"
-        android:name="ru.netology.nework.ui.EventsFragment"
-        android:label="@string/events_for_people"
-        tools:layout="@layout/fragment_events" />
-
-    <fragment
-        android:id="@+id/list_of_users"
-        android:name="ru.netology.nework.ui.UsersFragment"
-        android:label="@string/list_of_users" />
     <fragment
         android:id="@+id/newPostFragment"
         android:name="ru.netology.nework.ui.NewPostFragment"
         android:label="fragment_new_post"
-        tools:layout="@layout/fragment_new_post" />
+        tools:layout="@layout/fragment_new_post" >
+    <action
+        android:id="@+id/action_new_post_to_chooseEventUsersFragment"
+        app:destination="@id/chooseEventUsersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/events"
+        android:name="ru.netology.nework.ui.EventsFragment"
+        android:label="@string/events_for_people"
+        tools:layout="@layout/fragment_events">
+        <action
+            android:id="@+id/action_events_to_newEvents"
+            app:destination="@id/newEventFragment" />
+        <action
+            android:id="@+id/action_events_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_events_to_event_users"
+            app:destination="@id/chooseEventUsersFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newEventFragment"
+        android:name="ru.netology.nework.ui.NewEventFragment"
+        android:label="@string/events_for_people"
+        tools:layout="@layout/fragment_events" >
+        <action
+            android:id="@+id/action_new_events_to_event_users"
+            app:destination="@id/chooseEventUsersFragment" />
+</fragment>
+
+
+    <fragment
+        android:id="@+id/list_of_users"
+        android:name="ru.netology.nework.ui.UsersFragment"
+        android:label="@string/list_of_users" >
+        <action
+            android:id="@+id/action_list_of_users_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="ru.netology.nework.ui.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="ru.netology.nework.ui.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+    </fragment>
+    <fragment
+        android:id="@+id/chooseEventUsersFragment"
+        android:name="ru.netology.nework.ui.ChooseEventUsersFragment"
+        android:label="ChooseEventUsersFragment" >
+</fragment>
+    <fragment
+        android:id="@+id/choosePostUsersFragment"
+        android:name="ru.netology.nework.ui.ChoosePostUsersFragment"
+        android:label="fragment_choose_post_users"
+        tools:layout="@layout/fragment_choose_post_users" >
+    </fragment>
+    <fragment
+        android:id="@+id/showImageFragment"
+        android:name="ru.netology.nework.ui.ShowImageFragment"
+        android:label="ShowImageFragment" />
+    <fragment
+        android:id="@+id/newJobFragment"
+        android:name="ru.netology.nework.ui.NewJobFragment"
+        android:label="fragment_new_job"
+        tools:layout="@layout/fragment_new_job" />
+    <fragment
+        android:id="@+id/postUsersListFragment"
+        android:name="ru.netology.nework.ui.PostUsersListFragment"
+        android:label="fragment_post_users_list"
+        tools:layout="@layout/fragment_post_users_list" />
+
 </navigation>

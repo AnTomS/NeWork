@@ -1,29 +1,30 @@
 package ru.netology.nework.db
 
-import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import ru.netology.nework.dao.PostDao
-import ru.netology.nework.entity.PostEntity
 
-@Database(entities = [PostEntity::class], version = 1, exportSchema = false)
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import ru.netology.nework.dao.*
+import ru.netology.nework.entity.*
+
+@Database(
+    entities = [
+        PostEntity::class,
+        EventEntity::class,
+        EventRemoteKeyEntity::class,
+        PostRemoteKeyEntity::class,
+        UserEntity::class,
+        JobEntity::class,
+    ], version = 5
+)
+@TypeConverters(Converters::class)
 abstract class AppDb : RoomDatabase() {
     abstract fun postDao(): PostDao
+    abstract fun postRemoteKeyDao(): PostRemoteKeyDao
+    abstract fun eventDao(): EventDao
+    abstract fun eventRemoteKeyDao(): EventRemoteKeyDao
+    abstract fun userDao(): UserDao
+    abstract fun jobDao(): JobDao
 
-    companion object {
-        @Volatile
-        private var instance: AppDb? = null
-
-        fun getInstance(context: Context): AppDb {
-            return instance ?: synchronized(this) {
-                instance ?: buildDatabase(context).also { instance = it }
-            }
-        }
-
-        private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context, AppDb::class.java, "app.db")
-                .fallbackToDestructiveMigration()
-                .build()
-    }
 }
+

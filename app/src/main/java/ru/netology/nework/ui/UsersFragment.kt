@@ -4,39 +4,68 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.paging.ExperimentalPagingApi
+import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import ru.netology.nework.R
+import ru.netology.nework.adapter.ContactAdapter
+import ru.netology.nework.adapter.ContactInteractionListener
 import ru.netology.nework.databinding.FragmentUsersBinding
-import ru.netology.nework.viewmodel.UsersViewModel
+import ru.netology.nework.ui.UserProfileFragment.Companion.textArg
+import ru.netology.nework.viewmodel.UserProfileViewModel
 
+@OptIn(ExperimentalCoroutinesApi::class)
+@AndroidEntryPoint
 class UsersFragment : Fragment() {
-    private var _binding: FragmentUsersBinding? = null
+    private val userViewModel: UserProfileViewModel by activityViewModels()
+    lateinit var adapter: ContactAdapter
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
+    @ExperimentalCoroutinesApi
+    @ExperimentalPagingApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        val usersViewModel =
-            ViewModelProvider(this).get(UsersViewModel::class.java)
+        val binding = FragmentUsersBinding.inflate(inflater, container, false)
 
-        _binding = FragmentUsersBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        (activity as AppActivity).supportActionBar?.title = getString(R.string.contacts)
 
-        val textView: TextView = binding.textListOfUsers
-        usersViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        adapter = ContactAdapter(object : ContactInteractionListener {
+            override fun openUserProfile(id: Int) {
+                val idAuthor = id.toString()
+                findNavController().navigate(
+                    R.id.profile,
+                    Bundle().apply { textArg = idAuthor })
+            }
+        })
+        binding.list.adapter = adapter
+
+        userViewModel.dataState.observe(viewLifecycleOwner) { state ->
+            if (state.loading) {
+                Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT)
+                    .show()
+            }
         }
-        return root
+
+        userViewModel.getAllUsers()
+
+        userViewModel.data.observe(viewLifecycleOwner) {
+            println(it.toString())
+            adapter.submitList(it)
+        }
+
+
+
+
+
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
+
+

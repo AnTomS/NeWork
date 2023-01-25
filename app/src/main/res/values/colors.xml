@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="amber_50">#FFF8E1</color>
+    <color name="amber_100">#FFECB3</color>
+    <color name="amber_200">#FFE082</color>
+    <color name="amber_500">#FFC107</color>
+    <color name="amber_700">#FFA000</color>
+    <color name="brown_200">#BCAAA4</color>
+    <color name="brown_700">#5D4037</color>
+    <color name="green">#7CB342</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -12,4 +20,27 @@
     <color name="primaryLightColor">#6ec6ff</color>
     <color name="primaryDarkColor">#0069c0</color>
     <color name="primaryTextColor">#000000</color>
+    <color name="red">#B00020</color>
+    <color name="red_200">#eb8baf</color>
+    <color name="red_700">#b31058</color>
+
+
+    <color name="mint_container1">#defabb</color>
+    <color name="mint_container2">#f1fee8</color>
+    <color name="blue_container">#FFFDE7</color>
+    <color name="dark_green">#008b00</color>
+
+
+    <color name="clay">#77341D</color>
+    <color name="cyan">#206F7C</color>
+    <color name="coral">#B17365</color>
+
+
+    <color name="nut">#5C5946</color>
+    <color name="latte">#8F6331</color>
+
+    <color name="primary_700">#e57373</color>
+    <color name="primary_light">#ffa4a2</color>
+    <color name="secondary_500">#44ffff </color>
+    <color name="secondary_light">#aff9ff</color>
 </resources>
