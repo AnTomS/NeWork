@@ -95,4 +95,5 @@
     <string name="invalid_password">Пароль должен содержать не меньше 5 символов</string>
     <string name="login_failed">Вход не удался</string>
     <string name="server_error_message">Проблема с доступом к серверу</string>
+    <string name="noHaveWork">Пользователь не заполнил графу о своей работе</string>
 </resources>

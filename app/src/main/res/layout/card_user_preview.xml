@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/blue_container"
+    style="@style/Theme.NeWork"
     app:cardCornerRadius="20dp"
     app:strokeWidth="1dp">
 
@@ -43,7 +43,6 @@
             android:id="@+id/close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/blue_container"
             android:contentDescription="@string/close_user_preview_card_description"
             android:src="@drawable/ic_close_24"
             app:layout_constraintEnd_toEndOf="parent"

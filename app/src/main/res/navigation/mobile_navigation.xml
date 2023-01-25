@@ -119,5 +119,10 @@
         android:name="ru.netology.nework.ui.PostUsersListFragment"
         android:label="fragment_post_users_list"
         tools:layout="@layout/fragment_post_users_list" />
+    <fragment
+        android:id="@+id/addAvatarFragment"
+        android:name="ru.netology.nework.ui.AddAvatarFragment"
+        android:label="fragment_add_avatar"
+        tools:layout="@layout/fragment_add_avatar" />
 
 </navigation>
