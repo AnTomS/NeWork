@@ -13,7 +13,7 @@
         android:layout_marginTop="@dimen/small_padding"
         android:layout_marginEnd="@dimen/small_padding"
         android:layout_marginBottom="@dimen/small_padding"
-        android:background="@drawable/textview_background"
+        android:background="@color/blue_container"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/add_attachment"
         app:layout_constraintEnd_toEndOf="parent"

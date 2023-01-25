@@ -25,6 +25,12 @@
     <color name="red_700">#b31058</color>
 
 
+    <color name="mint_container1">#defabb</color>
+    <color name="mint_container2">#f1fee8</color>
+    <color name="blue_container">#FFFDE7</color>
+    <color name="dark_green">#008b00</color>
+
+
     <color name="clay">#77341D</color>
     <color name="cyan">#206F7C</color>
     <color name="coral">#B17365</color>

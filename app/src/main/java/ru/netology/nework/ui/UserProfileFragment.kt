@@ -171,18 +171,6 @@ class UserProfileFragment : Fragment() {
             }
         })
 
-        binding.postList.adapter = postAdapter.withLoadStateHeaderAndFooter(
-            header = PagingLoadStateAdapter(object : PagingLoadStateAdapter.OnInteractionListener {
-                override fun onRetry() {
-                    postAdapter.retry()
-                }
-            }),
-            footer = PagingLoadStateAdapter(object : PagingLoadStateAdapter.OnInteractionListener {
-                override fun onRetry() {
-                    postAdapter.retry()
-                }
-            }),
-        )
 
         binding.addJob.setOnClickListener {
             findNavController().navigate(R.id.newJobFragment)

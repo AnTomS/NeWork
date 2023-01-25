@@ -15,22 +15,54 @@
     <!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
     <!--    </style>-->
 
+
     <style name="Theme.NeWork" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/latte</item>
-        <item name="colorPrimaryVariant">@color/nut</item>
+        <item name="colorPrimary">@color/dark_green</item>
+        <item name="colorPrimaryVariant">@color/green</item>
         <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimaryContainer">@color/dark_green</item>
+        <item name="colorOnPrimaryContainer">@color/red</item>
+        <item name="colorPrimaryInverse">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/primary_light</item>
+        <item name="colorSecondary">@color/dark_green</item>
         <item name="colorSecondaryVariant">@color/secondary_500</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/primaryLightColor</item>
+        <item name="colorSecondaryContainer">@color/black</item>
+        <!-- Tertiary brand color. -->
+        <item name="colorTertiary">@color/red_200</item>
+        <item name="colorOnTertiary">@color/red_700</item>
+        <item name="colorTertiaryContainer">@color/red</item>
+        <item name="colorOnTertiaryContainer">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
 
         <item name="android:windowBackground">@drawable/contact_background</item>
+        <item name="colorSurface">@color/blue_container</item>
         <!-- Customize your theme here. -->
     </style>
 
+
+
+
+<!--    <style name="Theme.NeWork" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
+<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/latte</item>-->
+<!--        <item name="colorPrimaryVariant">@color/nut</item>-->
+<!--        <item name="colorOnPrimary">@color/black</item>-->
+<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
+<!--        <item name="colorSecondary">@color/primary_light</item>-->
+<!--        <item name="colorSecondaryVariant">@color/secondary_500</item>-->
+<!--        <item name="colorOnSecondary">@color/black</item>-->
+<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
+<!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
+
+<!--        <item name="android:windowBackground">@drawable/contact_background</item>-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--    </style>-->
+
+
+    // работающая тема для день ночь ботом навигации
     <style name="bottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView.PrimarySurface">
         <item name="colorPrimary">@color/white</item>
         <item name="colorSurface">@color/white</item>
