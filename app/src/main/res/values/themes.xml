@@ -43,23 +43,6 @@
     </style>
 
 
-    <!--    <style name="Theme.NeWork" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
-    <!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
-    <!--        <item name="colorPrimary">@color/latte</item>-->
-    <!--        <item name="colorPrimaryVariant">@color/nut</item>-->
-    <!--        <item name="colorOnPrimary">@color/black</item>-->
-    <!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
-    <!--        <item name="colorSecondary">@color/primary_light</item>-->
-    <!--        <item name="colorSecondaryVariant">@color/secondary_500</item>-->
-    <!--        <item name="colorOnSecondary">@color/black</item>-->
-    <!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
-    <!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
-
-    <!--        <item name="android:windowBackground">@drawable/contact_background</item>-->
-    <!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-    <!--    </style>-->
-
-
     // работающая тема для день ночь ботом навигации
 
     <style name="bottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView.PrimarySurface">

@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple_fon"
     tools:context=".ui.NewPostFragment">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/small_padding"
         android:layout_marginTop="@dimen/small_padding"
         android:layout_marginEnd="@dimen/small_padding"
         android:layout_marginBottom="@dimen/small_padding"
-        android:background="@color/blue_container"
+        android:background="@color/purple_fon"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/add_attachment"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +25,8 @@
         <ScrollView
             android:id="@+id/add_content"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/company_margin">
+            android:layout_height="@dimen/company_margin"
+            android:background="@color/purple_fon">
 
             <EditText
                 android:id="@+id/edit"
@@ -86,7 +89,7 @@
                 android:layout_height="@dimen/avatar_size"
                 android:layout_marginEnd="0dp"
                 android:autofillHints="no"
-                android:background="@drawable/textview_background_left_rounded"
+                android:background="@color/purple_button"
                 android:hint="@string/add_link"
                 android:inputType="textPostalAddress"
                 android:paddingStart="@dimen/common_spacing"
@@ -96,6 +99,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
+
                 android:id="@+id/add_link"
                 android:layout_width="@dimen/big_spacing"
                 android:layout_height="@dimen/avatar_size"
@@ -157,7 +161,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/common_spacing"
         android:layout_marginBottom="@dimen/small_padding"
-        android:backgroundTint="@color/amber_500"
+        android:backgroundTint="@color/purple_button"
         android:clickable="true"
         android:contentDescription="@string/add_post"
         android:focusable="true"

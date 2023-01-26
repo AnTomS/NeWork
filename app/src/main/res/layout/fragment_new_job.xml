@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple_fon"
     android:orientation="vertical"
     tools:context=".ui.NewJobFragment">
 
@@ -67,7 +68,7 @@
         android:autofillHints="@string/end_date"
         android:background="@drawable/textview_background"
         android:drawableStart="@drawable/ic_add_time_24"
-        android:drawableTint="@color/amber_700"
+        android:drawableTint="@color/purple_button"
         android:focusable="false"
         android:hint="@string/end_date"
         android:inputType="none"
@@ -121,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/small_padding"
-        android:backgroundTint="@color/amber_500"
+        android:backgroundTint="@color/purple_button"
         android:clickable="true"
         android:contentDescription="@string/add_post"
         android:focusable="true"
