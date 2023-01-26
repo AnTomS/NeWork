@@ -64,6 +64,9 @@ class ChoosePostUsersFragment : Fragment() {
             postViewModel.addMentionIds()
             findNavController().navigateUp()
         }
+
+
         return binding.root
     }
+
 }

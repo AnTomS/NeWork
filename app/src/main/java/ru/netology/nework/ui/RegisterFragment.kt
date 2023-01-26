@@ -35,6 +35,11 @@ class RegisterFragment : Fragment() {
     ): View? {
         val binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
+
+        binding.addAvatar.setOnClickListener {
+            findNavController().navigate(R.id.action_register_to_add_avatar)
+        }
+
         binding.singButton.setOnClickListener {
             val login = binding.login.text.toString()
             val pass = binding.password.text.toString()

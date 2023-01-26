@@ -25,6 +25,17 @@
     <color name="red_700">#b31058</color>
 
 
+
+
+    <color name="purple_bar">#2353bb</color>
+    <color name="purple_button">#4c6cc5</color>
+    <color name="purple_container">#c2caeb</color>
+    <color name="dark_container">#90A4AE</color>
+    <color name="purple_fon">#e7eaf7</color>
+    <color name="silver_text">#757575</color>
+
+
+
     <color name="mint_container1">#defabb</color>
     <color name="mint_container2">#f1fee8</color>
     <color name="blue_container">#FFFDE7</color>

@@ -149,7 +149,7 @@ class UserProfileFragment : Fragment() {
                         return
                     } else {
                         postViewModel.getLikedAndMentionedUsersList(post)
-                        findNavController().navigate(R.id.action_list_to_postUsersListFragment)
+                        findNavController().navigate(R.id.action_list_post_to_like_post_list)
                     }
                 } else {
                     Snackbar.make(binding.root, R.string.log_in_to_continue, Snackbar.LENGTH_SHORT)
