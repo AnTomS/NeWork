@@ -35,7 +35,7 @@ class RegisterFragment : Fragment() {
     ): View? {
         val binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
-
+        (activity as AppActivity).supportActionBar?.title = getString(R.string.fragment_register)
         binding.addAvatar.setOnClickListener {
             findNavController().navigate(R.id.action_register_to_add_avatar)
         }

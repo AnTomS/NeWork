@@ -22,7 +22,7 @@
     <string name="sample_content">заглушка</string>
     <string name="sample_number" translatable="false">15</string>
     <string name="mention" translatable="false">Mention</string>
-    <string name="retry_loading" >Повторить загрузку</string>
+    <string name="retry_loading">Повторить загрузку</string>
     <string name="empty_posts">В данный момент нет постов. Но если Вы создатите новый, то он отобразится здесь</string>
     <string name="error_loading">Ошибка загрузки.</string>
     <string name="add_post">Добавить новый пост</string>
@@ -53,7 +53,7 @@
     <string name="confirm_password">Подтвердите пароль</string>
     <string name="error_filling_forms">Пожалуйста, заполните все поля</string>
     <string name="password_doesnt_match">Пароль не подходит</string>
-    <string name="log_in_to_continue" >Выполните вход, чтобы продолжить</string>
+    <string name="log_in_to_continue">Выполните вход, чтобы продолжить</string>
     <string name="skip_edit_question">Вы уверены, что хотите выйти? все изменения будут потеряны!</string>
     <string name="fill_text">Пожалуйста, заполните все поля.</string>
     <string name="need_location_permission" translatable="false">Location permission required</string>
@@ -67,7 +67,7 @@
     <string name="fill_company_name_position_and_start_date_message">Пожалуйста укажите название компании, должность и начало работы</string>
     <string name="add_speakers">Добавить слушателей</string>
     <string name="add_date_time">Добавить время и дату</string>
-    <string name="go_to_register_page" translatable="false">Go to register page</string>
+    <string name="go_to_register_page">Перейти на страницу регистрации</string>
     <string name="do_not_have_an_account">Ещё нет аккаунта?</string>
     <string name="choose_event_users" translatable="false">Choose event users</string>
     <string name="choose_post_users" translatable="false">Choose post users</string>
@@ -88,11 +88,12 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Емейл</string>
     <string name="prompt_password">Пароль</string>
-    <string name="action_sign_in">ВЫполнить вход или регистрацию</string>
+    <string name="action_sign_in">Выполнить вход или регистрацию</string>
     <string name="action_sign_in_short">Выполнить вход</string>
     <string name="welcome">Добро пожаловать</string>
     <string name="invalid_username">Имя пользователя недоступно</string>
     <string name="invalid_password">Пароль должен содержать не меньше 5 символов</string>
     <string name="login_failed">Вход не удался</string>
     <string name="server_error_message">Проблема с доступом к серверу</string>
+    <string name="fragment_register">Регистрация нового аккаунта</string>
 </resources>
