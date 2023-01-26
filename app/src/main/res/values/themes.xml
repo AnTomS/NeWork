@@ -37,7 +37,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
 
-        <item name="android:windowBackground">@drawable/contact_background</item>
         <item name="colorSurface">@color/purple_container</item>
         <!-- Customize your theme here. -->
     </style>

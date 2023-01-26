@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_for_list_users"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/Theme.NeWork"
-    android:padding="@dimen/small_padding">
+    android:padding="@dimen/small_padding"
+    android:theme="@style/Theme.NeWork">
 
     <ImageView
         android:id="@+id/avatar"
