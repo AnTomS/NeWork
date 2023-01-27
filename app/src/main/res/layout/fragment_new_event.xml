@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_fon"
     tools:context=".ui.NewEventFragment">
 
     <LinearLayout
@@ -30,7 +29,6 @@
                 android:layout_margin="@dimen/common_spacing"
                 android:autoLink="web"
                 android:autofillHints="no"
-                android:background="@color/purple_fon"
                 android:gravity="start|top"
                 android:hint="@string/content"
                 android:inputType="textMultiLine"
@@ -90,7 +88,6 @@
             android:layout_marginEnd="@dimen/small_padding"
             android:layout_marginBottom="@dimen/small_padding"
             android:autofillHints="@string/add_date_time"
-            android:background="@color/purple_fon"
             android:drawableStart="@drawable/ic_add_time_24"
             android:drawableTint="@color/purple_button"
             android:focusable="false"

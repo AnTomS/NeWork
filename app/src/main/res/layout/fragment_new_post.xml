@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_fon"
     tools:context=".ui.NewPostFragment">
 
     <LinearLayout
@@ -15,7 +14,6 @@
         android:layout_marginTop="@dimen/small_padding"
         android:layout_marginEnd="@dimen/small_padding"
         android:layout_marginBottom="@dimen/small_padding"
-        android:background="@color/purple_fon"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/add_attachment"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,8 +23,7 @@
         <ScrollView
             android:id="@+id/add_content"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/company_margin"
-            android:background="@color/purple_fon">
+            android:layout_height="@dimen/company_margin">
 
             <EditText
                 android:id="@+id/edit"

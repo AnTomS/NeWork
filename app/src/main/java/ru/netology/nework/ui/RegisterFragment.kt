@@ -65,13 +65,13 @@ class RegisterFragment : Fragment() {
                 viewModel.avatar.value?.file == null -> {
                     viewModel.register(login, pass, name)
                     Utils.hideKeyboard(requireView())
-                    findNavController().navigateUp()
+                    findNavController().navigate(R.id.profile)
                 }
                 else -> {
                     val file = viewModel.avatar.value?.file?.let { MediaUpload(it) }
                     file?.let { viewModel.registerWithPhoto(login, pass, name, it) }
                     Utils.hideKeyboard(requireView())
-                    findNavController().navigateUp()
+                    findNavController().navigate(R.id.profile)
                 }
             }
         }

@@ -252,7 +252,7 @@ class NewPostFragment : Fragment() {
             }
 
             viewModel.postCreated.observe(viewLifecycleOwner) {
-                findNavController().navigateUp()
+                findNavController().navigate(R.id.list_post)
             }
 
             viewModel.dataState.observe(viewLifecycleOwner) { state ->
