@@ -18,8 +18,8 @@
 
     <style name="Theme.NeWork" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_button</item>
-        <item name="colorPrimaryVariant">@color/purple_container</item>
+        <item name="colorPrimary">@color/purple_container</item>
+        <item name="colorPrimaryVariant">@color/purple_bar</item>
         <item name="colorOnPrimary">@color/black</item>
         <item name="colorPrimaryContainer">@color/dark_green</item>
         <item name="colorOnPrimaryContainer">@color/red</item>
@@ -51,8 +51,6 @@
         <item name="colorOnPrimary">@color/black</item>
 
     </style>
-
-
 
 
 </resources>
