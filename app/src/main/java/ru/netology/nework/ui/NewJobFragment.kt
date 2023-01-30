@@ -1,6 +1,5 @@
 package ru.netology.nework.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,10 +23,6 @@ import ru.netology.nework.viewmodel.UserProfileViewModel
 class NewJobFragment : Fragment() {
     private val viewModel: UserProfileViewModel by activityViewModels()
 
-    @SuppressLint(
-        "FragmentBackPressedCallback", "UseRequireInsteadOfGet",
-        "ClickableViewAccessibility"
-    )
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,7 +36,7 @@ class NewJobFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.add_job)
 
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             Snackbar.make(binding.root, R.string.skip_edit_question, Snackbar.LENGTH_SHORT)
                 .setAction(R.string.exit) {
                     viewModel.deleteEditJob()

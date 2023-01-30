@@ -58,11 +58,6 @@ class UsersFragment : Fragment() {
             println(it.toString())
             adapter.submitList(it)
         }
-
-
-
-
-
         return binding.root
     }
 
