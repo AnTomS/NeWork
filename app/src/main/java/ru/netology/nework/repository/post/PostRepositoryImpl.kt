@@ -25,7 +25,7 @@ class PostRepositoryImpl @Inject constructor(
     private val dao: PostDao,
 ) : PostRepository {
 
-    override var data: Flow<PagingData<PostResponse>> =
+    override val data: Flow<PagingData<PostResponse>> =
         Pager(
             config = PagingConfig(pageSize = 10, enablePlaceholders = false),
             pagingSourceFactory = { dao.getAllPosts() },
@@ -194,10 +194,6 @@ class PostRepositoryImpl @Inject constructor(
         } catch (e: IOException) {
             throw NetworkError
         }
-    }
-
-    override fun getUserPosts(data: Flow<PagingData<PostResponse>>, id: Int) {
-        this.data = data.map { it.filter { it.authorId == id } }
     }
 
 }
