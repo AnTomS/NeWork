@@ -79,7 +79,7 @@
     <string name="create_post">Создать новый пост</string>
     <string name="post_users" translatable="false">Post users</string>
     <string name="event_users" translatable="false">Event users</string>
-    <string name="photo" translatable="false">Photo</string>
+    <string name="photo" >Изображение</string>
     <string name="list_of_post">Посты</string>
     <string name="my_profile">Мой профиль</string>
     <string name="events_for_people">События</string>

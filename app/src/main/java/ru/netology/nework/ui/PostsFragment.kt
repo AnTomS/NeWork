@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -27,7 +28,6 @@ import ru.netology.nework.utils.IntArg
 import ru.netology.nework.viewmodel.AuthViewModel
 import ru.netology.nework.viewmodel.PostViewModel
 
-
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class PostsFragment : Fragment() {
@@ -42,7 +42,7 @@ class PostsFragment : Fragment() {
     ): View {
         val binding = FragmentPostsBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.posts)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.posts)
 
         authViewModel.data.observeForever {
             if (!authViewModel.authenticated) {

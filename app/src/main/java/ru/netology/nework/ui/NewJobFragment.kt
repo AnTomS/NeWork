@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -38,7 +39,7 @@ class NewJobFragment : Fragment() {
             false
         )
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.add_job)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.add_job)
 
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             Snackbar.make(binding.root, R.string.skip_edit_question, Snackbar.LENGTH_SHORT)

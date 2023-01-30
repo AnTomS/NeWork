@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +36,7 @@ class RegisterFragment : Fragment() {
     ): View? {
         val binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.fragment_register)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.fragment_register)
         binding.addAvatar.setOnClickListener {
             findNavController().navigate(R.id.action_register_to_add_avatar)
         }

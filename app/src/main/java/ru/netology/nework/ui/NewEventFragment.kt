@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -46,17 +47,13 @@ class NewEventFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
 
-        (activity as AppActivity).supportActionBar?.title = "Редактирование события"
-
         val binding = FragmentNewEventBinding.inflate(
             inflater,
             container,
             false
         )
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.create_event)
-
-        var file: MultipartBody.Part
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.create_event)
 
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             Snackbar.make(binding.root, R.string.skip_edit_question, Snackbar.LENGTH_SHORT)
@@ -97,7 +94,7 @@ class NewEventFragment : Fragment() {
                     Activity.RESULT_OK -> {
                         val uri: Uri? = it.data?.data
                         val resultFile = uri?.toFile()
-                        file = MultipartBody.Part.createFormData(
+                        val file = MultipartBody.Part.createFormData(
                             "file", resultFile?.name, resultFile!!.asRequestBody()
                         )
                         viewModel.changeMedia(uri, resultFile, AttachmentType.IMAGE)
@@ -140,7 +137,7 @@ class NewEventFragment : Fragment() {
                         Utils.getVideoPathFromUri(selectedVideoUri, requireActivity())
                     if (selectedVideoPath != null) {
                         val resultFile = File(selectedVideoPath)
-                        file = MultipartBody.Part.createFormData(
+                        val file = MultipartBody.Part.createFormData(
                             "file", resultFile.name, resultFile.asRequestBody()
                         )
                         viewModel.changeMedia(
@@ -172,7 +169,7 @@ class NewEventFragment : Fragment() {
                         Utils.getAudioPathFromUri(selectedAudioUri, requireActivity())
                     if (selectedAudioPath != null) {
                         val resultFile = File(selectedAudioPath)
-                        file = MultipartBody.Part.createFormData(
+                        val file = MultipartBody.Part.createFormData(
                             "file", resultFile.name, resultFile.asRequestBody()
                         )
                         viewModel.changeMedia(

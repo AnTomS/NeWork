@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -46,7 +47,7 @@ class EventsFragment : Fragment() {
     ): View {
         val binding = FragmentEventsBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.events)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.events)
 
         authViewModel.data.observeForever {
             if (!authViewModel.authenticated) {

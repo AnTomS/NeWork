@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -26,7 +27,7 @@ class ChooseEventUsersFragment : Fragment() {
     ): View {
         val binding = FragmentChoosePostUsersBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.choose_event_users)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.choose_event_users)
 
         val eventViewModel: EventViewModel by activityViewModels()
 

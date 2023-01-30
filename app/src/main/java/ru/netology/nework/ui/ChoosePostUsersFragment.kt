@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -14,7 +15,6 @@ import ru.netology.nework.R
 import ru.netology.nework.adapter.ChooseUsersAdapter
 import ru.netology.nework.adapter.ChooseUsersInteractionListener
 import ru.netology.nework.databinding.FragmentChoosePostUsersBinding
-import ru.netology.nework.ui.AppActivity
 import ru.netology.nework.viewmodel.PostViewModel
 
 @ExperimentalCoroutinesApi
@@ -27,7 +27,7 @@ class ChoosePostUsersFragment : Fragment() {
     ): View {
         val binding = FragmentChoosePostUsersBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.choose_post_users)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.choose_post_users)
 
         val postViewModel: PostViewModel by activityViewModels()
 

@@ -9,6 +9,7 @@ import android.provider.MediaStore
 import android.view.*
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -25,7 +26,6 @@ import ru.netology.nework.adapter.CreatePageUsersListAdapter
 import ru.netology.nework.adapter.CreatePageUsersListInteractionListener
 import ru.netology.nework.databinding.FragmentNewPostBinding
 import ru.netology.nework.enumiration.AttachmentType
-import ru.netology.nework.ui.AppActivity
 import ru.netology.nework.ui.PostsFragment.Companion.intArg
 import ru.netology.nework.ui.UserProfileFragment.Companion.textArg
 import ru.netology.nework.utils.Utils
@@ -41,7 +41,7 @@ class NewPostFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.create_post)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.create_post)
 
         val binding = FragmentNewPostBinding.inflate(
             inflater,
@@ -50,7 +50,6 @@ class NewPostFragment : Fragment() {
         )
 
         val viewModel: PostViewModel by activityViewModels()
-        var file: MultipartBody.Part
 
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             Snackbar.make(binding.root, R.string.skip_edit_question, Snackbar.LENGTH_SHORT)
@@ -93,7 +92,7 @@ class NewPostFragment : Fragment() {
                     Activity.RESULT_OK -> {
                         val uri: Uri? = it.data?.data
                         val resultFile = uri?.toFile()
-                        file = MultipartBody.Part.createFormData(
+                        val file = MultipartBody.Part.createFormData(
                             "file", resultFile?.name, resultFile!!.asRequestBody()
                         )
                         viewModel.changeMedia(uri, resultFile, AttachmentType.IMAGE)
@@ -136,7 +135,7 @@ class NewPostFragment : Fragment() {
                         Utils.getVideoPathFromUri(selectedVideoUri, requireActivity())
                     if (selectedVideoPath != null) {
                         val resultFile = File(selectedVideoPath)
-                        file = MultipartBody.Part.createFormData(
+                        val file = MultipartBody.Part.createFormData(
                             "file", resultFile.name, resultFile.asRequestBody()
                         )
                         viewModel.changeMedia(selectedVideoUri, resultFile, AttachmentType.VIDEO)
@@ -167,7 +166,7 @@ class NewPostFragment : Fragment() {
                         Utils.getAudioPathFromUri(selectedAudioUri, requireActivity())
                     if (selectedAudioPath != null) {
                         val resultFile = File(selectedAudioPath)
-                        file = MultipartBody.Part.createFormData(
+                        val file = MultipartBody.Part.createFormData(
                             "file", resultFile.name, resultFile.asRequestBody()
                         )
                         viewModel.changeMedia(selectedAudioUri, resultFile, AttachmentType.AUDIO)

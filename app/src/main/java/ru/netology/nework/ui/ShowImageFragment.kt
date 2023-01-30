@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ru.netology.nework.R
 import ru.netology.nework.databinding.FragmentShowImageBinding
@@ -21,7 +22,7 @@ class ShowImageFragment : Fragment() {
             container,
             false
         )
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.photo)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.photo)
         val url = arguments?.textArg
         binding.imageView.load(url)
 
