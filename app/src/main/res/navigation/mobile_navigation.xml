@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/profile"
-        android:name="ru.netology.nework.ui.UserProfileFragment"
+        android:name="ru.netology.nework.ui.ProfileFragment"
         android:label="@string/my_profile">
         <action
             android:id="@+id/action_profile_to_signInFragment"
@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_events_to_event_users"
             app:destination="@id/chooseEventUsersFragment" />
+        <action
+            android:id="@+id/action_events_to_show_Image_Fragment"
+            app:destination="@id/showImageFragment" />
     </fragment>
 
     <fragment
@@ -83,6 +86,9 @@
         <action
             android:id="@+id/action_list_of_users_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_list_of_users_to_user_profile_fragment"
+            app:destination="@id/UserProfileFragment" />
     </fragment>
 
     <fragment
@@ -131,5 +137,10 @@
         android:name="ru.netology.nework.ui.AddAvatarFragment"
         android:label="fragment_add_avatar"
         tools:layout="@layout/fragment_add_avatar" />
+    <fragment
+        android:id="@+id/UserProfileFragment"
+        android:name="ru.netology.nework.ui.UserProfileFragment"
+        android:label="fragment__user_profile"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>

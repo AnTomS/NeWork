@@ -130,7 +130,7 @@ class EventsFragment : Fragment() {
                 if (event.attachment?.url != "") {
                     when (event.attachment?.type) {
                         AttachmentType.IMAGE -> {
-                            findNavController().navigate(R.id.action_list_post_to_show_image,
+                            findNavController().navigate(R.id.action_events_to_show_Image_Fragment,
                                 Bundle().apply { textArg = event.attachment.url })
                         }
                         else -> return

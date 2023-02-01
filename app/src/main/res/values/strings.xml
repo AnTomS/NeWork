@@ -96,4 +96,5 @@
     <string name="login_failed">Вход не удался</string>
     <string name="server_error_message">Проблема с доступом к серверу</string>
     <string name="fragment_register">Регистрация нового аккаунта</string>
+    <string name="no_job">Пользователь ещё не заполнил данные о своей карьере</string>
 </resources>

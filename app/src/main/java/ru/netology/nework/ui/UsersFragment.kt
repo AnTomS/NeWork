@@ -39,7 +39,7 @@ class UsersFragment : Fragment() {
             override fun openUserProfile(id: Int) {
                 val idAuthor = id.toString()
                 findNavController().navigate(
-                    R.id.profile,
+                    R.id.action_list_of_users_to_user_profile_fragment,
                     Bundle().apply { textArg = idAuthor })
             }
         })
