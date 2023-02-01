@@ -39,7 +39,6 @@ class ProfileFragment : Fragment() {
         authViewModel.data.observeForever {
             if (!authViewModel.authenticated || arguments != null) {
                 binding.addJob.visibility = View.GONE
-//                binding.addPost.visibility = View.GONE
 
             } else if (authViewModel.authenticated && arguments == null) {
                 binding.addJob.visibility = View.VISIBLE

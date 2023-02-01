@@ -42,15 +42,20 @@ class UserProfileFragment : Fragment() {
 
         userProfileViewModel.getUserById(id)
 
+
         userProfileViewModel.userData.observe(viewLifecycleOwner) { it ->
             (activity as AppActivity?)?.supportActionBar?.title = it.name
             arguments?.textArg?.let {
                 val userId = it.toInt()
                 userProfileViewModel.getUserById(userId)
                 userProfileViewModel.getUserJobs(userId)
-            binding.name.text = it
-            binding.avatar.loadCircleCrop (avatar)
+
             }
+        }
+        userProfileViewModel.userData.observe(viewLifecycleOwner) {
+            (activity as AppActivity?)?.supportActionBar?.title = it.name
+            binding.name.text = it.name
+            binding.avatar.loadCircleCrop(it.avatar)
         }
         val jobAdapter = JobAdapter(object : JobInteractionListener {
             override fun onLinkClick(url: String) {
@@ -64,8 +69,8 @@ class UserProfileFragment : Fragment() {
         binding.jobList.adapter = jobAdapter
 
         userProfileViewModel.jobData.observe(viewLifecycleOwner) {
-                jobAdapter.submitList(it)
-                binding.jobList.visibility = View.VISIBLE
+            jobAdapter.submitList(it)
+            binding.jobList.visibility = View.VISIBLE
         }
 
         return binding.root
