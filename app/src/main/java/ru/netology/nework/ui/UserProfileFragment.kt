@@ -50,13 +50,17 @@ class UserProfileFragment : Fragment() {
                 userProfileViewModel.getUserById(userId)
                 userProfileViewModel.getUserJobs(userId)
 
+
             }
-        }
-        userProfileViewModel.userData.observe(viewLifecycleOwner) {
-            (activity as AppActivity?)?.supportActionBar?.title = it.name
             binding.name.text = it.name
             binding.avatar.loadCircleCrop(it.avatar)
+
         }
+//        userProfileViewModel.userData.observe(viewLifecycleOwner) {
+//            (activity as AppActivity?)?.supportActionBar?.title = it.name
+//            binding.name.text = it.name
+//            binding.avatar.loadCircleCrop(it.avatar)
+//        }
         val jobAdapter = JobAdapter(object : JobInteractionListener {
             override fun onLinkClick(url: String) {
                 CustomTabsIntent.Builder()
