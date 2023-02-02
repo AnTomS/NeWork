@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -25,8 +26,7 @@ import ru.netology.nework.viewmodel.UserProfileViewModel
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class UserProfileFragment : Fragment() {
-    val userProfileViewModel: UserProfileViewModel by activityViewModels()
-    val authViewModel: AuthViewModel by activityViewModels()
+    private val userProfileViewModel: UserProfileViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,7 +44,7 @@ class UserProfileFragment : Fragment() {
 
 
         userProfileViewModel.userData.observe(viewLifecycleOwner) { it ->
-            (activity as AppActivity?)?.supportActionBar?.title = it.name
+            (activity as AppCompatActivity?)?.supportActionBar?.title = it.name
             arguments?.textArg?.let {
                 val userId = it.toInt()
                 userProfileViewModel.getUserById(userId)
@@ -56,11 +56,7 @@ class UserProfileFragment : Fragment() {
             binding.avatar.loadCircleCrop(it.avatar)
 
         }
-//        userProfileViewModel.userData.observe(viewLifecycleOwner) {
-//            (activity as AppActivity?)?.supportActionBar?.title = it.name
-//            binding.name.text = it.name
-//            binding.avatar.loadCircleCrop(it.avatar)
-//        }
+
         val jobAdapter = JobAdapter(object : JobInteractionListener {
             override fun onLinkClick(url: String) {
                 CustomTabsIntent.Builder()
