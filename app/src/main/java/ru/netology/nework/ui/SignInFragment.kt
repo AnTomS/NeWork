@@ -30,7 +30,6 @@ class SignInFragment : Fragment() {
 
     private val viewModel: SignInViewModel by activityViewModels()
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

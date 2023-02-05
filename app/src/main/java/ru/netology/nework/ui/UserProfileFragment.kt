@@ -8,29 +8,20 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import ru.netology.nework.R
 import ru.netology.nework.adapter.*
-import ru.netology.nework.auth.AppAuth.Companion.avatar
 import ru.netology.nework.databinding.FragmentUserProfileBinding
-import ru.netology.nework.dto.Job
-import ru.netology.nework.ui.ProfileFragment.Companion.textArg
 import ru.netology.nework.utils.StringArg
 import ru.netology.nework.view.loadCircleCrop
-import ru.netology.nework.viewmodel.AuthViewModel
 import ru.netology.nework.viewmodel.UserProfileViewModel
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class UserProfileFragment : Fragment() {
-    private val userProfileViewModel: UserProfileViewModel by activityViewModels()
+    private val userProfileViewModel: UserProfileViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
