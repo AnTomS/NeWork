@@ -1,5 +1,6 @@
 package ru.netology.nework.auth
 
+
 import android.content.SharedPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -60,6 +61,7 @@ class AppAuth @Inject constructor(
             commit()
         }
     }
+
 }
 
 data class AuthState(

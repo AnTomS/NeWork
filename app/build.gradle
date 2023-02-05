@@ -57,7 +57,6 @@ dependencies {
     def activity_version = '1.6.1'
     def lifecycle_version = '2.5.1'
     def mdc_version = '1.7.0'
-    def fragment_version = '1.5.5'
     def nav_version = '2.5.3'
     def room_version = '2.4.3'
     def glide_version = '4.14.1'
@@ -68,8 +67,8 @@ dependencies {
     def hilt_version = "2.44"
     def play_services_base_version = '18.1.0'
     def paging_version = "3.1.1"
-    def imagepicker_version = "2.1"
     def exoplayer_version = "2.18.2"
+    def firebase_version = "31.1.1"
 
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -107,6 +106,8 @@ dependencies {
     implementation 'com.yandex.android:maps.mobile:4.0.0-lite'
     implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
     implementation "androidx.browser:browser:1.4.0"
+    implementation "com.google.firebase:firebase-messaging-ktx"
+    implementation platform("com.google.firebase:firebase-bom:$firebase_version")
 
     implementation 'com.nambimobile.widgets:expandable-fab:1.1.1'
 
