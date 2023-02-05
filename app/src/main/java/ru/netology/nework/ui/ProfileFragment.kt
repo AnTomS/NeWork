@@ -26,8 +26,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        if (!authViewModel.authenticated || arguments != null)
-//            findNavController().navigate(R.id.list_of_users)
+
     }
 
     override fun onCreateView(
@@ -37,13 +36,13 @@ class ProfileFragment : Fragment() {
     ): View {
         val binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        authViewModel.data.observeForever {
+        authViewModel.data.observe(viewLifecycleOwner) {
+            (activity as AppCompatActivity?)?.supportActionBar?.title = it.name
             if (!authViewModel.authenticated || arguments != null) {
                 binding.addJob.visibility = View.GONE
 
             } else if (authViewModel.authenticated && arguments == null) {
                 binding.addJob.visibility = View.VISIBLE
-//                binding.addPost.visibility = View.VISIBLE
                 val myId = userProfileViewModel.myId.toInt()
                 userProfileViewModel.getUserById(myId)
                 userProfileViewModel.getMyJobs()
