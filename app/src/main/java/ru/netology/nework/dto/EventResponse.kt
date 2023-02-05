@@ -20,5 +20,5 @@ data class EventResponse(
     val attachment: Attachment?,
     val link: String?,
     val ownedByMe: Boolean,
-    val users: Map<Int, UserPreview>
+    val users: Map<Int, UserPreview>,
 )

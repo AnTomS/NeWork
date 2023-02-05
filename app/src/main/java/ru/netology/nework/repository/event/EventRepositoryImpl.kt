@@ -113,17 +113,6 @@ class EventRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getEventById(id: Int): EventResponse {
-        try {
-            val response = apiService.getEventById(id)
-            if (!response.isSuccessful) {
-                throw ApiError(response.code(), response.message())
-            }
-            return response.body() ?: throw ApiError(response.code(), response.message())
-        } catch (e: IOException) {
-            throw NetworkError
-        }
-    }
 
     override suspend fun getUsers(): List<UserResponse> {
         val usersList: List<UserResponse>

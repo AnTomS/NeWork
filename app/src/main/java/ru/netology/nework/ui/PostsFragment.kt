@@ -150,7 +150,6 @@ class PostsFragment : Fragment() {
             }
             if (state.loading) {
                 Snackbar.make(binding.root, R.string.server_error_message, Snackbar.LENGTH_SHORT)
-                    .setAction(R.string.retry_loading) { viewModel.refreshPosts() }
                     .show()
             }
         }

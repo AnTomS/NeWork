@@ -17,7 +17,6 @@ interface EventRepository {
     suspend fun dislikeEventById(id: Int): EventResponse
     suspend fun participateInEvent(id: Int): EventResponse
     suspend fun quitParticipateInEvent(id: Int): EventResponse
-    suspend fun getEventById(id: Int): EventResponse
     suspend fun getUsers(): List<UserResponse>
     suspend fun addMediaToEvent(type: AttachmentType, file: MultipartBody.Part): Attachment
     suspend fun saveEvent(event: EventCreateRequest)

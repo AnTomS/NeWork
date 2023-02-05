@@ -27,7 +27,8 @@ class ChoosePostUsersFragment : Fragment() {
     ): View {
         val binding = FragmentChoosePostUsersBinding.inflate(inflater, container, false)
 
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.choose_post_users)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.choose_post_users)
 
         val postViewModel: PostViewModel by activityViewModels()
 

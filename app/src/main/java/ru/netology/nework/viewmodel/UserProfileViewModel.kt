@@ -5,14 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.dto.Job
 import ru.netology.nework.dto.UserResponse
 import ru.netology.nework.model.FeedModelState
 import ru.netology.nework.repository.job.JobRepository
-import ru.netology.nework.repository.post.PostRepository
 import ru.netology.nework.repository.user.UserRepository
 import ru.netology.nework.utils.SingleLiveEvent
 import javax.inject.Inject
@@ -26,18 +24,14 @@ val editedJob = Job(
     link = null
 )
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class UserProfileViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val jobRepository: JobRepository,
-    private val postRepository: PostRepository,
     appAuth: AppAuth,
 ) : ViewModel() {
 
     val myId: Long = appAuth.authStateFlow.value.id
-
-    var userId: MutableLiveData<Int?> = MutableLiveData()
 
     val newJob: MutableLiveData<Job> = MutableLiveData(editedJob)
 

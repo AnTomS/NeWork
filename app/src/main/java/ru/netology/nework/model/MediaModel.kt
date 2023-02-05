@@ -7,5 +7,5 @@ import java.io.File
 data class MediaModel(
     val uri: Uri? = null,
     val file: File? = null,
-    val type: AttachmentType? = null
+    val type: AttachmentType? = null,
 )

@@ -24,11 +24,6 @@ class ProfileFragment : Fragment() {
     val userProfileViewModel: UserProfileViewModel by activityViewModels()
     private val authViewModel: AuthViewModel by activityViewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -80,7 +75,7 @@ class ProfileFragment : Fragment() {
         }
 
         userProfileViewModel.userData.observe(viewLifecycleOwner) {
-            (activity as AppCompatActivity?)?.supportActionBar?.title = it.name
+//            (activity as AppCompatActivity?)?.supportActionBar?.title = it.name
             binding.name.text = it.name
             binding.avatar.loadCircleCrop(it.avatar)
         }

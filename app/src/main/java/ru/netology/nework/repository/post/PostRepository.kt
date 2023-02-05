@@ -22,6 +22,4 @@ interface PostRepository {
     suspend fun addMediaToPost(type: AttachmentType, file: MultipartBody.Part): Attachment
     suspend fun savePost(post: PostCreateRequest)
 
-    suspend fun getAllPosts(): List<PostResponse>
-
 }

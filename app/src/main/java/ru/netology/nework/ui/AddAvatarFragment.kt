@@ -40,7 +40,7 @@ class AddAvatarFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         val binding = FragmentAddAvatarBinding.inflate(inflater, container, false)
 
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.add_avatar)

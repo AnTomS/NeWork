@@ -5,7 +5,6 @@ import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.yandex.mapkit.geometry.Point
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -19,7 +18,6 @@ import ru.netology.nework.repository.post.PostRepository
 import ru.netology.nework.utils.SingleLiveEvent
 import java.io.File
 import javax.inject.Inject
-import kotlin.math.roundToInt
 
 private val editedPost = PostCreateRequest(
     id = 0,
@@ -75,21 +73,6 @@ class PostViewModel @Inject constructor(
 
             }
         }
-
-
-    init {
-        refreshPosts()
-    }
-
-    fun refreshPosts() = viewModelScope.launch {
-        try {
-            _dataState.value = FeedModelState(refreshing = true)
-            repository.getAllPosts()
-            _dataState.value = FeedModelState()
-        } catch (e: Exception) {
-            _dataState.value = FeedModelState(error = true)
-        }
-    }
 
     fun getLikedAndMentionedUsersList(post: PostResponse) {
         viewModelScope.launch {
